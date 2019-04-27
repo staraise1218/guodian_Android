@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/reset_pay_back"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp" />
+    <TextView
+
+        android:layout_marginTop="25dp"
+        android:id="@+id/reset_pay_title"
+        android:layout_below="@+id/reset_pay_back"
+        android:textSize="20sp"
+        android:text="修改支付密码"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/reset_pay_originl"
+        android:text="原密码"
+        android:textColor="#d3d3d3"
+        android:textSize="14sp"
+        android:layout_below="@+id/reset_pay_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/reset_pay_origin"
+        android:layout_below="@+id/reset_pay_originl"
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="34dp" />
+    <TextView
+        android:id="@+id/reset_pay_newl"
+        android:layout_marginLeft="18dp"
+        android:text="新密码"
+        android:textColor="#d3d3d3"
+        android:textSize="14sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/reset_pay_origin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/reset_pay_new"
+        android:layout_below="@+id/reset_pay_newl"
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="34dp" />
+    <TextView
+        android:id="@+id/reset_pay_tip"
+        android:layout_marginLeft="18dp"
+        android:layout_below="@+id/reset_pay_new"
+        android:text="支付密码必须是由6位数组成"
+        android:textColor="#d3d3d3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/reset_pay_commit"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:text="提交"
+        android:layout_below="@+id/reset_pay_tip"
+        android:layout_width="284dp"
+        android:layout_height="42dp" />
+    <TextView
+        android:layout_marginRight="46dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/reset_pay_forget"
+        android:layout_below="@+id/reset_pay_commit"
+        android:textSize="13sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

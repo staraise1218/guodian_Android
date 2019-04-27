@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:paddingEnd="25dp"
+        android:paddingStart="25dp"
+        >
+
+        <ImageView
+            android:id="@+id/tv_quantity"
+            android:layout_width="80dp"
+            android:layout_height="128dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            />
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_quantity"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/item_browser_name"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/item_browser_tip"
+                android:textSize="10sp"
+                android:textColor="@color/gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="成色未使用"
+                android:id="@+id/item_browser_cs"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+
+                android:id="@+id/item_browser_price"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="60dp"
+        android:layout_height="128dp"
+        android:background="#D0A97A"
+        android:gravity="center"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:text="移除"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp" />
+</LinearLayout>

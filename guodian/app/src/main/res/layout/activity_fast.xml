@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <RelativeLayout
+        android:id="@+id/fast_login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/fast_login_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="短信快捷登录"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/fast_login_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:text="注册"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="欢迎来到国典"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/fast_login_account_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_title"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="144dp"
+        android:text="手机号"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+
+    <EditText
+        android:singleLine="true"
+        android:id="@+id/fast_login_account"
+        android:layout_width="284dp"
+        android:layout_height="26dp"
+        android:layout_below="@+id/fast_login_account_label"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="22dp"
+        android:background="@null"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="284dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/fast_login_account"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/fast_login_password_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_account"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="20dp"
+        android:text="验证码"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <EditText
+        android:singleLine="true"
+        android:id="@+id/fast_login_password"
+        android:layout_width="284dp"
+        android:layout_height="26dp"
+        android:layout_below="@+id/fast_login_password_label"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="22dp"
+        android:background="@null"
+        android:textSize="16sp" />
+    <Button
+        android:background="@drawable/register_bg"
+        android:layout_marginRight="40dp"
+        android:layout_alignParentRight="true"
+        android:text="重新获取密码"
+        android:id="@+id/reset_password"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_below="@+id/fast_login_password_label"
+        android:layout_width="90dp"
+        android:layout_height="30dp" />
+
+    <View
+        android:layout_width="284dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/fast_login_password"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/gray" />
+
+    <Button
+        android:background="@drawable/enable_check"
+        android:id="@+id/fast_login_commit"
+        android:layout_width="284dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/fast_login_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="登录"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/fast_login_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_commit"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="18dp"
+        android:text="忘记密码"
+        android:textColor="#FFD59A"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/fast_login_no_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_commit"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="52dp"
+        android:text="收不到验证码"
+        android:textColor="#FFD59A"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/fast_login_third_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_forget"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:text="第三方登录"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/fast_login_third_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="#b3b3b3" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_third_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/fast_login_qq"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/qq" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="QQ"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_third_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/fast_login_wx"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/service" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="微信"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fast_login_third_title"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/fast_login_wb"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/wb" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="微博"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,150 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <GridView
+        android:id="@+id/catergory"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"></GridView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="28dp"
+            android:id="@+id/tv_tmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="腕表"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_suan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="箱包皮具"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_marginRight="24dp"
+            android:id="@+id/tv_global"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="配饰"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_wai"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/home_top_04"
+            android:gravity="center"
+            android:text="鞋履"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_market"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/home_top_05"
+            android:gravity="center"
+            android:text="珠宝"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="28dp"
+            android:id="@+id/tv_charge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="鞋履"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_pig"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="珠宝"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_marginRight="28dp"
+            android:id="@+id/tv_gold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="  "
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_family"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/home_top_02"
+            android:gravity="center"
+            android:text="@string/home_family"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/home_top_01"
+            android:gravity="center"
+            android:text="@string/home_category"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</LinearLayout>
