@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/tom/Documents/GitHub/guodian_Android/GetDimen/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/tom/Documents/GitHub/guodian_Android/GetDimen/app/src/main/res/values-xlarge/strings.xml",
+                    "from": {
+                        "startLines": "4,3,5",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "102,56,155",
+                        "endColumns": "52,45,46",
+                        "endOffsets": "150,97,197"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,108,154",
+                        "endColumns": "52,45,46",
+                        "endOffsets": "103,149,196"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -5,7 +5,42 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/product_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/bag_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:id="@+id/bag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/bag_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/search"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+
+
     <WebView
+        android:layout_below="@+id/product_head"
         android:id="@+id/bag_web"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

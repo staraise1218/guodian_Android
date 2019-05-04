@@ -1,7 +1,9 @@
 package com.smile.guodian.model.entity;
 
 
-public class Category extends BaseBean {
+import cn.trinea.android.common.util.StringUtils;
+
+public class Category {
 
     public String getCat_name() {
         return cat_name;
@@ -35,8 +37,19 @@ public class Category extends BaseBean {
         this.name = name;
     }
 
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String cat_name;
     private String image;
     private String logo;
     private String name;
+    private String id;
 }

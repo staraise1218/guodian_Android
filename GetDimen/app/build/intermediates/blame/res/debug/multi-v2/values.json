@@ -1,0 +1,62 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/tom/Documents/GitHub/guodian_Android/GetDimen/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "map": [
+                {
+                    "source": "/Users/tom/Documents/GitHub/guodian_Android/GetDimen/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "4,3,5",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "102,56,155",
+                        "endColumns": "52,45,46",
+                        "endOffsets": "150,97,197"
+                    },
+                    "to": {
+                        "startLines": "5,6,7",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "210,263,309",
+                        "endColumns": "52,45,46",
+                        "endOffsets": "258,304,351"
+                    }
+                },
+                {
+                    "source": "/Users/tom/Documents/GitHub/guodian_Android/GetDimen/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "6,15",
+                        "startColumns": "4,4",
+                        "startOffsets": "186,510",
+                        "endLines": "12,17",
+                        "endColumns": "12,12",
+                        "endOffsets": "472,665"
+                    },
+                    "to": {
+                        "startLines": "8,15",
+                        "startColumns": "4,4",
+                        "startOffsets": "356,647",
+                        "endLines": "14,17",
+                        "endColumns": "12,12",
+                        "endOffsets": "642,802"
+                    }
+                },
+                {
+                    "source": "/Users/tom/Documents/GitHub/guodian_Android/GetDimen/app/src/main/res/values/dimens.xml",
+                    "from": {
+                        "startLines": "3,4,5",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "89,147,203",
+                        "endColumns": "57,55,40",
+                        "endOffsets": "142,198,239"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,113,169",
+                        "endColumns": "57,55,40",
+                        "endOffsets": "108,164,205"
+                    }
+                }
+            ]
+        }
+    ]
+}

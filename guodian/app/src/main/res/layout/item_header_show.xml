@@ -1,27 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="173dp"
-    android:layout_height="match_parent">
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:layout_height="257dp">
+
     <View
-        android:visibility="gone"
         android:layout_width="2dp"
         android:layout_height="16dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"
+        android:visibility="gone" />
+
     <TextView
-        android:visibility="gone"
-        android:gravity="center"
-        android:layout_below="@+id/item_headline_show_content"
         android:id="@+id/item_headline_show_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_headline_show_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
         android:text="腕表 新品到店"
         android:textSize="14sp"
-       android:layout_marginTop="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/item_headline_show_content"
         android:layout_width="173dp"
-        android:layout_height="257dp" />
+        android:layout_height="200dp" />
 
+    <TextView
+        android:id="@+id/header_show_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_headline_show_content"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/header_show_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_show_name"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:text="官网价格¥14100"
+        android:id="@+id/header_show_normal_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_show_price"
+        android:textColor="@color/gray"
+        android:textSize="10sp" />
 </RelativeLayout>

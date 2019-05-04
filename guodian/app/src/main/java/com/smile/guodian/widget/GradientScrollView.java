@@ -32,7 +32,7 @@ public class GradientScrollView extends NestedScrollView {
         this.toolbar = toolbar;
         headerDrawable = toolbar.getBackground().mutate();
         statusBarDrawable = statusBar.getBackground().mutate();
-        headerHeight = getContext().getResources().getDimensionPixelSize(R.dimen.default_scroll_gradient_height);
+        headerHeight = getContext().getResources().getDimensionPixelSize(R.dimen.dp_20);
     }
 
     @Override

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <WebView
+        android:layout_below="@+id/product_catogory_head"
+        android:visibility="gone"
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+
+    <RelativeLayout
+        android:id="@+id/product_catogory_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/product_catogory_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:id="@+id/product_catogory_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/product_catogory_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/search"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout
+        android:layout_below="@+id/product_catogory_head"
+        android:background="@color/white"
+        android:id="@+id/top_tab_layout"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@android:color/black"
+        app:tabTextColor="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </android.support.design.widget.TabLayout>
+
+    <GridView
+        android:id="@+id/product_catogory_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_tab_layout"
+        android:numColumns="2"></GridView>
+
+</RelativeLayout>

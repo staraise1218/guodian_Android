@@ -1,3 +1,4 @@
+
 package com.smile.guodian.ui.adapter;
 
 import android.content.Context;
@@ -110,7 +111,7 @@ public class UserAdapter extends RecyclerView.Adapter {
                 headerViewHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context,LoginActivity.class);
+                        Intent intent = new Intent(context, LoginActivity.class);
                         context.startActivity(intent);
                     }
                 });

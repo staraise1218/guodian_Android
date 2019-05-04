@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
@@ -58,7 +59,7 @@ public class RegisterActivity extends BaseActivity {
     private String code;
 
 
-    @OnClick({R.id.register_getVerification, R.id.register_commit, R.id.register_back,R.id.register_can_not,R.id.register_show_password})
+    @OnClick({R.id.register_getVerification, R.id.register_commit, R.id.register_back, R.id.register_can_not, R.id.register_show_password})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.register_getVerification:
@@ -78,9 +79,9 @@ public class RegisterActivity extends BaseActivity {
                 break;
             case R.id.register_show_password:
 
-                if(showPassword.isChecked()){
+                if (showPassword.isChecked()) {
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }else {
+                } else {
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
 
@@ -92,16 +93,22 @@ public class RegisterActivity extends BaseActivity {
     public void register() {
         String phon = phone.getText().toString();
         String pwd = password.getText().toString();
+        code = verify.getText().toString();
+
+//        if(phon.length()==0||pwd.length()==0||code.length()==0){
+//            Toast
+//            return;
+//        }
 
         Map<String, String> params = new HashMap<>();
 //        System.out.println(phon+"--"+code+"--"+pwd);
-        params.put("mobile", phon);
-        params.put("code", code);
-        params.put("password", pwd);
-        params.put("password_confirm", pwd);
+//        params.put("mobile", phon);
+//        params.put("code", code);
+//        params.put("password", pwd);
+//        params.put("password_confirm", pwd);
 //?mobile="+phon+"&code="+code+"&password="+pwd+"&password_confirm="+pwd
 
-        OkHttp.post(this, "http://guodian.staraise.com.cn/api/auth/register", params, new OkCallback() {
+        OkHttp.post(this, "http://guodian.staraise.com.cn/api/auth/register?mobile="+phon+"&code="+code+"&password="+pwd+"&password_confirm="+pwd, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
 //                System.out.println(response);
@@ -190,7 +197,7 @@ public class RegisterActivity extends BaseActivity {
                     commit.setEnabled(false);
                     break;
                 case 4:
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                     RegisterActivity.this.finish();
                     break;
@@ -206,6 +213,48 @@ public class RegisterActivity extends BaseActivity {
         tip.setText(spannableString);
 
 
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (start == 0 && commit.isEnabled()) {
+                    commit.setEnabled(false);
+                } else if (!commit.isEnabled() && verify.getText().toString().length() != 0 && password.getText().toString().length() != 0) {
+                    commit.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (start == 0 && commit.isEnabled()) {
+                    commit.setEnabled(false);
+                } else if (!commit.isEnabled() && phone.getText().toString().length() != 0 && verify.getText().toString().length() != 0) {
+                    commit.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         verify.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -214,9 +263,9 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (start == 0) {
+                if (start == 0 && commit.isEnabled()) {
                     commit.setEnabled(false);
-                } else {
+                } else if (!commit.isEnabled() && phone.getText().toString().length() != 0 && password.getText().toString().length() != 0) {
                     commit.setEnabled(true);
                 }
 

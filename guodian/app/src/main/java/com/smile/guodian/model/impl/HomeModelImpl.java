@@ -115,6 +115,7 @@ public class HomeModelImpl implements HomeLoadModel {
                     }
 
                     homeTop.setCustom_goods(customGoods);
+
                     array = data.getJSONArray("guessGoodsList");
                     List<GuessGoods> guessGoodsList = new ArrayList<>();
                     for (int i = 0; i < array.length(); i++) {
@@ -143,10 +144,15 @@ public class HomeModelImpl implements HomeLoadModel {
                     //横向数据
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADLINE, 300));
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HOT, 300));
-////
+
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_LIVE, 12));
-                    //猜你喜欢
+                    list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 300));
+
+                     //猜你喜欢
+//                    list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 12));
+
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADER, 300));
+
                     homeTop.setList(list);
 
                     listener.onSuccess(homeTop);

@@ -3,6 +3,7 @@ package com.smile.guodian.ui.adapter;
 import android.app.Activity;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.smile.guodian.R;
@@ -25,7 +26,7 @@ public class SecondGoodsAdapter extends BaseQuickAdapter<Category, BaseViewHolde
     protected void convert(BaseViewHolder holder, Category bean) {
         holder.setText(R.id.text_title, bean.getName());
 //        GlideUtil.load(context,bean.getImgUrl(),(ImageView)holder.getView(R.id.iv_view));
-        GlideUtil.load(context, HttpContants.BASE_URL+bean.getLogo(), (ImageView) holder
+        Glide.with(context).load(HttpContants.BASE_URL+bean.getLogo()).into((ImageView) holder
                 .getView(R.id.iv_view));
     }
 }

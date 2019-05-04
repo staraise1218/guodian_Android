@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.CategoryList;
 import com.smile.guodian.model.entity.Hot;
 import com.smile.guodian.utils.GlideUtil;
 
@@ -17,10 +19,10 @@ import java.util.List;
 
 public class HeadlineShowAdapter extends BaseAdapter {
     private Context context;
-    private List<Hot> hots;
+    private List<CategoryList> hots;
     private Activity activity;
 
-    public void setHots(List<Hot> hots) {
+    public void setHots(List<CategoryList> hots) {
         this.hots = hots;
     }
 
@@ -50,10 +52,10 @@ public class HeadlineShowAdapter extends BaseAdapter {
         convertView = View.inflate(context, R.layout.item_headline_show, null);
         TextView title = convertView.findViewById(R.id.item_headline_show_title);
         ImageView imageView = convertView.findViewById(R.id.item_headline_show_content);
-        title.setText(hots.get(position).getAd_name());
+        title.setText(hots.get(position).getName());
 //        System.out.println(HttpContants.BASE_URL + hots.get(position).getAd_code());
-        GlideUtil.load(context, activity, HttpContants.BASE_URL + hots.get(position).getAd_code(), imageView);
-//        Glide.with(context).load(HttpContants.BASE_URL+hots.get(position).getAd_code()).into(imageView);
+//        GlideUtil.load(context, activity, HttpContants.BASE_URL + hots.get(position).getImage(), imageView);
+        Glide.with(context).load(HttpContants.BASE_URL+hots.get(position).getImage()).into(imageView);
         return convertView;
     }
 }

@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
-    android:layout_height="120dp">
+    android:layout_height="wrap_content">
+    <View
+        android:background="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
     <TextView
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -13,24 +16,9 @@
         android:layout_height="wrap_content"
         android:text="为你挑选"
         android:textSize="16sp" />
-    <LinearLayout
-        android:background="@color/white"
-        android:paddingTop="5dp"
-        android:id="@+id/user_footer"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:background="@drawable/timg"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:background="@drawable/timg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
+   <GridView
+       android:id="@+id/user_footer_content"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+   </GridView>
 </LinearLayout>

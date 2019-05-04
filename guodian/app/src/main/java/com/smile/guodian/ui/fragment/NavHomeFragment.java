@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.smile.guodian.R;
 import com.smile.guodian.base.BundleKey;
@@ -19,6 +22,8 @@ import com.smile.guodian.model.entity.HomeBottom;
 import com.smile.guodian.model.entity.HomeTop;
 import com.smile.guodian.presenter.HomePresenter;
 import com.smile.guodian.ui.activity.DetailActivity;
+import com.smile.guodian.ui.activity.MainActivity;
+import com.smile.guodian.ui.activity.SearchActivity;
 import com.smile.guodian.ui.adapter.HomeAdapter;
 import com.smile.guodian.contract.HomeContract;
 import com.smile.guodian.utils.ToastUtil;
@@ -39,8 +44,10 @@ public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRe
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recycler_view)
     LoadMoreRecyclerView recyclerView;
+    @BindView(R.id.home_search)
+    EditText search;
     private Context context;
-    private Activity activity;
+    private MainActivity activity;
 
     private List<HomeBase> list = new ArrayList<>();
 
@@ -49,6 +56,7 @@ public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private int page = 1;
     private int pageSize = 10;
     private HomeBase footerItem = new HomeBase();
+
 
     public static NavHomeFragment newInstance() {
         NavHomeFragment fragment = new NavHomeFragment();
@@ -67,10 +75,8 @@ public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRe
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_home, container, false);
         ButterKnife.bind(this, view);
-
-        activity = getActivity();
+        activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
-
         presenter = new HomePresenter();
         presenter.init(this, context);
         return view;
@@ -78,21 +84,30 @@ public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void initView() {
+
         refreshLayout.setColorSchemeResources(R.color.font_orange_color);
         refreshLayout.setOnRefreshListener(this);
         int spanCount = getResources().getInteger(R.integer.grid_span_count);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(activity, spanCount);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new HomeAdapter(context, activity, list);
         adapter.setOnItemClickListener(this);
-        layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
+//        layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
         recyclerView.setAdapter(adapter);
         recyclerView.setOnLoadMoreListener(this);
 
         footerItem.setType(Type.TYPE_FOOTER_LOAD);
         footerItem.setSpanCount(spanCount);
         presenter.start(HOME_TOP);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

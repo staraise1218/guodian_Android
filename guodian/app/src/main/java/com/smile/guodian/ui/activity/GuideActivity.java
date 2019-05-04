@@ -63,20 +63,21 @@ public class GuideActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        for(int i=0;i<3;i++) {
-            View inflate = getLayoutInflater().inflate(R.layout.guide_item, null);
-            ImageView ivGuide = (ImageView) inflate.findViewById(R.id.iv_guide);
-            ivGuide.setBackgroundResource(imgRes[i]);
-//        Glide.with(GuideActivity.this).load("http://guodian.staraise.com.cn" + array.getJSONObject(i).getString("ad_code")).into(ivGuide);
-//                       GlideUtil.load(GuideActivity.this,GuideActivity.this,"http://guodian.staraise.com.cn"+array.getJSONObject(i).getString("ad_code"),ivGuide);
-            mViewList.add(inflate);
-        }
+//        for(int i=0;i<3;i++) {
+//            View inflate = getLayoutInflater().inflate(R.layout.guide_item, null);
+//            ImageView ivGuide = (ImageView) inflate.findViewById(R.id.iv_guide);
+//            ivGuide.setBackgroundResource(imgRes[i]);
+////        Glide.with(GuideActivity.this).load("http://guodian.staraise.com.cn" + array.getJSONObject(i).getString("ad_code")).into(ivGuide);
+////                       GlideUtil.load(GuideActivity.this,GuideActivity.this,"http://guodian.staraise.com.cn"+array.getJSONObject(i).getString("ad_code"),ivGuide);
+//            mViewList.add(inflate);
+//        }
         MyPagerAdapter adapter = new MyPagerAdapter();
         imageView.setVisibility(View.GONE);
         mViewPager.setAdapter(adapter);
 
+        mViewPager.setOffscreenPageLimit(0);
         mViewPager.setOnPageChangeListener(new PagePositionLister());
-//        initData();
+        initData();
     }
 
 

@@ -1,6 +1,7 @@
 package com.smile.guodian.ui.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -56,7 +57,8 @@ public class NavWeFragment extends Fragment {
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreListener());
         uid = getContext().getSharedPreferences("db", Context.MODE_PRIVATE).getInt("uid", -1);
-//        pullData();
+        pullData();
+
     }
 
 
@@ -90,7 +92,7 @@ public class NavWeFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-                    System.out.println("handler");
+//                    System.out.println("handler");
 //                    mRecyclerViewAdapter.getDataList().addAll(setList());
                     mRecyclerViewAdapter.setFinds(finds);
                     mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -101,14 +103,6 @@ public class NavWeFragment extends Fragment {
         }
     };
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if(!hidden){
-            pullData();
-            System.out.println(hidden);
-        }
-    }
 
     public void pullData() {
         Map<String, String> params = new HashMap<>();
@@ -169,7 +163,7 @@ public class NavWeFragment extends Fragment {
 //        OkHttpClient.Builder builder = new OkHttpClient.Builder();
 //        builder.
 
-        OkHttp.post(getContext(), HttpContants.BASE_URL+"/Api/find/index?user_id="+uid, params, new OkCallback() {
+        OkHttp.post(getContext(), HttpContants.BASE_URL+"/Api/find/index?user_id="+uid+"&cat_id=11&page=1", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
                 System.out.println(response);

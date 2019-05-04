@@ -1,12 +1,17 @@
 package com.smile.guodian.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,15 +49,17 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public ImageView imageView;
-        public LinearLayout view;
+        public RelativeLayout view;
         public TextView zan;
+        public CheckBox give;
 
         public ViewHolder(View itemView) {
             super(itemView);
             zan = itemView.findViewById(R.id.item_zan);
             view = itemView.findViewById(R.id.item_view);
             imageView = (ImageView) itemView.findViewById(R.id.item_img);
-            title = (TextView) itemView.findViewById(R.id.title);
+//            title = (TextView) itemView.findViewById(R.id.title);
+            give = itemView.findViewById(R.id.item_give);
         }
     }
 
@@ -62,11 +69,36 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         return new ViewHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        System.out.println(position);
-        holder.title.setText(finds.get(position).getTitle());
-        System.out.println(HttpContants.BASE_URL + finds.get(position).getTumb());
+//        System.out.println(position);
+//        holder.title.setText(finds.get(position).getTitle());
+        if (finds.get(position).getIsliked() == 1) {
+            holder.give.setChecked(true);
+            holder.zan.setTextColor(Color.parseColor("#DDA021"));
+        } else {
+            holder.give.setChecked(false);
+            holder.zan.setTextColor(Color.BLACK);
+        }
+
+        final TextView textView = holder.zan;
+        final int number = Integer.parseInt(holder.zan.getText().toString());
+
+        holder.give.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    textView.setTextColor(Color.parseColor("#DDA021"));
+                    textView.setText(number);
+                } else {
+                    textView.setTextColor(Color.BLACK);
+                    textView.setText(number - 1);
+                }
+            }
+        });
+
+//        System.out.println(HttpContants.BASE_URL + finds.get(position).getTumb());
         Glide.with(mContext).load(HttpContants.BASE_URL + finds.get(position).getTumb()).into(holder.imageView);
         holder.zan.setText(finds.get(position).getLike_num());
 

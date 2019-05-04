@@ -1,12 +1,14 @@
 package com.smile.guodian.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +16,10 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.smile.guodian.R;
+import com.smile.guodian.model.entity.CategoryList;
 import com.smile.guodian.ui.adapter.ViewPagerAdapter;
+import com.smile.guodian.ui.fragment.NavCategoryFragment;
+import com.smile.guodian.ui.fragment.NavHomeFragment;
 import com.smile.guodian.widget.DataGenerator;
 
 import java.util.ArrayList;
@@ -34,11 +39,23 @@ public class MainActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.tv_search_tips)
     TextView tvSearchTips;
-
+    private int uid;
 
     @BindView(R.id.bottom_tab_layout)
     TabLayout tabLayout;
+    private ViewPagerAdapter viewPagerAdapter;
 
+    public void setCategoryList(int categoryId) {
+//        this.categoryList = categoryList;
+//        System.out.print(categoryId);
+        ((NavCategoryFragment) viewPagerAdapter.getItem(2)).refreshData(categoryId);
+    }
+
+    public CategoryList getCategoryList() {
+        return categoryList;
+    }
+
+    public CategoryList categoryList;
 
     private CountDownTimer timer;
 
@@ -49,6 +66,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
     }
+
+    public static MainActivity getInstance() {
+        return new MainActivity();
+    }
+
 
     @Override
     protected void init() {
@@ -69,22 +91,35 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         setSupportActionBar(toolbar);
 
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 //                System.out.println(tab.getPosition());
-                viewPager.setCurrentItem(tab.getPosition(), false);
-                for (int i = 0; i < tabLayout.getTabCount(); i++) {
-                    View view = tabLayout.getTabAt(i).getCustomView();
-                    ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
-                    TextView text = (TextView) view.findViewById(R.id.tab_content_text);
-                    if (i == tab.getPosition()) {
-                        icon.setImageResource(DataGenerator.mTabResPressed[i]);
-                        text.setTextColor(Color.parseColor("#DDA021"));
-                    } else {
-                        icon.setImageResource(DataGenerator.mTabRes[i]);
-                        text.setTextColor(getResources().getColor(android.R.color.black));
+
+                SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("db", MODE_PRIVATE);
+                uid = sharedPreferences.getInt("uid", -1);
+
+                System.out.println(uid+"---"+tab.getPosition());
+
+                if (uid <= 0 && (tab.getPosition() == 4 || tab.getPosition() == 3)) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.putExtra("where", "main");
+                    startActivity(intent);
+                    return;
+                } else {
+                    viewPager.setCurrentItem(tab.getPosition(), false);
+
+                    for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                        View view = tabLayout.getTabAt(i).getCustomView();
+                        ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
+                        TextView text = (TextView) view.findViewById(R.id.tab_content_text);
+                        if (i == tab.getPosition()) {
+                            icon.setImageResource(DataGenerator.mTabResPressed[i]);
+                            text.setTextColor(Color.parseColor("#DDA021"));
+                        } else {
+                            icon.setImageResource(DataGenerator.mTabRes[i]);
+                            text.setTextColor(getResources().getColor(android.R.color.black));
+                        }
                     }
                 }
             }
@@ -129,7 +164,9 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
         viewPager.setOffscreenPageLimit(5);
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+//        NavHomeFragment.newInstance().setMainActivity(this);
 
         /**
          * 顶部搜索框内容定时更新，简单的采用倒计时功能
@@ -172,5 +209,33 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(false);
+    }
+
+/*    public void switchPosition(int position, CategoryList categoryList) {
+        viewPager.setCurrentItem(position);
+        this.categoryList = categoryList;
+    }*/
+
+    FragmentSkipInterface mFragmentSkipInterface;
+
+    public void setFragmentSkipInterface(FragmentSkipInterface fragmentSkipInterface) {
+        mFragmentSkipInterface = fragmentSkipInterface;
+    }
+
+    /**
+     * Fragment跳转
+     */
+    public void skipToFragment(int position) {
+        if (mFragmentSkipInterface != null) {
+            mFragmentSkipInterface.gotoFragment(viewPager);
+        }
+        tabLayout.getTabAt(position).select();
+    }
+
+    public interface FragmentSkipInterface {
+        /**
+         * ViewPager中子Fragment之间跳转的实现方法
+         */
+        void gotoFragment(AHBottomNavigationViewPager viewPager);
     }
 }

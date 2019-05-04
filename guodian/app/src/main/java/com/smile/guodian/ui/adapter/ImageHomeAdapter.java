@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.smile.guodian.R;
 import com.smile.guodian.model.entity.HomeTop;
 import com.smile.guodian.utils.GlideUtil;
@@ -52,7 +53,8 @@ public class ImageHomeAdapter extends RecyclingPagerAdapter {
         }
         holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         System.out.println(list.get(getPosition(position)).getUrl());
-        GlideUtil.load(activity, list.get(getPosition(position)).getUrl(), holder.imageView);
+        Glide.with(context).load(list.get(getPosition(position)).getUrl()).into(holder.imageView);
+//        GlideUtil.load(activity, list.get(getPosition(position)).getUrl(), holder.imageView);
         return view;
     }
 

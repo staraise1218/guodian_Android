@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/item_home_product_img"
+        android:layout_width="154dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:id="@+id/item_home_product_title"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp" />
+    <TextView
+        android:textSize="10sp"
+        android:text="Audermarspigues/爱彼皇家"
+        android:textColor="@color/gray"
+        android:singleLine="true"
+        android:id="@+id/item_home_product_name"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="6dp" />
+    <RelativeLayout
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
+        android:layout_width="154dp"
+        android:layout_height="15dp">
+
+        <TextView
+            android:id="@+id/item_home_product_price"
+            android:text="售价位:$3336,385"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:textSize="8sp"
+            android:text="会员再减"
+            android:textColor="@color/white"
+            android:background="#DDA021"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <TextView
+        android:text="官方公价：¥149000"
+        android:textSize="8sp"
+        android:textColor="@color/black"
+        android:singleLine="true"
+        android:id="@+id/item_home_product_price1"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="6dp" />
+
+</LinearLayout>

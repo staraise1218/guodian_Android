@@ -2,9 +2,13 @@ package com.smile.guodian.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -34,6 +38,11 @@ public class LoginActivity extends BaseActivity {
     Button commit;
     @BindView(R.id.login_show_password)
     CheckBox hiddenPassword;
+    @BindView(R.id.login_web)
+    WebView webView;
+
+
+    private String where;
 
 
     private boolean isHidden = false;
@@ -60,6 +69,32 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        Intent intent = getIntent();
+        where = intent.getStringExtra("where");
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                System.out.println(start + "--" + s.length());
+
+                if (start == 0 && !commit.isEnabled()) {
+                    commit.setEnabled(true);
+                } else if (s.length() == 0 && !commit.isEnabled()) {
+                    commit.setEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 //        initToolBar();
     }
 
@@ -74,7 +109,8 @@ public class LoginActivity extends BaseActivity {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.login_commit:
-                login();   //登录
+                if (commit.isEnabled())
+                    login();   //登录
                 break;
             case R.id.login_register:
                 intent = new Intent(this, RegisterActivity.class);
@@ -100,11 +136,11 @@ public class LoginActivity extends BaseActivity {
         String pwd = password.getText().toString().trim();
 
         Map<String, String> params = new HashMap<>();
-        params.put("mobile", phone);
-        params.put("password", pwd);
+//        params.put("mobile", phone);
+//        params.put("password", pwd);
 
 
-        OkHttp.post(this, HttpContants.LOGIN, params, new OkCallback() {
+        OkHttp.post(this, HttpContants.LOGIN + "?mobile=" + phone + "&password=" + pwd, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
                 JSONObject object = null;
@@ -119,12 +155,31 @@ public class LoginActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                 try {
-                    int uid = result.getInt("user_id");
+
+                    String uid = result.getString("user_id");
                     SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("uid", uid);
+                    editor.putInt("uid", Integer.parseInt(uid));
+                    System.out.print(uid);
                     editor.commit();
+                    webView.getSettings().setJavaScriptEnabled(true);
+                    webView.loadUrl("http://guodian.staraise.com.cn/page/empty.html?user_id=" + uid);
+                    webView.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public void onPageFinished(WebView view, String url) {
+                            super.onPageFinished(view, url);
+                            if (where == null) {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                LoginActivity.this.finish();
+                            }
+                        }
+                    });
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
