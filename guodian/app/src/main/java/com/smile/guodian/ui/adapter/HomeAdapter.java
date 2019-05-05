@@ -28,6 +28,7 @@ import com.smile.guodian.ui.activity.WebActivity;
 import com.smile.guodian.utils.GlideUtil;
 import com.smile.guodian.widget.CirclePageIndicator;
 import com.smile.guodian.widget.FooterLoading;
+import com.smile.guodian.widget.HomeGridView;
 
 import org.w3c.dom.Text;
 
@@ -379,10 +380,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class HeaderHolder extends RecyclerView.ViewHolder {
-//        @BindView(R.id.item_header_show_title)
+        //        @BindView(R.id.item_header_show_title)
 //        TextView tvTitle;
         @BindView(R.id.item_header_show_content)
-        GridView gridView;
+        HomeGridView gridView;
 
         HeaderHolder(View itemView) {
             super(itemView);

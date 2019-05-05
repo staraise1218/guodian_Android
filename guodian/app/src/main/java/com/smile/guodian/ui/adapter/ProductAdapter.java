@@ -22,7 +22,7 @@ public class ProductAdapter extends BaseAdapter {
     private Context context;
     private String name;
 
-    public ProductAdapter(List<ProductGood> goodList, Context context,String name) {
+    public ProductAdapter(List<ProductGood> goodList, Context context, String name) {
         this.goodList = goodList;
         this.context = context;
         this.name = name;
@@ -48,6 +48,7 @@ public class ProductAdapter extends BaseAdapter {
         public TextView name;
         public TextView price;
         public TextView title;
+        public TextView huiyuan;
     }
 
     ViewHolder viewHolder;
@@ -61,15 +62,17 @@ public class ProductAdapter extends BaseAdapter {
             viewHolder.name = convertView.findViewById(R.id.item_home_product_name);
             viewHolder.price = convertView.findViewById(R.id.item_home_product_price);
             viewHolder.title = convertView.findViewById(R.id.item_home_product_title);
+            viewHolder.huiyuan = convertView.findViewById(R.id.huiyuan);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        viewHolder.huiyuan.setVisibility(View.GONE);
         Glide.with(context).load(HttpContants.BASE_URL + goodList.get(position).getOriginal_img()).into(viewHolder.imageView);
         viewHolder.name.setText(goodList.get(position).getGoods_name());
         String price = goodList.get(position).getShop_price();
-        viewHolder.price.setText("销售价:¥"+price.substring(0,price.length()-3));
+        viewHolder.price.setText("销售价:¥" + price.substring(0, price.length() - 3));
         viewHolder.title.setText(name);
 
         return convertView;

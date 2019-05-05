@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#c6c6c6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="15dp"
+        android:text="猜您喜欢"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_10"
+        android:textStyle="bold" />
+
+    <com.smile.guodian.widget.HomeGridView
+        android:id="@+id/search_like_content"
+        android:layout_width="@dimen/dp_370"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:numColumns="2"></com.smile.guodian.widget.HomeGridView>
+
+</LinearLayout>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.GuessGoods;
 import com.smile.guodian.model.entity.SearchEntity;
 import com.smile.guodian.model.entity.SearchResultEntity;
 import com.smile.guodian.okhttp.OkCallback;
@@ -23,6 +24,7 @@ import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.adapter.SearchAdapter;
 import com.smile.guodian.utils.ToastUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,9 +59,17 @@ public class SearchActivity extends BaseActivity {
     private int page = 0;
     private List<Integer> type = new ArrayList<>();
     private SearchAdapter searchAdapter;
+    private List<String> hot = new ArrayList<>();
 
     @Override
     protected void init() {
+        hot.add("龙珠系列");
+        hot.add("LV 口红包");
+        hot.add("劳力士");
+        hot.add("LV 白棋盘格NOENOE");
+        hot.add("LV LOCKY BB");
+        hot.add("Tom Ford粉色圆框");
+
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -71,11 +81,12 @@ public class SearchActivity extends BaseActivity {
                 return false;
             }
         });
-        initData();
         searchAdapter = new SearchAdapter(type, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(searchAdapter);
+        initData();
+
 
     }
 
@@ -85,8 +96,46 @@ public class SearchActivity extends BaseActivity {
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/goods/searchPage", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
+
+                System.out.println(response);
                 Gson gson = new Gson();
+                JSONObject ob = null;
+                JSONObject data = null;
+                try {
+                    ob = new JSONObject(response);
+                    data = ob.getJSONObject("data");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                List<GuessGoods> guessGoodsList = new ArrayList<>();
+
+
+                JSONArray array = null;
+                try {
+                    array = data.getJSONArray("favourite_goods");
+                    for (int i = 0; i < array.length(); i++) {
+                        GuessGoods guessGoods = new GuessGoods();
+                        JSONObject object = array.getJSONObject(i);
+                        guessGoods.setGoods_id(object.getInt("goods_id"));
+                        guessGoods.setGoods_name(object.getString("goods_name"));
+                        guessGoods.setStore_count(object.getInt("store_count"));
+                        guessGoods.setOriginal_img(object.getString("original_img"));
+                        guessGoods.setShop_price(object.getString("shop_price"));
+                        guessGoodsList.add(guessGoods);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 SearchEntity searchEntity = gson.fromJson(response, SearchEntity.class);
+                type.add(2);
+                type.add(3);
+                searchAdapter.setHot(hot);
+                searchAdapter.setType(type);
+                searchAdapter.setGuessGoods(guessGoodsList);
+                searchAdapter.notifyDataSetChanged();
+
 
             }
 
@@ -106,7 +155,8 @@ public class SearchActivity extends BaseActivity {
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/goods/goodslist?keyword=" + keyword + "&page=" + page, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
+//                System.out.println(response);
+                type.clear();
                 JSONObject object = null;
                 try {
                     object = new JSONObject(response);
@@ -121,11 +171,14 @@ public class SearchActivity extends BaseActivity {
                         type.add(5);
                     } else {
                         type.add(1);
+                        type.add(3);
                     }
-                    searchAdapter = new SearchAdapter(type, SearchActivity.this);
+
+
+//                    searchAdapter = new SearchAdapter(type, SearchActivity.this);
                     searchAdapter.setType(type);
                     searchAdapter.setResultEntity(resultEntity);
-                    recyclerView.setAdapter(searchAdapter);
+//                    recyclerView.setAdapter(searchAdapter);
                     searchAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {

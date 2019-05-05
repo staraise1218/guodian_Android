@@ -14,9 +14,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -28,15 +31,24 @@ import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.Category;
 import com.smile.guodian.model.entity.CategoryBean;
 import com.smile.guodian.model.entity.CategoryBean2;
+import com.smile.guodian.model.entity.SortModel;
+import com.smile.guodian.okhttp.OkCallback;
+import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.activity.CategoryProductActivity;
 import com.smile.guodian.ui.activity.MainActivity;
 import com.smile.guodian.ui.adapter.CategoryAdapter;
 import com.smile.guodian.ui.adapter.SecondGoodsAdapter;
+import com.smile.guodian.ui.adapter.category.SortAdapter;
+import com.smile.guodian.utils.CharacterParser;
+import com.smile.guodian.utils.PinyinComparator;
+import com.smile.guodian.widget.ClearEditText;
+import com.smile.guodian.widget.SideBar;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,6 +56,9 @@ import butterknife.BindView;
 import okhttp3.Call;
 
 public class NavCategoryFragment extends BaseFragment {
+
+    public NavCategoryFragment() {
+    }
 
     public static NavCategoryFragment newInstance() {
         NavCategoryFragment fragment = new NavCategoryFragment();
@@ -57,6 +72,17 @@ public class NavCategoryFragment extends BaseFragment {
     private static final int STATE_REFREH = 1;
     private static final int STATE_MORE = 2;
     private int state = STATE_NORMAL;       //正常情况
+    private SortAdapter adapter;
+    private ClearEditText mClearEditText;
+    /**
+     * 汉字转换成拼音的类
+     */
+    private CharacterParser characterParser;
+    private List<SortModel> sourceDataList;
+    /**
+     * 根据拼音来排列ListView里面的数据类
+     */
+    private PinyinComparator pinyinComparator;
 
     @BindView(R.id.recyclerview_category)
     RecyclerView mRecyclerView;
@@ -77,6 +103,13 @@ public class NavCategoryFragment extends BaseFragment {
     RelativeLayout content;
     @BindView(R.id.catergory_banner)
     ImageView banner;
+
+    @BindView(R.id.sidrbar)
+    SideBar sideBar;
+    @BindView(R.id.dialog)
+    TextView dialog;
+    @BindView(R.id.name_listview)
+    ListView sortListView;
 
 
     private Gson mGson = new Gson();
@@ -107,7 +140,8 @@ public class NavCategoryFragment extends BaseFragment {
 
     @Override
     protected void init() {
-
+        characterParser = CharacterParser.getInstance();
+        pinyinComparator = new PinyinComparator();
 //        MainActivity mainActivity = (MainActivity) getActivity();
 //        if (mainActivity.getCategoryList() != null) {
 //            categoryId = mainActivity.getCategoryList().getId();
@@ -118,9 +152,37 @@ public class NavCategoryFragment extends BaseFragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        sideBar.setTextView(dialog);
+        // 设置右侧触摸监听
+        sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
+
+            @Override
+            public void onTouchingLetterChanged(String s) {
+                // 该字母首次出现的位置
+                int position = adapter.getPositionForSection(s.charAt(0));
+                if (position != -1) {
+                    sortListView.setSelection(position);
+                }
+            }
+        });
+
+        //单击名称列表后toast提示
+
+        sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // 这里要利用adapter.getItem(position)来获取当前position所对应的对象
+                Toast.makeText(getContext(),
+                        ((SortModel) adapter.getItem(position)).getName(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
-    public void refreshData(int categoryId){
+    public void refreshData(int categoryId) {
 //        MainActivity mainActivity = (MainActivity) getActivity();
 //        if (mainActivity.getCategoryList() != null) {
 //            categoryId = mainActivity.getCategoryList().getId();
@@ -181,18 +243,21 @@ public class NavCategoryFragment extends BaseFragment {
                         }.getType();
                         CategoryBean enums = mGson.fromJson(response, collectionType);
                         Iterator<Category> iterator = enums.getData().iterator();
+                        Category category = new Category();
+                        category.setCat_name("商品");
+                        categoryFirst.add(category);
                         while (iterator.hasNext()) {
                             Category bean = iterator.next();
                             position++;
-                            if ((categoryId + "" ).equals( bean.getId())) {
+                            if ((categoryId + "").equals(bean.getId())) {
                                 currentPosition = position;
                             }
                             categoryFirst.add(bean);
                         }
                         System.out.println(currentPosition);
-                        if(currentPosition!=0) {
+                        if (currentPosition != 0) {
                             showCategoryData(currentPosition - 1);
-                        }else {
+                        } else {
                             showCategoryData(0);
                         }
 
@@ -220,14 +285,19 @@ public class NavCategoryFragment extends BaseFragment {
         mCategoryAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Category category = (Category) adapter.getData().get(position);
-                String id = category.getId();
-                String name = category.getCat_name();
-                mCategoryAdapter.setPosition(position);
-                mCategoryAdapter.notifyDataSetChanged();
-                isclick = true;
-                defaultClick();
-                requestWares(id);
+
+                if (position == 0) {
+                    mCategoryAdapter.setPosition(position);
+
+                } else {
+                    Category category = (Category) adapter.getData().get(position);
+                    String id = category.getId();
+                    String name = category.getCat_name();
+                    mCategoryAdapter.notifyDataSetChanged();
+                    isclick = true;
+                    defaultClick();
+                    requestWares(id);
+                }
             }
         });
 
@@ -250,10 +320,33 @@ public class NavCategoryFragment extends BaseFragment {
 
         //默认选中第0个
         if (!isclick && categoryId == 0) {
-            Category category = categoryFirst.get(0);
+            Category category = categoryFirst.get(1);
             String id = category.getId();
             requestWares(id);
         }
+        sourceDataList = filledData(getResources().getStringArray(enums.get));
+        // 根据a-z进行排序源数据
+        Collections.sort(sourceDataList, pinyinComparator);
+        adapter = new SortAdapter(getContext(), sourceDataList);
+        sortListView.setAdapter(adapter);
+
+    }
+
+    public void getBanchID() {
+        OkHttpUtils.post().url(HttpContants.BASE_URL + "/Api/category/allBrandList").build()
+                .execute(new StringCallback() {
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+//                        LogUtil.e("分类一级", e + "", true);true
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        System.out.println(response + "");
+                    }
+                });
+
     }
 
 
@@ -312,13 +405,6 @@ public class NavCategoryFragment extends BaseFragment {
                         intent.putExtra("branch_id", datas.get(position).getId());
                         intent.putExtra("name", datas.get(position).getName());
                         getContext().startActivity(intent);
-
-//                        Category category = (Category) adapter.getData().get
-//                                (position);
-//                        content.setVisibility(View.GONE);
-//                        webView.setVisibility(View.VISIBLE);
-//                        webView.loadUrl("http://guodian.staraise.com.cn/page/commodity.html?goods_id="+category.getId());
-
                     }
                 });
 
@@ -335,13 +421,31 @@ public class NavCategoryFragment extends BaseFragment {
     }
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
+    /**
+     * 为ListView填充数据
+     *
+     * @param data
+     * @return
+     */
+    private List<SortModel> filledData(String[] data) {
 
-    @Override
-    public void onPause() {
-        super.onPause();
+        List<SortModel> mSortList = new ArrayList<SortModel>();
+        for (int i = 0; i < data.length; i++) {
+
+            SortModel sortModel = new SortModel();
+            sortModel.setName(data[i]);
+            // 汉字转换成拼音
+            String pinyin = characterParser.getSelling(data[i]);
+            String sortString = pinyin.substring(0, 1).toUpperCase();
+
+            // 正则表达式，判断首字母是否是英文字母
+            if (sortString.matches("[A-Z]")) {
+                sortModel.setSortLetters(sortString.toUpperCase());
+            } else {
+                sortModel.setSortLetters("#");
+            }
+            mSortList.add(sortModel);
+        }
+        return mSortList;
     }
 }

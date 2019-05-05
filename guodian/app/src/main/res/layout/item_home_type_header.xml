@@ -12,25 +12,24 @@
         android:background="#E7E7E7" />
 
     <TextView
-        android:layout_marginTop="25dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:id="@+id/item_header_show_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
         android:text="猜你喜欢"
-        android:textSize="18sp" />
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <GridView
+    <com.smile.guodian.widget.HomeGridView
+        android:id="@+id/item_header_show_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_header_show_title"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:numColumns="2"
-        android:id="@+id/item_header_show_content"
-        android:layout_below="@+id/item_header_show_title"
-        android:layout_width="match_parent"
-        android:layout_height="790dp"
-        />
+        android:numColumns="2" />
 
 
     <View

@@ -8,26 +8,28 @@
         android:id="@+id/search_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:text="索搜结果"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_20" />
+        android:textSize="@dimen/sp_10" />
 
     <TextView
         android:id="@+id/search_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_title"
+        android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:textColor="@color/gray"
-        android:textSize="@dimen/sp_18" />
+        android:textSize="@dimen/sp_8" />
 
-    <GridView
+    <com.smile.guodian.widget.HomeGridView
         android:id="@+id/search_gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/search_total"
-        android:numColumns="2"></GridView>
+        android:layout_marginTop="@dimen/dp_10"
+        android:numColumns="2"></com.smile.guodian.widget.HomeGridView>
 
 </RelativeLayout>

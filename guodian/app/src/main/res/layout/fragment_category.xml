@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <WebView
-        android:visibility="gone"
         android:id="@+id/catergory_web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="match_parent"
+        android:visibility="gone"></WebView>
 
     <RelativeLayout
         android:id="@+id/catergory_content"
@@ -69,6 +70,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/home_header"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/dp_6"
             android:orientation="horizontal">
 
             <android.support.v7.widget.RecyclerView
@@ -81,29 +83,67 @@
                 android:scrollbars="none" />
 
 
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_327"
+                android:layout_marginRight="@dimen/dp_16"
+                android:layout_weight="4"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <ListView
+                    android:id="@+id/name_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:divider="@null" />
+
+                <!-- 中间显示的选中的大写首字母 -->
+                <TextView
+                    android:id="@+id/dialog"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="30sp"
+                    android:visibility="gone" />
+
+                <!-- 右侧供选择的列表 -->
+                <com.example.widget.SideBar
+                    android:id="@+id/sidrbar"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right|center" />
+            </FrameLayout>
+
             <LinearLayout
-                android:background="@color/white"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:orientation="vertical">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone">
+
                 <ImageView
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="24dp"
                     android:id="@+id/catergory_banner"
                     android:layout_width="270dp"
-                    android:layout_gravity="center"
                     android:layout_height="80dp"
-                    />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="20dp" />
 
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -177,12 +217,12 @@
 
 
                 <com.cjj.MaterialRefreshLayout
-                    android:layout_marginTop="12dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:id="@+id/refresh_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="15dp"
                     app:overlay="false"
                     app:progress_colors="@array/material_colors"
                     app:progress_show_circle_backgroud="false"

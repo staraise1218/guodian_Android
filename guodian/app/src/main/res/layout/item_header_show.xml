@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="173dp"
+    android:layout_height="wrap_content"
     android:paddingLeft="2dp"
-    android:paddingRight="2dp"
-    android:layout_height="257dp">
+    android:paddingRight="2dp">
 
     <View
         android:layout_width="2dp"
@@ -31,26 +31,27 @@
 
     <TextView
         android:id="@+id/header_show_name"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dp_173"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_headline_show_content"
+        android:minLines="2"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/header_show_price"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dp_173"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header_show_name"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
     <TextView
-        android:text="官网价格¥14100"
         android:id="@+id/header_show_normal_price"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dp_173"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header_show_price"
+        android:text="官网价格:¥"
         android:textColor="@color/gray"
         android:textSize="10sp" />
 </RelativeLayout>

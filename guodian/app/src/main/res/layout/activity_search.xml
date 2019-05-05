@@ -14,12 +14,12 @@
         android:layout_marginBottom="20dp">
 
         <EditText
-            android:singleLine="true"
             android:id="@+id/search_search"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/dp_32"
             android:background="@drawable/search_bg"
-            android:paddingLeft="@dimen/dp_20" />
+            android:paddingLeft="@dimen/dp_40"
+            android:singleLine="true" />
 
         <ImageView
             android:id="@+id/search_search_icon"
@@ -53,6 +53,7 @@
         android:id="@+id/search_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/search_header"></android.support.v7.widget.RecyclerView>
+        android:layout_below="@+id/search_header"
+        android:layout_marginBottom="20dp"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
