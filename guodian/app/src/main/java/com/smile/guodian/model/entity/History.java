@@ -7,12 +7,12 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class History {
     @Id(autoincrement = true)
-    long id;
+    Long id;
 
     private String history;
 
-    @Generated(hash = 619429370)
-    public History(long id, String history) {
+    @Generated(hash = 2123561833)
+    public History(Long id, String history) {
         this.id = id;
         this.history = history;
     }
@@ -21,11 +21,11 @@ public class History {
     public History() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

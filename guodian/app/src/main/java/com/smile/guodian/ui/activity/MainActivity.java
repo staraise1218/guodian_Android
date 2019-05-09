@@ -41,6 +41,8 @@ public class MainActivity extends BaseActivity {
     TextView tvSearchTips;
     private int uid;
 
+
+
     @BindView(R.id.bottom_tab_layout)
     TabLayout tabLayout;
     private ViewPagerAdapter viewPagerAdapter;
@@ -192,6 +194,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+
     }
 
     @Override

@@ -258,7 +258,7 @@ public class NavCategoryFragment extends BaseFragment {
                         CategoryBean enums = mGson.fromJson(response, collectionType);
                         Iterator<Category> iterator = enums.getData().iterator();
                         Category category = new Category();
-                        category.setCat_name("商品");
+                        category.setCat_name("品牌");
                         categoryFirst.add(category);
                         while (iterator.hasNext()) {
                             Category bean = iterator.next();

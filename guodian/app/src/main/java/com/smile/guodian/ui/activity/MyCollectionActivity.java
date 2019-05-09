@@ -44,7 +44,7 @@ public class MyCollectionActivity extends BaseActivity {
     @Override
     protected void init() {
         SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
-        uid = sharedPreferences.getInt("user_id", -1);
+        uid = sharedPreferences.getInt("uid", -1);
         recycler_view_list = (SlideRecyclerView) findViewById(R.id.recycler_view_list);
         recycler_view_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);

@@ -33,7 +33,7 @@ public class SettingActivity extends BaseActivity {
             case R.id.logout:
                 SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("user_id", -1);
+                editor.putInt("uid", -1);
                 editor.commit();
                 break;
         }

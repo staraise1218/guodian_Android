@@ -11,6 +11,10 @@
     <color name="divider_main_color">#CCC</color>
 
     <color name="font_gray_color">#C0C0C0</color>
+    <color name="date_picker_bg">#FFFFFF</color>
+    <color name="date_picker_divider">#11112233</color>
+    <color name="date_picker_text_light">#000000</color>
+    <color name="date_picker_text_dark">#333333</color>
 
 
     <color name="white">#ffffff</color>

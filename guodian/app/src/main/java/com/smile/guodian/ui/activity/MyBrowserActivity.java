@@ -99,7 +99,7 @@ public class MyBrowserActivity extends BaseActivity {
     protected void init() {
 
         SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
-        uid = sharedPreferences.getInt("user_id", -1);
+        uid = sharedPreferences.getInt("uid", -1);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

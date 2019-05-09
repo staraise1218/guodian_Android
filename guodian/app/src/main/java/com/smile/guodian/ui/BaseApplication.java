@@ -2,6 +2,7 @@ package com.smile.guodian.ui;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 
 import com.smile.guodian.DaoMaster;
 import com.smile.guodian.DaoSession;
@@ -17,6 +18,12 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         setupDatabase(this);
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
+
+
     }
 
     private void setupDatabase(Context context) {

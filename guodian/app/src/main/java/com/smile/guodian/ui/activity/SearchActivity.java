@@ -19,10 +19,12 @@ import com.smile.guodian.HistoryDao;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.GuessGoods;
+import com.smile.guodian.model.entity.History;
 import com.smile.guodian.model.entity.SearchEntity;
 import com.smile.guodian.model.entity.SearchResultEntity;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.adapter.SearchAdapter;
 import com.smile.guodian.utils.ToastUtil;
 
@@ -102,6 +104,13 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     }
 
     public void initData() {
+
+        List<History> histories = BaseApplication.getDaoSession().getHistoryDao().loadAll();
+        final String[] hist = new String[histories.size()];
+        for (int i = 0; i < histories.size(); i++) {
+            hist[i] = histories.get(i).getHistory();
+        }
+
         type.clear();
         Map<String, String> params = new HashMap<>();
 
@@ -143,11 +152,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 if (!history)
                     type.add(4);
                 type.add(3);
-                String[] history = new String[]{"LV", "LV 白棋盘格NOENOE", "LV 口红包", "LV 白棋盘格NOENOE"};
                 searchAdapter.setHot(hot);
                 searchAdapter.setType(type);
                 searchAdapter.setOnClickListener(SearchActivity.this);
-                searchAdapter.setList(history);
+                searchAdapter.setList(hist);
                 searchAdapter.setGuessGoods(guessGoodsList);
                 searchAdapter.notifyDataSetChanged();
 
@@ -163,13 +171,14 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    public void search(String keyword) {
+    public void search(final String keyword) {
         page++;
         Map<String, String> params = new HashMap<>();
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/goods/goodslist?keyword=" + keyword + "&page=" + page, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
 //                System.out.println(response);
+
                 type.clear();
                 JSONObject object = null;
                 try {
@@ -187,6 +196,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         type.add(1);
                         type.add(3);
                     }
+
+                    History history = new History();
+                    history.setHistory(keyword);
+                    BaseApplication.getDaoSession().getHistoryDao().insert(history);
 
 //                    searchAdapter = new SearchAdapter(type, SearchActivity.this);
                     searchAdapter.setType(type);

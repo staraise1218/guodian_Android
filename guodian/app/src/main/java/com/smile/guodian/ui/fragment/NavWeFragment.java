@@ -74,6 +74,7 @@ public class NavWeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_navigation_we, container, false);
+        title = view.findViewById(R.id.we_title);
         return view;
     }
 
@@ -206,6 +207,7 @@ public class NavWeFragment extends Fragment {
                         finds.add(find);
 
                     }
+                    title.setText(finds.get(0).getTitle());
                     handler.sendEmptyMessage(1);
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -54,7 +54,7 @@ public abstract class OkCallback implements Callback {
         //15501230201
         try {
             final String res = response.body().string();
-//            System.out.println(res);
+            System.out.println(res);
             final JSONObject jsonObject = new JSONObject(res);
             final String status = jsonObject.getString(STATE);
             final String data = jsonObject.getString(DATA);

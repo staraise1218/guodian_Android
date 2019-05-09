@@ -58,6 +58,7 @@
         android:textSize="@dimen/sp_8" />
 
     <Button
+        android:id="@+id/reset_nick_save"
         android:layout_width="@dimen/dp_284"
         android:layout_height="@dimen/dp_42"
         android:layout_below="@+id/reset_nick_tips"

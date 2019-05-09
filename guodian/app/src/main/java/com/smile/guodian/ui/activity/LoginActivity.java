@@ -13,10 +13,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
 import com.smile.guodian.R;
+import com.smile.guodian.UserDao;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.User;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.utils.ToastUtil;
 
 import org.json.JSONException;
@@ -71,6 +75,7 @@ public class LoginActivity extends BaseActivity {
     protected void init() {
         Intent intent = getIntent();
         where = intent.getStringExtra("where");
+        System.out.println(where);
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -159,13 +164,22 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                 }
 
+                Gson gson = new Gson();
+                User user = gson.fromJson(result.toString(), User.class);
+                user.setId(1L);
+                UserDao userDao = BaseApplication.getDaoSession().getUserDao();
+                if (userDao.loadAll().size() > 0)
+                    userDao.update(user);
+                else {
+                    userDao.insert(user);
+                }
+
                 try {
 
-                    String uid = result.getString("user_id");
+                    String uid = user.getUser_id();
                     SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("uid", Integer.parseInt(uid));
-                    System.out.print(uid);
                     editor.commit();
                     webView.getSettings().setJavaScriptEnabled(true);
                     webView.loadUrl("http://guodian.staraise.com.cn/page/empty.html?user_id=" + uid);
@@ -173,17 +187,17 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void onPageFinished(WebView view, String url) {
                             super.onPageFinished(view, url);
-                            if (where == null) {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                LoginActivity.this.finish();
-                            }
+//                            if (where == null) {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+//                            } else {
+//                                LoginActivity.this.finish();
+//                            }
                         }
                     });
 
 
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

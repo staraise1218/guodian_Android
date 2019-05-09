@@ -71,7 +71,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
         android:singleLine="true"
-        android:text="官方公价：¥149000"
+        android:text="官方公价:"
         android:textColor="@color/black"
         android:textSize="8sp" />
 

@@ -76,8 +76,10 @@ public class ProductAdapter extends BaseAdapter {
         String price = goodList.get(position).getShop_price();
         viewHolder.price.setText("销售价:¥" + price.substring(0, price.length() - 3));
         viewHolder.title.setText(name);
+
         String marketPrice = goodList.get(position).getMarket_price();
-        viewHolder.market.setText("官方公价:¥" + marketPrice.substring(0, marketPrice.length() - 3));
+        if (marketPrice != null)
+            viewHolder.market.setText("官方公价:¥" + marketPrice.substring(0, marketPrice.length() - 3));
 
         return convertView;
     }

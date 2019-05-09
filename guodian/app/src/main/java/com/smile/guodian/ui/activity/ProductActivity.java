@@ -79,7 +79,7 @@ public class ProductActivity extends BaseActivity {
         Intent intent = getIntent();
         type = intent.getIntExtra("type", 1);
         name = intent.getStringExtra("title");
-        if(type == 4){
+        if (type == 4) {
             tabLayout.setVisibility(View.GONE);
         }
 
@@ -132,7 +132,7 @@ public class ProductActivity extends BaseActivity {
                     }
                 }
 
-                initData(categories.get(tab.getPosition()).getId()+"");
+                initData(categories.get(tab.getPosition()).getId() + "");
 
 
             }
@@ -167,7 +167,7 @@ public class ProductActivity extends BaseActivity {
                 if (!flag) {
                     flag = true;
                     for (int i = 0; i < categories.size(); i++) {
-                        tabLayout.addTab(tabLayout.newTab().setCustomView(ProductGenerator.getTabView(ProductActivity.this, categories.get(i).getCat_name().substring(0,2), i)));
+                        tabLayout.addTab(tabLayout.newTab().setCustomView(ProductGenerator.getTabView(ProductActivity.this, categories.get(i).getCat_name(), i)));
 
                     }
                 }

@@ -79,6 +79,7 @@
             android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/message_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -93,6 +94,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_12"
+            android:rotation="180"
             android:src="@drawable/back" />
     </RelativeLayout>
 
@@ -115,6 +117,7 @@
             android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/message_sex_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -129,6 +132,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_12"
+            android:rotation="180"
             android:src="@drawable/back" />
     </RelativeLayout>
 
@@ -151,6 +155,7 @@
             android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/message_phone_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -179,6 +184,7 @@
             android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/message_birthday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

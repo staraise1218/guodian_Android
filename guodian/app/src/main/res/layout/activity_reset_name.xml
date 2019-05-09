@@ -38,6 +38,7 @@
         android:layout_below="@+id/reset_name_tip"
         android:layout_centerHorizontal="true"
         android:background="@null"
+        android:singleLine="true"
         android:textSize="@dimen/sp_10" />
 
     <TextView
@@ -58,6 +59,7 @@
         android:textSize="@dimen/sp_8" />
 
     <Button
+        android:id="@+id/reset_name_save"
         android:layout_width="@dimen/dp_284"
         android:layout_height="@dimen/dp_42"
         android:layout_below="@+id/reset_name_tips"

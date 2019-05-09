@@ -1,4 +1,0 @@
-#Sat May 04 11:46:32 CST 2019
-base.0=/Users/tom/Documents/GitHub/guodian_Android/GetDimen/app/build/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex

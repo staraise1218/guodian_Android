@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.reflect.TypeToken;
 import com.smile.guodian.R;
+import com.smile.guodian.UserDao;
 import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.Category;
 import com.smile.guodian.model.entity.CategoryBean;
@@ -85,6 +86,7 @@ public class NavMyFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable

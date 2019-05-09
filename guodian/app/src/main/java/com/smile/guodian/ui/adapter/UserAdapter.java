@@ -12,8 +12,13 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.smile.guodian.R;
+import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.User;
+import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.LoginActivity;
+import com.smile.guodian.ui.activity.SettingActivity;
 import com.smile.guodian.ui.activity.WebActivity;
 
 import butterknife.BindView;
@@ -141,11 +146,17 @@ public class UserAdapter extends RecyclerView.Adapter {
         System.out.println("holder--t" + i);
         switch (i) {
             case 0:
+                User user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
                 HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
+
+                if (user.getHead_pic() != null) {
+                    Glide.with(context).load(HttpContants.BASE_URL + user.getHead_pic()).into(headerViewHolder.circleImageView);
+                }
+
                 headerViewHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, LoginActivity.class);
+                        Intent intent = new Intent(context, SettingActivity.class);
                         context.startActivity(intent);
                     }
                 });
