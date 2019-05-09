@@ -9,13 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smile.guodian.R;
 import com.smile.guodian.ui.activity.LoginActivity;
+import com.smile.guodian.ui.activity.WebActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter {
@@ -62,6 +65,37 @@ public class UserAdapter extends RecyclerView.Adapter {
         public TextView title;
         @BindView(R.id.user_icon)
         public CircleImageView circleImageView;
+        @BindView(R.id.user_wait)
+        LinearLayout wait;
+        @BindView(R.id.user_receive)
+        LinearLayout receive;
+        @BindView(R.id.user_return)
+        LinearLayout re;
+        @BindView(R.id.user_all)
+        LinearLayout all;
+
+        @OnClick({R.id.user_wait, R.id.user_receive, R.id.user_return, R.id.user_all})
+        public void clickView(View view) {
+            Intent intent = new Intent(context, WebActivity.class);
+            switch (view.getId()) {
+                case R.id.user_wait:
+                    intent.putExtra("type", 4);
+                    context.startActivity(intent);
+                    break;
+                case R.id.user_receive:
+                    intent.putExtra("type", 5);
+                    context.startActivity(intent);
+                    break;
+                case R.id.user_return:
+                    intent.putExtra("type", 6);
+                    context.startActivity(intent);
+                    break;
+                case R.id.user_all:
+                    intent.putExtra("type", 7);
+                    context.startActivity(intent);
+                    break;
+            }
+        }
 
         public HeaderViewHolder(View itemView) {
             super(itemView);

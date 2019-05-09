@@ -8,6 +8,24 @@ public class Browser {
     private String original_img;
     private String shop_price;
     private int cat_id;
+    private boolean isChecked;
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public int getVisit_id() {
         return visit_id;

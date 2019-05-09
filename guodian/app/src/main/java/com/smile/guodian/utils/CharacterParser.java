@@ -77,7 +77,7 @@ public class CharacterParser {
 			"lan", "lang", "lao", "le", "lei", "leng", "li", "lia", "lian",
 			"liang", "liao", "lie", "lin", "ling", "liu", "long", "lou", "lu",
 			"lv", "luan", "lue", "lun", "luo", "ma", "mai", "man", "mang",
-			"mao", "me", "mei", "men", "meng", "mi", "mian", "miao", "mie",
+			"mao", "me_check", "mei", "men", "meng", "mi", "mian", "miao", "mie",
 			"min", "ming", "miu", "mo", "mou", "mu", "na", "nai", "nan",
 			"nang", "nao", "ne", "nei", "nen", "neng", "ni", "nian", "niang",
 			"niao", "nie", "nin", "ning", "niu", "nong", "nu", "nv", "nuan",

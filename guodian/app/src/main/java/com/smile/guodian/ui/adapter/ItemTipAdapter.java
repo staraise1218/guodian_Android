@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.smile.guodian.R;
 import com.smile.guodian.ui.activity.MyBrowserActivity;
 import com.smile.guodian.ui.activity.MyCollectionActivity;
+import com.smile.guodian.ui.activity.WebActivity;
 
 public class ItemTipAdapter extends BaseAdapter {
     private int type;
@@ -51,33 +52,53 @@ public class ItemTipAdapter extends BaseAdapter {
         ImageView imageView = convertView.findViewById(R.id.item_tip_img);
         LinearLayout tips = convertView.findViewById(R.id.item_tips);
 
-        if (type == 2 && position!=5) {
+        if (type == 2 && position != 5) {
             textView.setText(tip1[position]);
             imageView.setBackgroundResource(icon1[position]);
-        } else if (type == 4){
+        } else if (type == 4) {
             textView.setText(tip2[position]);
             imageView.setBackgroundResource(icon2[position]);
         }
 
-        if(type ==2 &&position==0){
+        if (type == 2 && position == 0) {
             tips.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context,MyCollectionActivity.class);
+                    Intent intent = new Intent(context, MyCollectionActivity.class);
                     context.startActivity(intent);
                 }
             });
         }
-        if(type ==2 &&position==1){
+        if (type == 2 && position == 1) {
             tips.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context,MyBrowserActivity.class);
+                    Intent intent = new Intent(context, MyBrowserActivity.class);
                     context.startActivity(intent);
                 }
             });
         }
 
+        if (type == 2 && position == 3) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 8);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        if (type == 2 && position == 4) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 9);
+                    context.startActivity(intent);
+                }
+            });
+        }
 
         return convertView;
     }

@@ -60,9 +60,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'WuXiaolong'        //填写的一些基本信息
-                        name 'WuXiaolong'
-                        email '1413129987@qq.com'
+                        id ''        //填写的一些基本信息
+                        name ''
+                        email ''
                     }
                 }
                 scm {

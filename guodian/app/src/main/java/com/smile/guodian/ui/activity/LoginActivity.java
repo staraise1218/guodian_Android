@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.login_show_password:
-                if (hiddenPassword.isChecked()) {
+                if (!hiddenPassword.isChecked()) {
                     isHidden = false;
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
@@ -143,6 +143,9 @@ public class LoginActivity extends BaseActivity {
         OkHttp.post(this, HttpContants.LOGIN + "?mobile=" + phone + "&password=" + pwd, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
+
+                System.out.println(response);
+
                 JSONObject object = null;
                 try {
                     object = new JSONObject(response);

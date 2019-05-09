@@ -74,6 +74,11 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
     public void onBindViewHolder(ViewHolder holder, final int position) {
 //        System.out.println(position);
 //        holder.title.setText(finds.get(position).getTitle());
+
+//        if (finds.get(position).getTitle() == null) {
+//            holder.give.setBackgroundColor(Color.WHITE);
+//        } else {
+
         if (finds.get(position).getIsliked() == 1) {
             holder.give.setChecked(true);
             holder.zan.setTextColor(Color.parseColor("#DDA021"));
@@ -90,18 +95,21 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     textView.setTextColor(Color.parseColor("#DDA021"));
-                    textView.setText(number);
+                    textView.setText(number + "");
                 } else {
                     textView.setTextColor(Color.BLACK);
-                    textView.setText(number - 1);
+                    textView.setText((number - 1) + "");
                 }
             }
         });
 
 //        System.out.println(HttpContants.BASE_URL + finds.get(position).getTumb());
+
+//        Glide.with(mContext).load(HttpContants.BASE_URL + "/public/upload/goods/2018/01-15/42400f54c1ab8efe61614f15f0c0f872.jpg").into(holder.imageView);
+
         Glide.with(mContext).load(HttpContants.BASE_URL + finds.get(position).getTumb()).into(holder.imageView);
         holder.zan.setText(finds.get(position).getLike_num());
-
+//        }
         //
 // if (position % 2 == 0)
 //            holder.imageView.setBackgroundResource(R.drawable.give_choose);
@@ -118,8 +126,10 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
 //        holder.zan.setCompoundDrawables(null, drawable, null, null);
     }
 
+
     @Override
     public int getItemCount() {
+        System.out.println(finds.size());
         return finds.size();
     }
 }

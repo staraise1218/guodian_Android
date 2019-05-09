@@ -84,8 +84,9 @@
 
 
             <FrameLayout
+                android:id="@+id/sort"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/dp_327"
+                android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_16"
                 android:layout_weight="4"
                 android:background="@color/white">
@@ -93,6 +94,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
                     android:background="@color/gray" />
 
                 <ListView
@@ -113,14 +115,15 @@
                     android:visibility="gone" />
 
                 <!-- 右侧供选择的列表 -->
-                <com.example.widget.SideBar
+                <com.smile.guodian.widget.SideBar
                     android:id="@+id/sidrbar"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="@dimen/dp_370"
                     android:layout_gravity="right|center" />
             </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/category_second"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"

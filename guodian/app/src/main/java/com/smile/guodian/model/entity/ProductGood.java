@@ -6,6 +6,15 @@ public class ProductGood {
     private int store_count;
     private String original_img;
     private String shop_price;
+    private String market_price;
+
+    public String getMarket_price() {
+        return market_price;
+    }
+
+    public void setMarket_price(String market_price) {
+        this.market_price = market_price;
+    }
 
     public int getGoods_id() {
         return goods_id;

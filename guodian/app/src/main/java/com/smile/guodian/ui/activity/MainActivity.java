@@ -138,11 +138,11 @@ public class MainActivity extends BaseActivity {
             tabLayout.addTab(tabLayout.newTab().setCustomView(DataGenerator.getTabView(this, i)));
         }
 
-//        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.bottom_navigation_item_home, R.drawable.home, R.color.colorBottomNavigationActiveColored);
-//        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.bottom_navigation_item_we, R.drawable.found, R.color.colorBottomNavigationActiveColored);
+//        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.bottom_navigation_item_home, R.drawable.home_check, R.color.colorBottomNavigationActiveColored);
+//        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.bottom_navigation_item_we, R.drawable.found_check, R.color.colorBottomNavigationActiveColored);
 //        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.bottom_navigation_item_help, R.drawable.classify, R.color.colorBottomNavigationActiveColored);
 //        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.bottom_navigation_item_cart, R.drawable.shop, R.color.colorBottomNavigationActiveColored);
-//        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.bottom_navigation_item_user, R.drawable.me, R.color.colorBottomNavigationActiveColored);
+//        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.bottom_navigation_item_user, R.drawable.me_check, R.color.colorBottomNavigationActiveColored);
 
 //        bottomNavigationItems.add(item1);
 //        bottomNavigationItems.add(item2);

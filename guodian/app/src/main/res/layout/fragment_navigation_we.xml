@@ -5,12 +5,12 @@
     <TextView
         android:id="@+id/we_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:text="发现国典"
-        android:textSize="22sp" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_22" />
 
     <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
         android:id="@+id/pullLoadMoreRecyclerView"

@@ -15,7 +15,9 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,9 +27,11 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cjj.MaterialRefreshLayout;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.Brand;
 import com.smile.guodian.model.entity.Category;
 import com.smile.guodian.model.entity.CategoryBean;
 import com.smile.guodian.model.entity.CategoryBean2;
@@ -45,6 +49,10 @@ import com.smile.guodian.widget.ClearEditText;
 import com.smile.guodian.widget.SideBar;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -111,6 +119,11 @@ public class NavCategoryFragment extends BaseFragment {
     @BindView(R.id.name_listview)
     ListView sortListView;
 
+    @BindView(R.id.category_second)
+    LinearLayout second;
+    @BindView(R.id.sort)
+    FrameLayout sort;
+
 
     private Gson mGson = new Gson();
     private List<Category> categoryFirst = new ArrayList<>();      //一级菜单
@@ -129,7 +142,7 @@ public class NavCategoryFragment extends BaseFragment {
     private int currPage = 1;     //当前是第几页
     private int totalPage = 1;    //一共有多少页
     private int pageSize = 10;     //每页数目
-
+    List<Brand> brands = new ArrayList<>();
     private int categoryId;
 
     @Override
@@ -174,9 +187,10 @@ public class NavCategoryFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-                Toast.makeText(getContext(),
-                        ((SortModel) adapter.getItem(position)).getName(),
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CategoryProductActivity.class);
+                intent.putExtra("branch_id", brands.get(position).getId() + "");
+                intent.putExtra("name", brands.get(position).getName());
+                getContext().startActivity(intent);
             }
         });
 
@@ -285,17 +299,19 @@ public class NavCategoryFragment extends BaseFragment {
         mCategoryAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                mCategoryAdapter.setPosition(position);
+                Category category = (Category) adapter.getData().get(position);
+                String id = category.getId();
+                String name = category.getCat_name();
+                mCategoryAdapter.notifyDataSetChanged();
+                isclick = true;
                 if (position == 0) {
-                    mCategoryAdapter.setPosition(position);
-
-                } else {
-                    Category category = (Category) adapter.getData().get(position);
-                    String id = category.getId();
-                    String name = category.getCat_name();
-                    mCategoryAdapter.notifyDataSetChanged();
-                    isclick = true;
+                    second.setVisibility(View.GONE);
+                    sort.setVisibility(View.VISIBLE);
                     defaultClick();
+                } else {
+                    second.setVisibility(View.VISIBLE);
+                    sort.setVisibility(View.GONE);
                     requestWares(id);
                 }
             }
@@ -320,19 +336,55 @@ public class NavCategoryFragment extends BaseFragment {
 
         //默认选中第0个
         if (!isclick && categoryId == 0) {
-            Category category = categoryFirst.get(1);
-            String id = category.getId();
-            requestWares(id);
+//            Category category = categoryFirst.get(1);
+//            String id = category.getId();
+//            requestWares(id);
+            getBanchID();
         }
-        sourceDataList = filledData(getResources().getStringArray(enums.get));
+//        sourceDataList = filledData();
         // 根据a-z进行排序源数据
-        Collections.sort(sourceDataList, pinyinComparator);
-        adapter = new SortAdapter(getContext(), sourceDataList);
-        sortListView.setAdapter(adapter);
+//        Collections.sort(sourceDataList, pinyinComparator);
+//        adapter = new SortAdapter(getContext(), sourceDataList);
+//        sortListView.setAdapter(adapter);
 
     }
 
     public void getBanchID() {
+        brands.clear();
+        sourceDataList = new ArrayList<>();
+//        Brand brand = new Brand();
+//        brand.setId(14);
+//        brand.setName("爱彼");
+//        brand.setCat_name("腕表推荐");
+//        brand.setInitials("A");
+//        SortModel sortModel = new SortModel();
+//        sortModel.setName("爱彼");
+//        sortModel.setSortLetters("A");
+//        sourceDataList.add(sortModel);
+//        brands.add(brand);
+//        brand = new Brand();
+//        brand.setId(3);
+//        brand.setName("百年灵");
+//        brand.setCat_name("腕表推荐");
+//        brand.setInitials("B");
+//        sortModel = new SortModel();
+//        sortModel.setName("百年灵");
+//        sortModel.setSortLetters("B");
+//        sourceDataList.add(sortModel);
+//        brands.add(brand);
+//        brand.setId(22);
+//        brand.setName("百达翡丽");
+//        brand.setCat_name("腕表推荐");
+//        brand.setInitials("B");
+//        sortModel = new SortModel();
+//        sortModel.setName("百达翡丽");
+//        sortModel.setSortLetters("B");
+//        sourceDataList.add(sortModel);
+//        brands.add(brand);
+//        sourceDataList = filledData();
+//         根据a-z进行排序源数据
+
+
         OkHttpUtils.post().url(HttpContants.BASE_URL + "/Api/category/allBrandList").build()
                 .execute(new StringCallback() {
 
@@ -344,6 +396,38 @@ public class NavCategoryFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response, int id) {
                         System.out.println(response + "");
+
+                        JSONObject object = null;
+                        try {
+                            object = new JSONObject(response);
+
+                            JSONObject data = object.getJSONObject("data");
+                            Iterator<String> iterator = data.keys();
+                            while (iterator.hasNext()) {
+                                String key = iterator.next();
+
+                                JSONArray array = data.getJSONArray(key);
+                                for (int i = 0; i < array.length(); i++) {
+                                    JSONObject branObject = array.getJSONObject(i);
+                                    Brand brand1 = new Brand();
+                                    brand1.setCat_name(branObject.getString("cat_name"));
+                                    brand1.setId(branObject.getInt("id"));
+                                    brand1.setInitials(branObject.getString("initials"));
+                                    brand1.setName(branObject.getString("name"));
+                                    brands.add(brand1);
+                                    SortModel sortModel = new SortModel();
+                                    sortModel.setName(brand1.getName());
+                                    sortModel.setSortLetters(((JSONObject) branObject).getString("initials"));
+                                    sourceDataList.add(sortModel);
+
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Collections.sort(sourceDataList, pinyinComparator);
+                        adapter = new SortAdapter(getContext(), sourceDataList);
+                        sortListView.setAdapter(adapter);
                     }
                 });
 

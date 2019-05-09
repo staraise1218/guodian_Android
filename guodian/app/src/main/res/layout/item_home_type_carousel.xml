@@ -7,10 +7,9 @@
     <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="375dp" />
+        android:layout_height="wrap_content" />
 
     <com.smile.guodian.widget.CirclePageIndicator
-        android:visibility="gone"
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

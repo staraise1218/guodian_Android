@@ -37,121 +37,133 @@
         android:text="欢迎来到国典"
         android:textColor="#000000"
         android:textSize="@dimen/sp_24" />
-    <View
-        android:layout_width="@dimen/dp_2"
-        android:layout_marginLeft="@dimen/dp_45"
-        android:layout_height="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_83"
+
+    <RelativeLayout
+        android:id="@+id/register_phone_line"
+        android:layout_width="@dimen/dp_284"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/register_title"
-        android:background="#DDA021" />
+        android:layout_centerHorizontal="true">
 
-    <EditText
-        android:textSize="@dimen/sp_14"
-        android:layout_marginLeft="@dimen/dp_46"
-        android:paddingLeft="@dimen/dp_2"
-        android:id="@+id/register_phone"
+        <View
+            android:layout_width="@dimen/dp_2"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_83"
+            android:background="#DDA021" />
+
+        <EditText
+            android:id="@+id/register_phone"
+            android:layout_width="@dimen/dp_284"
+            android:layout_height="@dimen/dp_31"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_76"
+            android:background="@null"
+            android:hint="手机号"
+            android:inputType="number"
+            android:paddingLeft="@dimen/dp_2"
+            android:textSize="@dimen/sp_14" />
+
+        <View
+            android:layout_width="@dimen/dp_284"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/register_phone"
+            android:layout_centerHorizontal="true"
+            android:background="@color/gray" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/register_phone_line1"
         android:layout_width="@dimen/dp_284"
-        android:layout_height="@dimen/dp_31"
-        android:layout_below="@+id/register_title"
-        android:layout_marginTop="@dimen/dp_76"
-        android:background="@null"
-        android:hint="手机号"
-        android:inputType="number" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_phone_line"
+        android:layout_centerHorizontal="true">
 
-    <View
+        <View
+            android:layout_width="@dimen/dp_2"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_42"
+            android:background="#DDA021" />
+
+        <EditText
+            android:id="@+id/register_verify"
+            android:layout_width="@dimen/dp_284"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_37"
+            android:background="@null"
+            android:hint="验证码"
+            android:paddingLeft="@dimen/dp_2"
+            android:singleLine="true"
+            android:textSize="@dimen/sp_14" />
+
+        <View
+            android:layout_width="@dimen/dp_284"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/register_verify"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/register_getVerification"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_28"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_28"
+            android:background="@drawable/register_bg"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:singleLine="true"
+            android:text="获取验证码"
+            android:textColor="#d3d3d3"
+            android:textSize="@dimen/sp_12" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/register_phone_line2"
         android:layout_width="@dimen/dp_284"
-        android:layout_height="@dimen/dp_1"
-        android:layout_below="@+id/register_phone"
-        android:layout_marginLeft="46dp"
-        android:background="@color/gray" />
-    <View
-        android:layout_width="@dimen/dp_2"
-        android:layout_marginLeft="@dimen/dp_45"
-        android:layout_height="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_42"
-        android:layout_below="@+id/register_phone"
-        android:background="#DDA021" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_phone_line1"
+        android:layout_centerHorizontal="true">
 
-    <EditText
-        android:paddingLeft="@dimen/dp_2"
-        android:id="@+id/register_verify"
-        android:layout_width="@dimen/dp_284"
-        android:layout_height="@dimen/dp_30"
-        android:layout_marginLeft="@dimen/dp_46"
-        android:layout_below="@+id/register_phone"
-        android:layout_marginTop="@dimen/dp_37"
-        android:background="@null"
-        android:hint="验证码"
-        android:textSize="@dimen/sp_14"
-        android:singleLine="true" />
+        <View
+            android:layout_width="@dimen/dp_2"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_42"
+            android:background="#DDA021" />
 
-    <View
-        android:layout_width="@dimen/dp_284"
-        android:layout_height="@dimen/dp_1"
-        android:layout_below="@+id/register_verify"
-        android:layout_marginLeft="@dimen/dp_46"
-        android:background="@color/gray" />
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_36"
+            android:background="@null"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/dp_2"
+            android:singleLine="true"
+            android:textSize="@dimen/sp_14" />
 
-    <TextView
-        android:id="@+id/register_getVerification"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_28"
-        android:layout_below="@+id/register_phone"
-        android:layout_marginTop="@dimen/dp_28"
-        android:layout_marginLeft="@dimen/dp_230"
-        android:background="@drawable/register_bg"
-        android:gravity="center"
-        android:padding="@dimen/dp_5"
-        android:singleLine="true"
-        android:text="获取验证码"
-        android:textColor="#d3d3d3"
-        android:textSize="@dimen/sp_12" />
+        <View
+            android:layout_width="@dimen/dp_284"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/register_password"
+            android:background="@color/gray" />
 
-
-    <View
-        android:layout_width="@dimen/dp_2"
-        android:layout_marginLeft="@dimen/dp_45"
-        android:layout_height="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_42"
-        android:layout_below="@+id/register_verify"
-        android:background="#DDA021" />
-
-    <EditText
-        android:paddingLeft="@dimen/dp_2"
-        android:id="@+id/register_password"
-        android:layout_width="@dimen/dp_200"
-        android:layout_height="@dimen/dp_30"
-        android:layout_below="@+id/register_verify"
-        android:layout_marginLeft="@dimen/dp_46"
-        android:layout_marginTop="@dimen/dp_36"
-        android:background="@null"
-        android:hint="密码"
-        android:textSize="@dimen/sp_14"
-        android:singleLine="true" />
-
-    <View
-        android:layout_width="@dimen/dp_284"
-        android:layout_height="@dimen/dp_1"
-        android:layout_below="@+id/register_password"
-        android:layout_marginLeft="@dimen/dp_46"
-        android:background="@color/gray" />
-
-    <CheckBox
-        android:button="@null"
-        android:background="@drawable/password_check"
-        android:id="@+id/register_show_password"
-        android:layout_width="@dimen/dp_40"
-        android:layout_height="@dimen/dp_40"
-        android:layout_below="@+id/register_verify"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dp_30"
-        android:layout_marginRight="@dimen/dp_46" />
+        <CheckBox
+            android:id="@+id/register_show_password"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_5"
+            android:background="@drawable/password_check"
+            android:button="@null"
+            android:checked="true" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/register_tip"
         android:layout_width="@dimen/dp_284"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/register_password"
+        android:layout_below="@+id/register_phone_line2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_10"
         android:text="密码需为字母（区分大小写）、数字、符号两种以上组成的6-20位字符"
@@ -163,7 +175,7 @@
         android:layout_width="@dimen/dp_284"
         android:layout_height="@dimen/dp_42"
         android:layout_below="@+id/register_tip"
-        android:layout_marginLeft="@dimen/dp_46"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_24"
         android:background="@drawable/button_check"
         android:enabled="false"
@@ -172,13 +184,13 @@
 
     <TextView
         android:id="@+id/register_can_not"
-        android:layout_width="@dimen/dp_100"
+        android:layout_width="@dimen/dp_284"
         android:layout_height="wrap_content"
         android:layout_below="@+id/register_commit"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_4"
         android:gravity="right"
         android:text="收不到验证码"
-        android:layout_marginLeft="@dimen/dp_230"
         android:textColor="#FFD59A"
         android:textSize="10sp" />
 

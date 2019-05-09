@@ -1,6 +1,8 @@
 package com.smile.guodian.ui.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -8,13 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.smile.guodian.R;
 import com.smile.guodian.model.entity.GuessGoods;
 import com.smile.guodian.model.entity.SearchResultEntity;
+import com.smile.guodian.ui.activity.SearchActivity;
 import com.smile.guodian.ui.adapter.search.SearchHotAdapter;
+import com.smile.guodian.widget.FlowLayout;
 import com.smile.guodian.widget.HomeGridView;
+import com.smile.guodian.widget.SideBar;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -28,12 +37,24 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.type = type;
     }
 
+    private View.OnClickListener onClickListener;
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    SearchActivity searchActivity;
     private List<Integer> type;
     private SearchResultEntity resultEntity;
     private LayoutInflater inflater;
     private Context context;
     private List<String> hot;
     private List<GuessGoods> guessGoods;
+    private String[] list;
+
+    public void setList(String[] list) {
+        this.list = list;
+    }
 
     public void setGuessGoods(List<GuessGoods> guessGoods) {
         this.guessGoods = guessGoods;
@@ -47,10 +68,11 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.resultEntity = resultEntities;
     }
 
-    public SearchAdapter(List<Integer> type, Context context) {
+    public SearchAdapter(List<Integer> type, Context context, SearchActivity searchActivity) {
         this.type = type;
         inflater = LayoutInflater.from(context);
         this.context = context;
+        this.searchActivity = searchActivity;
     }
 
 
@@ -75,7 +97,8 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 view = inflater.inflate(R.layout.search_like, null);
                 return new SearchLikeViewHolder(view);
             case 4:
-                break;
+                view = inflater.inflate(R.layout.search_tips, null);
+                return new TipsViewHolder(view);
             case 5:
                 view = inflater.inflate(R.layout.search_gridview, null);
                 return new ResultViewHolder(view);
@@ -105,11 +128,68 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             SearchLikeViewHolder searchLikeViewHolder = (SearchLikeViewHolder) viewHolder;
             HomeHeaderAdapter headerAdapter = new HomeHeaderAdapter(context);
             headerAdapter.setGuessGoods(guessGoods);
-            System.out.println(guessGoods.size());
+//            System.out.println(guessGoods.size());
             searchLikeViewHolder.gridView.setAdapter(headerAdapter);
-
         }
 
+        if (viewHolder instanceof TipsViewHolder) {
+            TipsViewHolder tipsViewHolder = (TipsViewHolder) viewHolder;
+            initFlowlayout(tipsViewHolder.flowLayout);
+            tipsViewHolder.imageView.setOnClickListener(onClickListener);
+        }
+
+    }
+
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    public static int px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    public void initFlowlayout(FlowLayout flowLayoutMoreView) {
+        //初始化多选
+        flowLayoutMoreView.removeAllViews();
+        for (int i = 0; i < list.length; i++) {
+            final TextView child = new TextView(context
+            );
+            ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(
+                    ViewGroup.MarginLayoutParams.WRAP_CONTENT,
+                    ViewGroup.MarginLayoutParams.WRAP_CONTENT);
+            if (i == list.length - 1) {
+                params.setMargins(dip2px(context, 5), dip2px(context, 10), dip2px(context, 5), 0);
+            } else {
+                params.setMargins(dip2px(context, 5), dip2px(context, 10), dip2px(context, 5), 0);
+            }
+            child.setLayoutParams(params);
+            child.setTag(false);
+            child.setBackgroundColor(Color.parseColor("#c3c3c3"));
+            child.setText(list[i]);
+//            child.setTextColor(Color.BLACK);
+            child.setTextSize(px2sp(context, 30));
+            child.setPadding(dip2px(context, 10), dip2px(context, 10), dip2px(context, 10), dip2px(context, 10));
+            child.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+
+                    searchActivity.search(child.getText().toString());
+
+                    if ((Boolean) child.getTag()) {
+//                        child.setTag(false);
+//                        child.setBackgroundResource(R.drawable.normal);
+                    } else {
+//                        child.setTag(true);
+//                        child.setBackgroundResource(R.drawable.press);
+                    }
+                }
+            });
+            flowLayoutMoreView.addView(child);
+            flowLayoutMoreView.requestLayout();
+        }
     }
 
     public class EmptyViewHolder extends RecyclerView.ViewHolder {
@@ -128,6 +208,19 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public class TipsViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.flowLayoutMoreView)
+        FlowLayout flowLayout;
+        @BindView(R.id.del_history)
+        ImageView imageView;
+
+        public TipsViewHolder(@NonNull View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
     }
 
     public class HotViewHolder extends RecyclerView.ViewHolder {

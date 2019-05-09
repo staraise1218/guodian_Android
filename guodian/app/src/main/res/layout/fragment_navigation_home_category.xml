@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/dp_30"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -14,12 +14,12 @@
             android:id="@+id/home_category_one"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
+            android:layout_marginLeft="@dimen/dp_28"
             android:layout_weight="1"
             android:gravity="center"
             android:text="今日新品"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
 
         <TextView
@@ -27,11 +27,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="8dp"
+            android:drawablePadding="@dimen/dp_8"
             android:gravity="center"
             android:text="重奢经典"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
 
         <TextView
@@ -56,13 +56,13 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/gray"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="28dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Today's new"
+            android:textColor="@color/gray"
             android:textSize="10sp"
             android:textStyle="bold" />
 

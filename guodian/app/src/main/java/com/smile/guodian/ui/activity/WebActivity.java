@@ -49,14 +49,45 @@ public class WebActivity extends BaseActivity {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setDomStorageEnabled(true);
         if (type > -1) {
-            url = "http://guodian.staraise.com.cn/page/article.html?type=" + type;
+
 //            Toast.makeText(this, "123" + url, Toast.LENGTH_LONG).show();
-            if (type == 2)
+            if (type == 2) {
+                url = "http://guodian.staraise.com.cn/page/article.html?type=" + type;
                 title.setText("鉴定机制");
-            if (type == 1)
+            }
+            if (type == 1) {
+                url = "http://guodian.staraise.com.cn/page/article.html?type=" + type;
                 title.setText("探索国典");
-            if(type ==3)
+            }
+            if (type == 3) {
+                url = "http://guodian.staraise.com.cn/page/article.html?type=" + type;
                 title.setText("文章");
+            }
+            if (type == 4) {
+                url = "http://guodian.staraise.com.cn/page/orderWait.html";
+                title.setText("待付款");
+            }
+            if (type == 5) {
+                url = "http://guodian.staraise.com.cn/page/orderReceive.html";
+                title.setText("待收货");
+            }
+            if (type == 6) {
+                url = "http://guodian.staraise.com.cn/page/orderReturn.html";
+                title.setText("退货单");
+            }
+            if (type == 7) {
+                url = "http://guodian.staraise.com.cn/page/orderAll.html";
+                title.setText("全部订单");
+            }
+            if (type == 8) {
+                url = "http://guodian.staraise.com.cn/page/myCoupon.html";
+                title.setText("优惠券");
+            }
+            if (type == 9) {
+                url = "http://guodian.staraise.com.cn/page/myIntegral.html";
+                title.setText("我的积分");
+            }
+
         } else {
             url = "http://guodian.staraise.com.cn/page/commodity.html?goods_id=" + goodsid;
             title.setText(name);

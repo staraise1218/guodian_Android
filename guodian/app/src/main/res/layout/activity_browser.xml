@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/browser_header"
@@ -54,6 +55,45 @@
         android:id="@+id/browser_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/browser_header"></ListView>
+        android:layout_below="@+id/browser_header"
+        android:divider="#00FFFFFF"
+        android:dividerHeight="@dimen/dp_0"></ListView>
+
+    <RelativeLayout
+        android:id="@+id/browser_footer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/check_all"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:background="@drawable/round_check"
+            android:button="@null" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/check_all"
+            android:text="全选" />
+
+        <Button
+            android:id="@+id/browser_del"
+            android:layout_width="@dimen/dp_129"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/button"
+            android:text="删除"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
@@ -36,6 +37,7 @@ public class NavWeFragment extends Fragment {
     private int mCount = 1;
     private StaggeredRecycleViewAdapter mRecyclerViewAdapter;
     private int uid;
+    private TextView title;
 
     private List<Find> finds = new ArrayList<>();
 
@@ -70,32 +72,40 @@ public class NavWeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_navigation_we, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_navigation_we, container, false);
+        return view;
     }
 
     private List<Map<String, String>> setList() {
         List<Map<String, String>> dataList = new ArrayList<>();
-        int start = 30 * (mCount - 1);
-        Map<String, String> map;
-        for (int i = start; i < 30 * mCount; i++) {
-            map = new HashMap<>();
-            map.put("text", "Third" + i);
-            map.put("height", (200 + 10 * i) + "");
-            dataList.add(map);
-        }
+//        int start = 30 * (mCount - 1);
+//        Map<String, String> map;
+//        for (int i = start; i < 30 * mCount; i++) {
+//            map = new HashMap<>();
+//            map.put("text", "Third" + i);
+//            map.put("height", (200 + 10 * i) + "");
+//            dataList.add(map);
+//        }
         return dataList;
 
     }
-    Handler handler = new Handler(){
+
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
 //                    System.out.println("handler");
 //                    mRecyclerViewAdapter.getDataList().addAll(setList());
+
+//                    if (finds.size() % 2 == 1) {
+//                        finds.add(new Find());
+//                    }
+
                     mRecyclerViewAdapter.setFinds(finds);
-                    mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+//                    mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
                     mRecyclerViewAdapter.notifyDataSetChanged();
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     break;
@@ -105,6 +115,8 @@ public class NavWeFragment extends Fragment {
 
 
     public void pullData() {
+
+//        mRecyclerViewAdapter.getFinds().clear();
         Map<String, String> params = new HashMap<>();
 //        params.put("user_id", "1");
 
@@ -163,10 +175,11 @@ public class NavWeFragment extends Fragment {
 //        OkHttpClient.Builder builder = new OkHttpClient.Builder();
 //        builder.
 
-        OkHttp.post(getContext(), HttpContants.BASE_URL+"/Api/find/index?user_id="+uid+"&cat_id=11&page=1", params, new OkCallback() {
+        OkHttp.post(getContext(), HttpContants.BASE_URL + "/Api/find/index?user_id=" + uid + "&cat_id=11&page=1", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
+//                finds = new ArrayList<>();
+//                System.out.println(response);
                 JSONObject object = null;
                 try {
                     object = new JSONObject(response);
@@ -191,7 +204,7 @@ public class NavWeFragment extends Fragment {
                         find.setLike_num(findOb.getString("like_num"));
                         find.setIsliked(findOb.getInt("isliked"));
                         finds.add(find);
-                        System.out.println(find.toString());
+
                     }
                     handler.sendEmptyMessage(1);
                 } catch (JSONException e) {
@@ -210,8 +223,6 @@ public class NavWeFragment extends Fragment {
 
 
     }
-
-
 
 
     private void getData() {
@@ -234,7 +245,8 @@ public class NavWeFragment extends Fragment {
 
         @Override
         public void onLoadMore() {
-            mCount = mCount + 1;
+
+
             pullData();
         }
     }
@@ -242,8 +254,7 @@ public class NavWeFragment extends Fragment {
     private void setRefresh() {
 
         mRecyclerViewAdapter.getFinds().clear();
-
-        mCount = 1;
+//        mCount = 1;
 
     }
 }

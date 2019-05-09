@@ -46,13 +46,13 @@ public class ImageHomeAdapter extends RecyclingPagerAdapter {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = holder.imageView = new ImageView(context);
+            view = View.inflate(context, R.layout.imageview, null);
+            holder.imageView = view.findViewById(R.id.image);
             view.setTag(R.string.app_name, holder);
         } else {
             holder = (ViewHolder) view.getTag(R.string.app_name);
         }
         holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        System.out.println(list.get(getPosition(position)).getUrl());
         Glide.with(context).load(list.get(getPosition(position)).getUrl()).into(holder.imageView);
 //        GlideUtil.load(activity, list.get(getPosition(position)).getUrl(), holder.imageView);
         return view;

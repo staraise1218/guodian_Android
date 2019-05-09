@@ -1,5 +1,6 @@
 package com.smile.guodian.ui.activity;
 
+import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,13 +37,14 @@ public class MyCollectionActivity extends BaseActivity {
     @BindView(R.id.collection_back)
     ImageView back;
     Collection collection = new Collection();
-    private int uid = 1;
+    private int uid = -1;
     private int page = 1;
     List<Collection.MyCollection> myCollections;
 
     @Override
     protected void init() {
-
+        SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
+        uid = sharedPreferences.getInt("user_id", -1);
         recycler_view_list = (SlideRecyclerView) findViewById(R.id.recycler_view_list);
         recycler_view_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -75,13 +77,13 @@ public class MyCollectionActivity extends BaseActivity {
     public void initData() {
         Map<String, String> params = new HashMap<>();
 
-        params.put("uer_id","1");
-        params.put("page","1");
-        Gson gson = new Gson();
-        String paramStr = gson.toJson(params);
+//        params.put("uer_id","1");
+//        params.put("page","1");
+//        Gson gson = new Gson();
+//        String paramStr = gson.toJson(params);
 //        System.out.println(paramStr);
-        MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, paramStr);
+//        MediaType JSON = MediaType.parse("application/json;charset=utf-8");
+//        RequestBody body = RequestBody.create(JSON, paramStr);
 //        RequestBody body = RequestBody.create(MediaType.parse())
 
         OkHttp.post(this, "http://guodian.staraise.com.cn/Api/user/collectGoodslist?user_id=" + uid + "&page=" + page, params, new OkCallback() {

@@ -4,17 +4,17 @@
 
     <RelativeLayout
         android:id="@+id/home_header"
-        android:layout_width="312dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginTop="30dp">
+        android:layout_width="@dimen/dp_312"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_18">
 
 
         <EditText
-            android:layout_marginLeft="10dp"
             android:id="@+id/home_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/surch_bg"
             android:editable="false" />
 

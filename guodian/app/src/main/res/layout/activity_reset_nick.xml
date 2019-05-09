@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/reset_nick_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/back" />
+
+    <TextView
+        android:id="@+id/reset_nick_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text=" 修改昵称"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/reset_nick_tip"
+        android:layout_width="@dimen/dp_284"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_130"
+        android:text="输入昵称"
+        android:textSize="@dimen/sp_10" />
+
+    <EditText
+        android:id="@+id/reset_nick"
+        android:layout_width="@dimen/dp_284"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/reset_nick_tip"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:textSize="@dimen/sp_10" />
+
+    <TextView
+        android:layout_width="@dimen/dp_284"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@+id/reset_nick"
+        android:layout_centerHorizontal="true"
+        android:background="#E6E6E6" />
+
+    <TextView
+        android:id="@+id/reset_nick_tips"
+        android:layout_width="@dimen/dp_284"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reset_nick"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="可使用中英文（英文区分大小）、数字（不可纯数字或字符）'_'和'_',字数限制4-20个字符"
+        android:textSize="@dimen/sp_8" />
+
+    <Button
+        android:layout_width="@dimen/dp_284"
+        android:layout_height="@dimen/dp_42"
+        android:layout_below="@+id/reset_nick_tips"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_44"
+        android:background="@drawable/button_check"
+        android:enabled="false"
+        android:text="保存"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

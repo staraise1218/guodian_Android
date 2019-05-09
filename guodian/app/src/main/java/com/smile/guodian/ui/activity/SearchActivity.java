@@ -1,5 +1,6 @@
 package com.smile.guodian.ui.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.smile.guodian.HistoryDao;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.GuessGoods;
@@ -35,8 +37,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
-public class SearchActivity extends BaseActivity {
+public class SearchActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.search_search)
     EditText search;
@@ -56,13 +59,20 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
+    private boolean history;
+
     private int page = 0;
     private List<Integer> type = new ArrayList<>();
     private SearchAdapter searchAdapter;
     private List<String> hot = new ArrayList<>();
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void init() {
+
+        sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
+        history = sharedPreferences.getBoolean("history", false);
+
         hot.add("龙珠系列");
         hot.add("LV 口红包");
         hot.add("劳力士");
@@ -75,13 +85,14 @@ public class SearchActivity extends BaseActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == 5) {
                     page = 0;
-                    search();
+                    String keyword = search.getText().toString();
+                    search(keyword);
                     return true;
                 }
                 return false;
             }
         });
-        searchAdapter = new SearchAdapter(type, this);
+        searchAdapter = new SearchAdapter(type, this, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(searchAdapter);
@@ -91,6 +102,7 @@ public class SearchActivity extends BaseActivity {
     }
 
     public void initData() {
+        type.clear();
         Map<String, String> params = new HashMap<>();
 
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/goods/searchPage", params, new OkCallback() {
@@ -126,13 +138,16 @@ public class SearchActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
                 SearchEntity searchEntity = gson.fromJson(response, SearchEntity.class);
                 type.add(2);
+                if (!history)
+                    type.add(4);
                 type.add(3);
+                String[] history = new String[]{"LV", "LV 白棋盘格NOENOE", "LV 口红包", "LV 白棋盘格NOENOE"};
                 searchAdapter.setHot(hot);
                 searchAdapter.setType(type);
+                searchAdapter.setOnClickListener(SearchActivity.this);
+                searchAdapter.setList(history);
                 searchAdapter.setGuessGoods(guessGoodsList);
                 searchAdapter.notifyDataSetChanged();
 
@@ -148,10 +163,9 @@ public class SearchActivity extends BaseActivity {
     }
 
 
-    public void search() {
+    public void search(String keyword) {
         page++;
         Map<String, String> params = new HashMap<>();
-        String keyword = search.getText().toString();
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/goods/goodslist?keyword=" + keyword + "&page=" + page, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
@@ -173,7 +187,6 @@ public class SearchActivity extends BaseActivity {
                         type.add(1);
                         type.add(3);
                     }
-
 
 //                    searchAdapter = new SearchAdapter(type, SearchActivity.this);
                     searchAdapter.setType(type);
@@ -200,5 +213,55 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected int getContentResourseId() {
         return R.layout.activity_search;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.dialog_ok:
+                break;
+            case R.id.del_history:
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                final AlertDialog dialog = builder.create();
+                View view = View.inflate(this, R.layout.dialog_del, null);
+
+                TextView del = view.findViewById(R.id.dialog_close);
+                TextView cancel = view.findViewById(R.id.dialog_cancel);
+                TextView ok = view.findViewById(R.id.dialog_ok);
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("history", true);
+                        editor.commit();
+                        history = true;
+                        initData();
+
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.setView(view);
+                dialog.show();
+
+                break;
+        }
+
     }
 }

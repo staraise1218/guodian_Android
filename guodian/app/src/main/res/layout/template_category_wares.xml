@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="70dp"
-    android:layout_height="76dp"
-    android:layout_marginTop="10dp"
+    android:layout_width="@dimen/dp_70"
+    android:layout_height="@dimen/dp_76"
+    android:layout_marginTop="@dimen/dp_10"
     android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
-        android:layout_above="@+id/text_title"
         android:id="@+id/iv_view"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_above="@+id/text_title"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white" />
+        android:background="@color/white"
+        android:scaleType="fitXY" />
 
     <TextView
-        android:layout_alignParentBottom="true"
         android:id="@+id/text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_8"
         android:gravity="center"
         android:singleLine="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:textColor="@color/base_color"
-        android:textSize="10sp" />
+        android:textSize="@dimen/sp_10" />
 
 </RelativeLayout>
