@@ -21,6 +21,8 @@ import com.smile.guodian.ui.activity.LoginActivity;
 import com.smile.guodian.ui.activity.SettingActivity;
 import com.smile.guodian.ui.activity.WebActivity;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -146,7 +148,10 @@ public class UserAdapter extends RecyclerView.Adapter {
         System.out.println("holder--t" + i);
         switch (i) {
             case 0:
-                User user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
+                List<User> users = BaseApplication.getDaoSession().getUserDao().loadAll();
+                User user = new User();
+                if (users.size() > 0)
+                    user = users.get(0);
                 HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
 
                 if (user.getHead_pic() != null) {
