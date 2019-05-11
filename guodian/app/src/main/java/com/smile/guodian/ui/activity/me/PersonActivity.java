@@ -1,21 +1,34 @@
 package com.smile.guodian.ui.activity.me;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.smile.guodian.BuildConfig;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.History;
@@ -25,21 +38,36 @@ import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.BaseActivity;
-import com.smile.guodian.ui.activity.MainActivity;
-import com.smile.guodian.ui.activity.SearchActivity;
+import com.smile.guodian.ui.activity.ClipImageActivity;
+import com.smile.guodian.utils.FileUtil;
 import com.smile.guodian.utils.GlideUtil;
 import com.smile.guodian.utils.ToastUtil;
+import com.smile.guodian.widget.CircleImageView;
+import com.smile.guodian.widget.ClipViewLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import static com.smile.guodian.utils.FileUtil.getRealFilePathFromUri;
 
 public class PersonActivity extends BaseActivity {
 
@@ -51,14 +79,26 @@ public class PersonActivity extends BaseActivity {
     @BindView(R.id.person_userphone)
     TextView userPhone;
     @BindView(R.id.person_icon)
-    ImageView icon;
-    private Bitmap mBitmap;
+    CircleImageView icon;
+    //请求相机
+    private static final int REQUEST_CAPTURE = 100;
+    //请求相册
+    private static final int REQUEST_PICK = 101;
+    //请求截图
+    private static final int REQUEST_CROP_PHOTO = 102;
+    //请求访问外部存储
+    private static final int READ_EXTERNAL_STORAGE_REQUEST_CODE = 103;
+    //请求写入外部存储
+    private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 104;
+    //头像1
+    private CircleImageView headImage1;
+    //头像2
+    private ImageView headImage2;
+    //调用照相机返回图片文件
+    private File tempFile;
+    // 1: qq, 2: weixin
+    private int type;
     private int uid;
-
-    protected static final int CHOOSE_PICTURE = 0;
-    protected static final int TAKE_PICTURE = 1;
-    protected static Uri tempUri;
-    private static final int CROP_SMALL_PICTURE = 2;
 
     @OnClick({R.id.change_icon, R.id.person_center, R.id.person_name, R.id.person_nick, R.id.person_back, R.id.person_show, R.id.person_phone, R.id.person_more})
     public void onclickView(View view) {
@@ -87,7 +127,7 @@ public class PersonActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.change_icon:
-                showChoosePicDialog();
+                uploadHeadImage();
                 break;
         }
     }
@@ -107,123 +147,247 @@ public class PersonActivity extends BaseActivity {
         return R.layout.activity_person;
     }
 
-    /**
-     * 显示修改图片的对话框
-     */
-    protected void showChoosePicDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(PersonActivity.this);
-        builder.setTitle("添加图片");
-        String[] items = {"选择本地照片", "拍照"};
-        builder.setNegativeButton("取消", null);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
 
+    /**
+     * 上传头像
+     */
+    private void uploadHeadImage() {
+        View view = LayoutInflater.from(this).inflate(R.layout.layout_popupwindow, null);
+        TextView btnCarema = (TextView) view.findViewById(R.id.btn_camera);
+        TextView btnPhoto = (TextView) view.findViewById(R.id.btn_photo);
+        TextView btnCancel = (TextView) view.findViewById(R.id.btn_cancel);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
+        popupWindow.setOutsideTouchable(true);
+        View parent = LayoutInflater.from(this).inflate(R.layout.activity_person, null);
+        popupWindow.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+        //popupWindow在弹窗的时候背景半透明
+        final WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0.5f;
+        getWindow().setAttributes(params);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case CHOOSE_PICTURE: // 选择本地照片
-                        Intent openAlbumIntent = new Intent(
-                                Intent.ACTION_GET_CONTENT);
-                        openAlbumIntent.setType("image/*");
-                        //用startActivityForResult方法，待会儿重写onActivityResult()方法，拿到图片做裁剪操作
-                        startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
-                        break;
-                    case TAKE_PICTURE: // 拍照
-                        Intent openCameraIntent = new Intent(
-                                MediaStore.ACTION_IMAGE_CAPTURE);
-                        tempUri = Uri.fromFile(new File(Environment
-                                .getExternalStorageDirectory(), "temp_image.jpg"));
-                        // 将拍照所得的相片保存到SD卡根目录
-                        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
-                        startActivityForResult(openCameraIntent, TAKE_PICTURE);
-                        break;
-                }
+            public void onDismiss() {
+                params.alpha = 1.0f;
+                getWindow().setAttributes(params);
             }
         });
-        builder.show();
+
+        btnCarema.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //权限判断
+                if (ContextCompat.checkSelfPermission(PersonActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    //申请WRITE_EXTERNAL_STORAGE权限
+                    ActivityCompat.requestPermissions(PersonActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+                } else {
+                    //跳转到调用系统相机
+                    gotoCamera();
+                }
+                popupWindow.dismiss();
+            }
+        });
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //权限判断
+                if (ContextCompat.checkSelfPermission(PersonActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    //申请READ_EXTERNAL_STORAGE权限
+                    ActivityCompat.requestPermissions(PersonActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            READ_EXTERNAL_STORAGE_REQUEST_CODE);
+                } else {
+                    //跳转到相册
+                    gotoPhoto();
+                }
+                popupWindow.dismiss();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
     }
 
+
+    /**
+     * 外部存储权限申请返回
+     */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == PersonActivity.RESULT_OK) {
-            switch (requestCode) {
-                case TAKE_PICTURE:
-                    cutImage(tempUri); // 对图片进行裁剪处理
-                    break;
-                case CHOOSE_PICTURE:
-                    cutImage(data.getData()); // 对图片进行裁剪处理
-                    break;
-                case CROP_SMALL_PICTURE:
-                    if (data != null) {
-                        setImageToView(data); // 让刚才选择裁剪得到的图片显示在界面上
-                    }
-                    break;
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == WRITE_EXTERNAL_STORAGE_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                gotoCamera();
+            }
+        } else if (requestCode == READ_EXTERNAL_STORAGE_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                gotoPhoto();
             }
         }
     }
 
-    /**
-     * 裁剪图片方法实现
-     */
-    protected void cutImage(Uri uri) {
-        if (uri == null) {
-            Log.i("alanjet", "The uri is not exist.");
-        }
-        tempUri = uri;
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        //com.android.camera.action.CROP这个action是用来裁剪图片用的
-        intent.setDataAndType(uri, "image/*");
-        // 设置裁剪
-        intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, CROP_SMALL_PICTURE);
-    }
 
     /**
-     * 保存裁剪之后的图片数据
+     * 跳转到相册
      */
-    protected void setImageToView(Intent data) {
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-            mBitmap = extras.getParcelable("data");
-//            GlideUtil.load(this,this,data.getData(),icon);
-            //这里图片是方形的，可以用一个工具类处理成圆形（很多头像都是圆形，这种工具类网上很多不再详述）
-            icon.setImageBitmap(mBitmap);//显示图片
-
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
-            //第二步:利用Base64将字节数组输出流中的数据转换成字符串String
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
-            String imageString = new String(Base64.encodeToString(byteArray, Base64.DEFAULT));
-            uploadIcon(imageString);
-        }
+    private void gotoPhoto() {
+        Log.d("evan", "*****************打开图库********************");
+        //跳转到调用系统图库
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(Intent.createChooser(intent, "请选择图片"), REQUEST_PICK);
     }
 
 
-    public void uploadIcon(String image) {
-        Map<String, String> params = new HashMap<>();
-        params.put("head_pic", image);
-        params.put("user_id", uid + "");
-        OkHttp.post(this, HttpContants.BASE_URL + "/Api/User/changeHeadPic", params, new OkCallback() {
+    /**
+     * 跳转到照相机
+     */
+    private void gotoCamera() {
+        Log.d("evan", "*****************打开相机********************");
+        //创建拍照存储的图片文件
+        tempFile = new File(FileUtil.checkDirPath(Environment.getExternalStorageDirectory().getPath() + "/image/"), System.currentTimeMillis() + ".jpg");
+
+        //跳转到调用系统相机
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //设置7.0中共享文件，分享路径定义在xml/file_paths.xml
+            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(PersonActivity.this, BuildConfig.APPLICATION_ID + ".fileProvider", tempFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+        } else {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+        }
+        startActivityForResult(intent, REQUEST_CAPTURE);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        switch (requestCode) {
+            case REQUEST_CAPTURE: //调用系统相机返回
+                if (resultCode == RESULT_OK) {
+                    gotoClipActivity(Uri.fromFile(tempFile));
+                }
+                break;
+            case REQUEST_PICK:  //调用系统相册返回
+                if (resultCode == RESULT_OK) {
+                    Uri uri = intent.getData();
+                    gotoClipActivity(uri);
+                }
+                break;
+            case REQUEST_CROP_PHOTO:  //剪切图片返回
+                if (resultCode == RESULT_OK) {
+                    final Uri uri = intent.getData();
+                    if (uri == null) {
+                        return;
+                    }
+                    cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
+                    Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
+//                    if (type == 1) {
+                    icon.setImageBitmap(bitMap);
+//                    } else {
+//                        headImage2.setImageBitmap(bitMap);
+//                    }
+                    post_file("", new File(cropImagePath));
+
+                }
+                break;
+        }
+    }
+
+    String cropImagePath;
+
+    protected void post_file(final String url, File file) {
+        OkHttpClient client = new OkHttpClient();
+        // form 表单形式上传
+        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (file != null) {
+            // MediaType.parse() 里面是上传的文件类型。
+            RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
+            String filename = file.getName();
+            // 参数分别为， 请求key ，文件名称 ， RequestBody
+            requestBody.addFormDataPart("head_pic", file.getName(), body);
+        }
+        requestBody.addFormDataPart("user_id", uid + "");
+//        Request request = new Request.Builder().url(HttpContants.BASE_URL + "/Api/User/changeHeadPic").post(requestBody.build()).tag(this).build();
+        // readTimeout("请求超时时间" , 时间单位);
+
+        OkHttp.post(PersonActivity.this, HttpContants.BASE_URL + "/Api/User/changeHeadPic", requestBody.build(), this, new OkCallback() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
 
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JSONObject data = null;
+                try {
+                    data = object.getJSONObject("data");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String headPic = null;
+                try {
+                    headPic = data.getString("head_pic");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+                List<User> users = BaseApplication.getDaoSession().getUserDao().loadAll();
+                if (users.size() > 0) {
+                    User user = users.get(0);
+                    user.setHead_pic(headPic);
+                    BaseApplication.getDaoSession().getUserDao().update(user);
+                }
             }
 
             @Override
             public void onFailure(String state, String msg) {
-                ToastUtil.showShortToast(PersonActivity.this, msg);
+
             }
         });
 
+//        client.newBuilder().readTimeout(5000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.i("lfq", "onFailure");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (response.isSuccessful()) {
+//                    String str = response.body().string();
+//                    Log.i("lfq", response.message() + " , body " + str);
+//
+//                } else {
+//                    Log.i("lfq", response.message() + " error : body " + response.body().string());
+//                }
+//            }
+//        });
     }
+
+
+    /**
+     * 打开截图界面
+     */
+    public void gotoClipActivity(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+        Intent intent = new Intent();
+        intent.setClass(this, ClipImageActivity.class);
+        intent.putExtra("type", type);
+        intent.setData(uri);
+        startActivityForResult(intent, REQUEST_CROP_PHOTO);
+    }
+
 
 }

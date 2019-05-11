@@ -75,7 +75,6 @@ public class LoginActivity extends BaseActivity {
     protected void init() {
         Intent intent = getIntent();
         where = intent.getStringExtra("where");
-        System.out.println(where);
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -85,11 +84,9 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                System.out.println(start + "--" + s.length());
-
-                if (start == 0 && !commit.isEnabled()) {
+                if (s.length() != 0 && !commit.isEnabled()) {
                     commit.setEnabled(true);
-                } else if (s.length() == 0 && !commit.isEnabled()) {
+                } else if (s.length() == 0 && commit.isEnabled()) {
                     commit.setEnabled(false);
                 }
 
@@ -141,15 +138,10 @@ public class LoginActivity extends BaseActivity {
         String pwd = password.getText().toString().trim();
 
         Map<String, String> params = new HashMap<>();
-//        params.put("mobile", phone);
-//        params.put("password", pwd);
-
 
         OkHttp.post(this, HttpContants.LOGIN + "?mobile=" + phone + "&password=" + pwd, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
-
-                System.out.println(response);
 
                 JSONObject object = null;
                 try {
@@ -187,12 +179,8 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void onPageFinished(WebView view, String url) {
                             super.onPageFinished(view, url);
-//                            if (where == null) {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
-//                            } else {
-//                                LoginActivity.this.finish();
-//                            }
                         }
                     });
 
@@ -205,7 +193,6 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailure(String state, String msg) {
-//                System.out.println(state+msg);
                 ToastUtil.showShortToast(LoginActivity.this, msg);
             }
         });
@@ -213,29 +200,6 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    private void loginlogic(String phone, String pwd) {
-
-//        List<User> mUserDataList = DataManager.queryUser(phone);
-//        if (mUserDataList != null && mUserDataList.size() > 0) {
-//
-//            String netPwd = mUserDataList.get(0).getPwd();
-//            Long netUserId = mUserDataList.get(0).getUserId();
-//
-//            if (pwd.equals(netPwd)) {
-//                ToastUtils.showSafeToast(LoginActivity.this, "登录成功");
-//                EnjoyshopApplication application = EnjoyshopApplication.getInstance();
-//
-//                com.enjoyshop.bean.User user = new com.enjoyshop.bean.User();
-//                user.setMobi(phone);
-//                user.setUsername("非洲小白脸");
-//                user.setId(netUserId);
-//                user.setLogo_url(imageUrl);
-//
-//                application.putUser(user, "12345678asfghdssa");
-        finish();
-
-
-    }
 
     @Override
     public void onBackPressed() {

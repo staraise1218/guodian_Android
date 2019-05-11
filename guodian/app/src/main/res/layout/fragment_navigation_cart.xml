@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_30">
 
     <RelativeLayout
         android:id="@+id/product_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/bag_back"
@@ -27,23 +27,23 @@
             android:textSize="20sp" />
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/bag_search"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:background="@drawable/search"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
 
     <WebView
-        android:layout_below="@+id/product_head"
         android:id="@+id/bag_web"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/product_head"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>

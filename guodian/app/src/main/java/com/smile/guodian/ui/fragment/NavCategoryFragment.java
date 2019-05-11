@@ -352,38 +352,6 @@ public class NavCategoryFragment extends BaseFragment {
     public void getBanchID() {
         brands.clear();
         sourceDataList = new ArrayList<>();
-//        Brand brand = new Brand();
-//        brand.setId(14);
-//        brand.setName("爱彼");
-//        brand.setCat_name("腕表推荐");
-//        brand.setInitials("A");
-//        SortModel sortModel = new SortModel();
-//        sortModel.setName("爱彼");
-//        sortModel.setSortLetters("A");
-//        sourceDataList.add(sortModel);
-//        brands.add(brand);
-//        brand = new Brand();
-//        brand.setId(3);
-//        brand.setName("百年灵");
-//        brand.setCat_name("腕表推荐");
-//        brand.setInitials("B");
-//        sortModel = new SortModel();
-//        sortModel.setName("百年灵");
-//        sortModel.setSortLetters("B");
-//        sourceDataList.add(sortModel);
-//        brands.add(brand);
-//        brand.setId(22);
-//        brand.setName("百达翡丽");
-//        brand.setCat_name("腕表推荐");
-//        brand.setInitials("B");
-//        sortModel = new SortModel();
-//        sortModel.setName("百达翡丽");
-//        sortModel.setSortLetters("B");
-//        sourceDataList.add(sortModel);
-//        brands.add(brand);
-//        sourceDataList = filledData();
-//         根据a-z进行排序源数据
-
 
         OkHttpUtils.post().url(HttpContants.BASE_URL + "/Api/category/allBrandList").build()
                 .execute(new StringCallback() {
@@ -416,7 +384,7 @@ public class NavCategoryFragment extends BaseFragment {
                                     brand1.setName(branObject.getString("name"));
                                     brands.add(brand1);
                                     SortModel sortModel = new SortModel();
-                                    sortModel.setName(brand1.getName());
+                                    sortModel.setName(brand1.getName() + "  " + brand1.getCat_name());
                                     sortModel.setSortLetters(((JSONObject) branObject).getString("initials"));
                                     sourceDataList.add(sortModel);
 

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
+    <dimen name="title_size">15sp</dimen>
+
     <dimen name="picker_view_height">160dp</dimen>
     <dimen name="date_unit_text_size">18sp</dimen>
     <dimen name="common_margin">@dimen/dp_15</dimen>

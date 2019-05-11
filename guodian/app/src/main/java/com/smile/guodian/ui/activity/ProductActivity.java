@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -69,10 +70,11 @@ public class ProductActivity extends BaseActivity {
 
     private int type;
 
-    private int page;
+    private int page = 1;
     private String name;
 
     private List<ProductGood> goodList;
+    private String cat_id;
 
     @Override
     protected void init() {
@@ -83,6 +85,23 @@ public class ProductActivity extends BaseActivity {
             tabLayout.setVisibility(View.GONE);
         }
 
+//        content.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                if (firstVisibleItem == (totalItemCount - visibleItemCount) && cat_id != null) {
+//
+//                    page++;
+//                    initData(cat_id);
+//
+//                }
+//            }
+//        });
+
         webView.getSettings().setJavaScriptEnabled(true);
         title.setText(name);
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -90,7 +109,7 @@ public class ProductActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 webView.setVisibility(View.VISIBLE);
                 content.setVisibility(View.GONE);
-//                head.setVisibility(View.GONE);
+                head.setVisibility(View.GONE);
                 tabLayout.setVisibility(View.GONE);
                 System.out.println(goodList.get(position).getGoods_id());
                 webView.loadUrl("http://guodian.staraise.com.cn/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
@@ -102,7 +121,7 @@ public class ProductActivity extends BaseActivity {
                                 webView.setVisibility(View.GONE);
                                 content.setVisibility(View.VISIBLE);
                                 tabLayout.setVisibility(View.GONE);
-//                                head.setVisibility(View.VISIBLE);
+                                head.setVisibility(View.VISIBLE);
                                 return true;
 
                         }
@@ -118,7 +137,7 @@ public class ProductActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 System.out.println(tab.getPosition());
 //                if(tab.getPosition()!=0)
-
+                page = 1;
                 for (int i = 0; i < tabLayout.getTabCount(); i++) {
                     View view = tabLayout.getTabAt(i).getCustomView();
                     ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
@@ -132,7 +151,9 @@ public class ProductActivity extends BaseActivity {
                     }
                 }
 
-                initData(categories.get(tab.getPosition()).getId() + "");
+                cat_id = categories.get(tab.getPosition()).getId() + "";
+
+                initData(cat_id);
 
 
             }

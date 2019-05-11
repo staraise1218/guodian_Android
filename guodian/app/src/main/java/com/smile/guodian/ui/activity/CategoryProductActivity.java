@@ -193,7 +193,6 @@ public class CategoryProductActivity extends BaseActivity {
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/category/goodsList?brand_id=" + branch_id + tail, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
-                System.out.print(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray array = jsonObject.getJSONArray("data");

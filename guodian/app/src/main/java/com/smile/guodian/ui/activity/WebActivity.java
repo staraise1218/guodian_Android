@@ -8,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class WebActivity extends BaseActivity {
     private int type;
     private String url;
 
+    @BindView(R.id.product_head)
+    RelativeLayout head;
     @BindView(R.id.bag_title)
     TextView title;
     @BindView(R.id.bag_web)
@@ -89,6 +92,7 @@ public class WebActivity extends BaseActivity {
             }
 
         } else {
+            head.setVisibility(View.GONE);
             url = "http://guodian.staraise.com.cn/page/commodity.html?goods_id=" + goodsid;
             title.setText(name);
 

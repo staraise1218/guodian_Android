@@ -8,8 +8,7 @@
     <RelativeLayout
         android:layout_width="@dimen/dp_258"
         android:layout_height="@dimen/dp_134"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_200"
+        android:layout_centerInParent="true"
         android:background="@color/white">
 
         <TextView

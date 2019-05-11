@@ -1,29 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/home_header"
-        android:layout_width="@dimen/dp_312"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_30"
-        android:layout_marginBottom="@dimen/dp_18">
+        android:layout_width="@dimen/dp_317"
+        android:layout_height="@dimen/dp_70"
+        android:layout_marginTop="@dimen/dp_17"
+        android:layout_marginBottom="@dimen/dp_8">
 
 
         <EditText
             android:id="@+id/home_search"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/surch_bg"
+            android:background="@drawable/search_bg1"
             android:editable="false" />
 
         <ImageView
             android:id="@+id/home_search_icon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="@dimen/dp_23"
             android:background="@drawable/search" />
 
         <ImageView
@@ -31,8 +32,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginTop="@dimen/dp_23"
+            android:layout_marginRight="30dp"
             android:background="@drawable/image_search" />
 
     </RelativeLayout>
@@ -41,8 +42,8 @@
         android:id="@+id/home_notify"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="40dp"
         android:layout_toRightOf="@+id/home_header"
         android:background="@drawable/message" />
 

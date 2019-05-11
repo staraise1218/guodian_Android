@@ -1,16 +1,5 @@
 package com.smile.guodian.model;
 
-/**
- * <pre>
- *     author : 高磊华
- *     e-mail : 984992087@qq.com
- *     time   : 2017/08/06
- *     desc   :
- *     version: 1.0
- * </pre>
- */
-
-
 public interface HttpContants {
 
     public static final String BASE_URL = "http://guodian.staraise.com.cn";

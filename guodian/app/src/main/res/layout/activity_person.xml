@@ -34,7 +34,7 @@
         android:layout_height="@dimen/dp_100"
         android:background="@color/white">
 
-        <ImageView
+        <com.smile.guodian.widget.CircleImageView
             android:id="@+id/person_icon"
             android:layout_width="@dimen/dp_66"
             android:layout_height="@dimen/dp_66"

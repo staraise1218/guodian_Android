@@ -94,21 +94,8 @@ public class RegisterActivity extends BaseActivity {
         String phon = phone.getText().toString();
         String pwd = password.getText().toString();
         code = verify.getText().toString();
-
-//        if(phon.length()==0||pwd.length()==0||code.length()==0){
-//            Toast
-//            return;
-//        }
-
         Map<String, String> params = new HashMap<>();
-//        System.out.println(phon+"--"+code+"--"+pwd);
-//        params.put("mobile", phon);
-//        params.put("code", code);
-//        params.put("password", pwd);
-//        params.put("password_confirm", pwd);
-//?mobile="+phon+"&code="+code+"&password="+pwd+"&password_confirm="+pwd
-
-        OkHttp.post(this, "http://guodian.staraise.com.cn/api/auth/register?mobile="+phon+"&code="+code+"&password="+pwd+"&password_confirm="+pwd, params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/api/auth/register?mobile=" + phon + "&code=" + code + "&password=" + pwd + "&password_confirm=" + pwd, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
 //                System.out.println(response);
@@ -221,7 +208,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (start == 0 && commit.isEnabled()) {
+                if (s.length() == 0 && commit.isEnabled()) {
                     commit.setEnabled(false);
                 } else if (!commit.isEnabled() && verify.getText().toString().length() != 0 && password.getText().toString().length() != 0) {
                     commit.setEnabled(true);
@@ -242,7 +229,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (start == 0 && commit.isEnabled()) {
+                if (s.length() == 0 && commit.isEnabled()) {
                     commit.setEnabled(false);
                 } else if (!commit.isEnabled() && phone.getText().toString().length() != 0 && verify.getText().toString().length() != 0) {
                     commit.setEnabled(true);
@@ -263,7 +250,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (start == 0 && commit.isEnabled()) {
+                if (s.length() == 0 && commit.isEnabled()) {
                     commit.setEnabled(false);
                 } else if (!commit.isEnabled() && phone.getText().toString().length() != 0 && password.getText().toString().length() != 0) {
                     commit.setEnabled(true);
@@ -295,7 +282,6 @@ public class RegisterActivity extends BaseActivity {
                     getVerification.setText("重新获取（" + duration + "）");
                     if (duration < 2) {
                         timer.cancel();
-//                        jumpActivity();
                     }
                 }
             });

@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"></WebView>
+
     <RelativeLayout
         android:id="@+id/fast_login_title"
         android:layout_width="match_parent"
@@ -26,7 +32,6 @@
             android:textSize="20sp" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/fast_login_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,7 +39,8 @@
             android:layout_marginRight="15dp"
             android:text="注册"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -61,7 +67,6 @@
 
 
     <EditText
-        android:singleLine="true"
         android:id="@+id/fast_login_account"
         android:layout_width="284dp"
         android:layout_height="26dp"
@@ -69,6 +74,7 @@
         android:layout_marginLeft="52dp"
         android:layout_marginTop="22dp"
         android:background="@null"
+        android:singleLine="true"
         android:textSize="16sp" />
 
     <View
@@ -91,7 +97,6 @@
         android:textSize="16sp" />
 
     <EditText
-        android:singleLine="true"
         android:id="@+id/fast_login_password"
         android:layout_width="284dp"
         android:layout_height="26dp"
@@ -99,18 +104,20 @@
         android:layout_marginLeft="52dp"
         android:layout_marginTop="22dp"
         android:background="@null"
+        android:singleLine="true"
         android:textSize="16sp" />
+
     <Button
-        android:background="@drawable/register_bg"
-        android:layout_marginRight="40dp"
-        android:layout_alignParentRight="true"
-        android:text="重新获取密码"
         android:id="@+id/reset_password"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_below="@+id/fast_login_password_label"
         android:layout_width="90dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:layout_below="@+id/fast_login_password_label"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/register_bg"
+        android:gravity="center"
+        android:text="重新获取密码" />
 
     <View
         android:layout_width="284dp"
@@ -121,18 +128,17 @@
         android:background="@color/gray" />
 
     <Button
-        android:background="@drawable/enable_check"
         android:id="@+id/fast_login_commit"
         android:layout_width="284dp"
         android:layout_height="42dp"
         android:layout_below="@+id/fast_login_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
+        android:background="@drawable/enable_check"
         android:text="登录"
         android:textColor="#FFFFFF" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/fast_login_forget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,7 +147,8 @@
         android:layout_marginTop="18dp"
         android:text="忘记密码"
         android:textColor="#FFD59A"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/fast_login_no_password"

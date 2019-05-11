@@ -27,6 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 
+import static java.security.AccessController.getContext;
+
 
 public class NavMyFragment extends Fragment {
     @BindView(R.id.user_recycle)

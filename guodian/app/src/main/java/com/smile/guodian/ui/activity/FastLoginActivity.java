@@ -1,18 +1,25 @@
 package com.smile.guodian.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
 import com.smile.guodian.R;
+import com.smile.guodian.UserDao;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.User;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.utils.ToastUtil;
 
 import org.json.JSONException;
@@ -36,6 +43,9 @@ public class FastLoginActivity extends BaseActivity {
     Button getVerify;
     @BindView(R.id.fast_login_commit)
     Button commit;
+    @BindView(R.id.webView)
+    WebView webView;
+
     private String code;
     private String phone;
     Timer timer = new Timer();
@@ -86,13 +96,45 @@ public class FastLoginActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
+                Gson gson = new Gson();
+                User user = gson.fromJson(data.toString(), User.class);
+                user.setId(1L);
+                UserDao userDao = BaseApplication.getDaoSession().getUserDao();
+                if (userDao.loadAll().size() > 0)
+                    userDao.update(user);
+                else {
+                    userDao.insert(user);
+                }
+
                 try {
-                    code = data.getString("code");
-                    Intent intent = new Intent(FastLoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } catch (JSONException e) {
+
+                    String uid = user.getUser_id();
+                    SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("uid", Integer.parseInt(uid));
+                    editor.commit();
+                    webView.getSettings().setJavaScriptEnabled(true);
+                    webView.loadUrl("http://guodian.staraise.com.cn/page/empty.html?user_id=" + uid);
+                    webView.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public void onPageFinished(WebView view, String url) {
+                            super.onPageFinished(view, url);
+//                            if (where == null) {
+                            Intent intent = new Intent(FastLoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+//                            } else {
+//                                LoginActivity.this.finish();
+//                            }
+                        }
+                    });
+
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
 
             @Override

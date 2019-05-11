@@ -13,12 +13,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.Find;
+import com.smile.guodian.model.entity.User;
+import com.smile.guodian.okhttp.OkCallback;
+import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.BaseApplication;
+import com.smile.guodian.ui.activity.RegisterActivity;
+import com.smile.guodian.utils.ToastUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,7 +82,7 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 //        System.out.println(position);
 //        holder.title.setText(finds.get(position).getTitle());
 
@@ -82,6 +93,7 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         if (finds.get(position).getIsliked() == 1) {
             holder.give.setChecked(true);
             holder.zan.setTextColor(Color.parseColor("#DDA021"));
+            holder.give.setEnabled(false);
         } else {
             holder.give.setChecked(false);
             holder.zan.setTextColor(Color.BLACK);
@@ -94,42 +106,53 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    textView.setTextColor(Color.parseColor("#DDA021"));
-                    textView.setText(number + "");
-                } else {
-                    textView.setTextColor(Color.BLACK);
-                    textView.setText((number - 1) + "");
+
+                    int number = Integer.parseInt(holder.zan.getText().toString()) + 1;
+                    System.out.println(number);
+                    holder.zan.setTextColor(Color.parseColor("#DDA021"));
+                    holder.zan.setText(number + "");
+                    checked(finds.get(position).getArticle_id());
+                    holder.give.setEnabled(false);
                 }
             }
         });
 
-//        System.out.println(HttpContants.BASE_URL + finds.get(position).getTumb());
-
-//        Glide.with(mContext).load(HttpContants.BASE_URL + "/public/upload/goods/2018/01-15/42400f54c1ab8efe61614f15f0c0f872.jpg").into(holder.imageView);
-
         Glide.with(mContext).load(HttpContants.BASE_URL + finds.get(position).getTumb()).into(holder.imageView);
         holder.zan.setText(finds.get(position).getLike_num());
-//        }
-        //
-// if (position % 2 == 0)
-//            holder.imageView.setBackgroundResource(R.drawable.give_choose);
-//        else {
-//            holder.imageView.setBackgroundResource(R.drawable.timg);
-//        }
-//        ViewGroup.LayoutParams params = holder.imageView.getLayoutParams();
-//        params.height = Integer.parseInt(dataList.get(position).get("height"));
-//        holder.imageView.setLayoutParams(params);//高度随机，下拉刷新高度会变
-//        Drawable drawable = mContext.getResources().getDrawable(R.drawable.give);
-//        // 设置图片的大小
-//        drawable.setBounds(0, 0, 10, 10);
-//        // 设置图片的位置，左、上、右、下
-//        holder.zan.setCompoundDrawables(null, drawable, null, null);
     }
 
 
     @Override
     public int getItemCount() {
-        System.out.println(finds.size());
         return finds.size();
     }
+
+
+    public void checked(int cat_id) {
+
+        Map<String, String> params = new HashMap<>();
+
+        List<User> userList = BaseApplication.getDaoSession().getUserDao().loadAll();
+        User user = new User();
+        if (userList.size() > 0) {
+            user = userList.get(0);
+        }
+
+        params.put("user_id", user.getUser_id() + "");
+        params.put("article_id", cat_id + "");
+
+        OkHttp.post(mContext, HttpContants.BASE_URL + "/Api/like/clickLike", params, new OkCallback() {
+            @Override
+            public void onResponse(String response) {
+//                System.out.println(response);
+            }
+
+            @Override
+            public void onFailure(String state, String msg) {
+                Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
 }

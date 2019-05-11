@@ -150,8 +150,8 @@ public class UserAdapter extends RecyclerView.Adapter {
             case 0:
                 List<User> users = BaseApplication.getDaoSession().getUserDao().loadAll();
                 User user = new User();
-                if (users.size() > 0)
-                    user = users.get(0);
+                if(users.size()>0)
+                 user = users.get(0);
                 HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
 
                 if (user.getHead_pic() != null) {

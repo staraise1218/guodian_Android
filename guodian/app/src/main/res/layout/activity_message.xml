@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="注销说明"
+            android:text="完善信息"
             android:textColor="#000000"
             android:textSize="@dimen/sp_20" />
 

@@ -63,10 +63,10 @@ public class ResetPassword extends BaseActivity {
         String phon = newPwd.getText().toString();
 
         Map<String, String> params = new HashMap<>();
-        params.put("mobile", phon);
-        params.put("scene", "1");
+//        params.put("mobile", phon);
+//        params.put("scene", "1");
 
-        OkHttp.post(this, HttpContants.BASE_URL + "/api/auth/sendMobileCode", params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/api/auth/sendMobileCode?mobile="+phon+"&scene=1", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
                 JSONObject object = null;

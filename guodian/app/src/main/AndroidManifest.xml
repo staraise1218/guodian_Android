@@ -33,45 +33,20 @@
         <activity android:name="com.smile.guodian.ui.activity.MainActivity"></activity>
         <activity android:name="com.smile.guodian.ui.activity.MyBrowserActivity" />
         <activity android:name="com.smile.guodian.ui.activity.MyCollectionActivity" />
-        <activity
-            android:name="com.smile.guodian.ui.activity.LoginActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name="com.smile.guodian.ui.activity.RegisterActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name="com.smile.guodian.ui.activity.ForgetPassword"
-            android:theme="@style/Full" />
-        <activity
-            android:name="com.smile.guodian.ui.activity.ResetPassword"
-            android:theme="@style/Full" />
-        <activity
-            android:name="com.smile.guodian.ui.activity.FastLoginActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name=".ui.activity.ProductActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name=".ui.activity.CategoryProductActivity"
-            android:theme="@style/Full"></activity>
-        <activity
-            android:name=".ui.activity.SearchActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name=".ui.activity.WebActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name=".ui.activity.SettingActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name=".ui.activity.me.PersonActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name=".ui.activity.me.PersonNameActivity"
-            android:theme="@style/Full" />
-        <activity
-            android:name=".ui.activity.me.MessageActivity"
-            android:theme="@style/Full" />
+        <activity android:name="com.smile.guodian.ui.activity.LoginActivity" />
+        <activity android:name="com.smile.guodian.ui.activity.RegisterActivity" />
+        <activity android:name="com.smile.guodian.ui.activity.ForgetPassword" />
+        <activity android:name="com.smile.guodian.ui.activity.ResetPassword" />
+        <activity android:name="com.smile.guodian.ui.activity.FastLoginActivity" />
+        <activity android:name=".ui.activity.ProductActivity" />
+        <activity android:name=".ui.activity.CategoryProductActivity"></activity>
+        <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.WebActivity" />
+        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.me.PersonActivity" />
+        <activity android:name=".ui.activity.me.PersonNameActivity" />
+        <activity android:name=".ui.activity.me.MessageActivity" />
+        <activity android:name=".ui.activity.ClipImageActivity" />
     </application>
 
 </manifest>

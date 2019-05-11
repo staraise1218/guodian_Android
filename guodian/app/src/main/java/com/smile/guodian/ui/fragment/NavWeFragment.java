@@ -40,6 +40,7 @@ public class NavWeFragment extends Fragment {
     private TextView title;
 
     private List<Find> finds = new ArrayList<>();
+    private int page = 1;
 
     public static NavWeFragment newInstance() {
         NavWeFragment fragment = new NavWeFragment();
@@ -80,14 +81,6 @@ public class NavWeFragment extends Fragment {
 
     private List<Map<String, String>> setList() {
         List<Map<String, String>> dataList = new ArrayList<>();
-//        int start = 30 * (mCount - 1);
-//        Map<String, String> map;
-//        for (int i = start; i < 30 * mCount; i++) {
-//            map = new HashMap<>();
-//            map.put("text", "Third" + i);
-//            map.put("height", (200 + 10 * i) + "");
-//            dataList.add(map);
-//        }
         return dataList;
 
     }
@@ -98,15 +91,7 @@ public class NavWeFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-//                    System.out.println("handler");
-//                    mRecyclerViewAdapter.getDataList().addAll(setList());
-
-//                    if (finds.size() % 2 == 1) {
-//                        finds.add(new Find());
-//                    }
-
                     mRecyclerViewAdapter.setFinds(finds);
-//                    mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
                     mRecyclerViewAdapter.notifyDataSetChanged();
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     break;
@@ -117,70 +102,10 @@ public class NavWeFragment extends Fragment {
 
     public void pullData() {
 
-//        mRecyclerViewAdapter.getFinds().clear();
         Map<String, String> params = new HashMap<>();
-//        params.put("user_id", "1");
-
-//        Gson gson = new Gson();
-//        String paramStr = gson.toJson(params);
-//        System.out.println(paramStr);
-//        MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, paramStr);
-//        Request request = new Request.Builder().url(HttpContants.BASE_URL + "/Api/find/index").post(body).build();
-//        new OkHttpClient().newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                System.out.println("err");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response res) throws IOException {
-//                String response = res.body().string();
-//                System.out.println(response);
-//                JSONObject object = null;
-//                try {
-//                    object = new JSONObject(response);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                JSONObject result = null;
-//                try {
-//                    result = object.getJSONObject("data");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                JSONArray array = null;
-//                try {
-//                    array = result.getJSONArray("list");
-//                    for (int i = 0; i < array.length(); i++) {
-//                        Find find = new Find();
-//                        JSONObject findOb = array.getJSONObject(i);
-//                        find.setArticle_id(findOb.getInt("article_id"));
-//                        find.setTitle(findOb.getString("title"));
-//                        find.setTumb(findOb.getString("thumb"));
-//                        find.setLike_num(findOb.getString("like_num"));
-//                        find.setIsliked(findOb.getInt("isliked"));
-//                    }
-//                    handler.sendEmptyMessage(1);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
-//    }
-
-//        params.put("password", pwd);
-
-//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//        builder.
-
-        OkHttp.post(getContext(), HttpContants.BASE_URL + "/Api/find/index?user_id=" + uid + "&cat_id=11&page=1", params, new OkCallback() {
+        OkHttp.post(getContext(), HttpContants.BASE_URL + "/Api/find/index?user_id=" + uid + "&cat_id=11&page=" + page, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
-//                finds = new ArrayList<>();
-//                System.out.println(response);
                 JSONObject object = null;
                 try {
                     object = new JSONObject(response);
@@ -205,15 +130,12 @@ public class NavWeFragment extends Fragment {
                         find.setLike_num(findOb.getString("like_num"));
                         find.setIsliked(findOb.getInt("isliked"));
                         finds.add(find);
-
                     }
                     title.setText(finds.get(0).getTitle());
                     handler.sendEmptyMessage(1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -222,10 +144,7 @@ public class NavWeFragment extends Fragment {
                 ToastUtil.showShortToast(getContext(), msg);
             }
         });
-
-
     }
-
 
     private void getData() {
         new Handler().postDelayed(new Runnable() {
@@ -241,20 +160,19 @@ public class NavWeFragment extends Fragment {
     class PullLoadMoreListener implements PullLoadMoreRecyclerView.PullLoadMoreListener {
         @Override
         public void onRefresh() {
+            page = 1;
             setRefresh();
             pullData();
         }
 
         @Override
         public void onLoadMore() {
-
-
+            page++;
             pullData();
         }
     }
 
     private void setRefresh() {
-
         mRecyclerViewAdapter.getFinds().clear();
 //        mCount = 1;
 

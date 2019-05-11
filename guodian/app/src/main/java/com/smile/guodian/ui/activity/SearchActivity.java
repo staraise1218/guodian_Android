@@ -41,6 +41,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.search_search)
