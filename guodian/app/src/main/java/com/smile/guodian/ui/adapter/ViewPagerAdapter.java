@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.smile.guodian.ui.fragment.NavCartFragment;
 import com.smile.guodian.ui.fragment.NavCategoryFragment;
 import com.smile.guodian.ui.fragment.NavHomeFragment;
-import com.smile.guodian.ui.fragment.NavMyFragment;
-import com.smile.guodian.ui.fragment.NavWeFragment;
+import com.smile.guodian.ui.fragment.NavUserFragment;
+import com.smile.guodian.ui.fragment.NavFoundFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +22,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
         fragments.clear();
         fragments.add(NavHomeFragment.newInstance());
-        fragments.add(NavWeFragment.newInstance());
+        fragments.add(NavFoundFragment.newInstance());
         fragments.add(NavCategoryFragment.newInstance());
         fragments.add(NavCartFragment.newInstance());
-        fragments.add(NavMyFragment.newInstance());
+        fragments.add(NavUserFragment.newInstance());
 
     }
 

@@ -6,10 +6,10 @@
 
     <ImageView
         android:id="@+id/reset_name_back"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_30"
         android:background="@drawable/back" />
 
     <TextView
@@ -17,23 +17,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/dp_30"
         android:text=" 修改用户名"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/reset_name_tip"
-        android:layout_width="@dimen/dp_284"
+        android:layout_width="@dimen/dp_281"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_130"
         android:text="用户名"
-        android:textSize="@dimen/sp_10" />
+        android:textSize="@dimen/sp_12" />
 
     <EditText
         android:id="@+id/reset_name"
-        android:layout_width="@dimen/dp_284"
+        android:layout_width="@dimen/dp_281"
         android:layout_height="@dimen/dp_50"
         android:layout_below="@+id/reset_name_tip"
         android:layout_centerHorizontal="true"
@@ -42,7 +42,7 @@
         android:textSize="@dimen/sp_10" />
 
     <TextView
-        android:layout_width="@dimen/dp_284"
+        android:layout_width="@dimen/dp_281"
         android:layout_height="@dimen/dp_1"
         android:layout_below="@+id/reset_name"
         android:layout_centerHorizontal="true"
@@ -50,24 +50,25 @@
 
     <TextView
         android:id="@+id/reset_name_tips"
-        android:layout_width="@dimen/dp_284"
+        android:layout_width="@dimen/dp_281"
         android:layout_height="wrap_content"
         android:layout_below="@+id/reset_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_20"
         android:text="可使用中英文（英文区分大小）、数字（不可纯数字或字符）'_'和'_',字数限制4-20个字符"
-        android:textSize="@dimen/sp_8" />
+        android:textSize="@dimen/sp_10" />
 
     <Button
         android:id="@+id/reset_name_save"
-        android:layout_width="@dimen/dp_284"
-        android:layout_height="@dimen/dp_42"
+        android:layout_width="@dimen/dp_273"
+        android:layout_height="@dimen/dp_40"
         android:layout_below="@+id/reset_name_tips"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_44"
         android:background="@drawable/button_check"
         android:enabled="false"
         android:text="保存"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_13" />
 
 </RelativeLayout>

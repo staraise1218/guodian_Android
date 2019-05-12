@@ -99,13 +99,6 @@ public class NavCategoryFragment extends BaseFragment {
     RecyclerView mRecyclerviewWares;
     @BindView(R.id.refresh_layout)
     MaterialRefreshLayout mRefreshLaout;
-    @BindView(R.id.tv_city)
-    TextView mCityName;
-    @BindView(R.id.tv_day_weather)
-    TextView mDayWeather;
-    @BindView(R.id.tv_night_weather)
-    TextView mNightWeather;
-
     @BindView(R.id.catergory_web)
     WebView webView;
     @BindView(R.id.catergory_content)
@@ -195,12 +188,6 @@ public class NavCategoryFragment extends BaseFragment {
             }
         });
 
-//        mRefreshLaout.setMaterialRefreshListener(new MaterialRefreshListener() {
-//            @Override
-//            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-//                materialRefreshLayout.autoRefreshLoadMore();
-//            }
-//        });
 
     }
 
@@ -229,20 +216,20 @@ public class NavCategoryFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("resume");
+//        System.out.println("resume");
     }
 
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        System.out.println(hidden);
+//        System.out.println(hidden);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        System.out.println("created");
+//        System.out.println("created");
     }
 
     private void requestCategoryData() {

@@ -44,7 +44,6 @@ public class UserAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        System.out.println("holder--" + i);
         View view = null;
         switch (i) {
             case 0:
@@ -72,6 +71,10 @@ public class UserAdapter extends RecyclerView.Adapter {
         public TextView title;
         @BindView(R.id.user_icon)
         public CircleImageView circleImageView;
+        @BindView(R.id.user_name)
+        TextView name;
+        @BindView(R.id.user_rename)
+        TextView rename;
         @BindView(R.id.user_wait)
         LinearLayout wait;
         @BindView(R.id.user_receive)
@@ -107,7 +110,6 @@ public class UserAdapter extends RecyclerView.Adapter {
         public HeaderViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-//            title = (TextView) itemView.findViewById(R.id.title);
         }
     }
 
@@ -150,13 +152,16 @@ public class UserAdapter extends RecyclerView.Adapter {
             case 0:
                 List<User> users = BaseApplication.getDaoSession().getUserDao().loadAll();
                 User user = new User();
-                if(users.size()>0)
-                 user = users.get(0);
+                if (users.size() > 0)
+                    user = users.get(0);
                 HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
 
                 if (user.getHead_pic() != null) {
                     Glide.with(context).load(HttpContants.BASE_URL + user.getHead_pic()).into(headerViewHolder.circleImageView);
                 }
+
+                headerViewHolder.name.setText("姓名：" + user.getRealname());
+//                headerViewHolder.rename.setText("");
 
                 headerViewHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
                     @Override

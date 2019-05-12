@@ -11,52 +11,54 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_icon"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="@dimen/dp_58"
+            android:layout_height="@dimen/dp_58"
+            android:layout_marginLeft="19dp"
+            android:layout_marginTop="36dp"
             android:src="#000000" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_9"
+            android:layout_marginTop="@dimen/dp_45"
             android:layout_toRightOf="@+id/user_icon"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="姓名"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/user_rename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/dp_6"
                 android:text="曾用名"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="@dimen/sp_10" />
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/user_notify"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/dp_31"
+            android:layout_height="@dimen/dp_31"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginTop="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_16"
             android:background="@drawable/message_withe" />
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="@dimen/dp_31"
+            android:layout_height="@dimen/dp_31"
+            android:layout_marginTop="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_12"
             android:layout_toLeftOf="@+id/user_notify"
             android:background="@drawable/set_up_withe" />
 
@@ -78,19 +80,19 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
                     android:background="@drawable/waitpay" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:gravity="center_horizontal"
                     android:text="待付款"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
 
@@ -103,19 +105,19 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
                     android:background="@drawable/ready_receive" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:gravity="center_horizontal"
                     android:text="待收货"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,19 +129,19 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
                     android:background="@drawable/refuse_order" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:gravity="center_horizontal"
                     android:text="退货单"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
             <LinearLayout
@@ -151,19 +153,19 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
                     android:background="@drawable/all_order" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:gravity="center_horizontal"
                     android:text="全部订单"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
         </LinearLayout>

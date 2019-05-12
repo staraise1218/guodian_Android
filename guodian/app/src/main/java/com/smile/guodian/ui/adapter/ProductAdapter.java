@@ -74,7 +74,7 @@ public class ProductAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.huiyuan.setVisibility(View.GONE);
+//        viewHolder.huiyuan.setVisibility(View.GONE);
         Glide.with(context).load(HttpContants.BASE_URL + goodList.get(position).getOriginal_img()).into(viewHolder.imageView);
         viewHolder.name.setText(goodList.get(position).getGoods_name());
         String price = goodList.get(position).getShop_price();

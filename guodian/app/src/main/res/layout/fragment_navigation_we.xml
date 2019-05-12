@@ -10,7 +10,7 @@
         android:gravity="center"
         android:text="发现国典"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_20" />
+        android:textSize="@dimen/sp_17" />
 
     <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
         android:id="@+id/pullLoadMoreRecyclerView"

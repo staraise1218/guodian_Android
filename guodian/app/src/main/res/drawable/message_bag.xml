@@ -3,8 +3,8 @@
     <!--<solid android:color="@color/white" />-->
     <gradient
         android:angle="-90"
-        android:endColor="#F2C2A9"
-        android:startColor="#C2AB80" />
+        android:endColor="#D0A97A"
+        android:startColor="#FFE0BB" />
     <!--<stroke android:color="@color/darkcyan" android:width="1dp" />-->
 
 </shape>

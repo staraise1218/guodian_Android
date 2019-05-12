@@ -1,64 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="@dimen/dp_175"
+    android:layout_height="@dimen/dp_242"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_9"
+    android:paddingTop="@dimen/dp_10">
 
     <ImageView
         android:id="@+id/item_home_product_img"
-        android:layout_width="@dimen/dp_154"
-        android:layout_height="@dimen/dp_182"
-        android:layout_marginLeft="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_5" />
+        android:layout_width="@dimen/dp_121"
+        android:layout_height="@dimen/dp_163"
+        android:layout_marginLeft="@dimen/dp_14"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/item_home_product_title"
-        android:layout_width="@dimen/dp_154"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_10" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_13"
+        android:layout_marginTop="@dimen/dp_7"
+        android:textColor="#434343"
+        android:textSize="@dimen/sp_10"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/item_home_product_name"
         android:layout_width="@dimen/dp_154"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="6dp"
+        android:layout_height="@dimen/dp_13"
+        android:layout_marginTop="2dp"
         android:singleLine="true"
         android:text="Audermarspigues/爱彼皇家"
-        android:textColor="@color/gray"
+        android:textColor="#434343"
         android:textSize="@dimen/sp_10" />
 
     <RelativeLayout
         android:layout_width="@dimen/dp_154"
         android:layout_height="15dp"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="2dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/item_home_product_price"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_16"
             android:text="售价位:$3336,385"
-            android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textColor="#434343"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/huiyuan"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:background="#DDA021"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_12"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_toRightOf="@+id/item_home_product_price"
+            android:background="#FF9F4D"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingTop="2dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="2dp"
             android:text="会员再减"
             android:textColor="@color/white"
             android:textSize="8sp" />
@@ -68,11 +65,11 @@
         android:id="@+id/item_home_product_price1"
         android:layout_width="154dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="1dp"
         android:singleLine="true"
         android:text="官方公价:"
-        android:textColor="@color/black"
-        android:textSize="8sp" />
+        android:textColor="#434343"
+        android:textSize="8sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

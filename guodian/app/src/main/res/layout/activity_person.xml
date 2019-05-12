@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/person_back"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_15"
             android:background="@drawable/back" />
 
@@ -25,45 +25,42 @@
             android:layout_centerHorizontal="true"
             android:text="个人信息"
             android:textColor="#000000"
-            android:textSize="@dimen/sp_20" />
+            android:textSize="@dimen/sp_15" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100"
+        android:layout_height="@dimen/dp_108"
         android:background="@color/white">
 
         <com.smile.guodian.widget.CircleImageView
             android:id="@+id/person_icon"
-            android:layout_width="@dimen/dp_66"
-            android:layout_height="@dimen/dp_66"
-            android:layout_marginLeft="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_10" />
+            android:layout_width="@dimen/dp_58"
+            android:layout_height="@dimen/dp_58"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_25" />
 
         <TextView
             android:id="@+id/change_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="@dimen/dp_35"
-            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_54"
+            android:layout_marginRight="@dimen/dp_28"
             android:text="更换头像"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_10"
+            android:textSize="@dimen/sp_12"
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_10"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="@dimen/dp_15"
-            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_56"
+            android:layout_marginRight="@dimen/dp_9"
             android:background="@drawable/back"
             android:rotation="180" />
-
     </RelativeLayout>
 
     <RelativeLayout

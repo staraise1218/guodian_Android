@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="70dp"
-    android:layout_height="79dp"
-    android:background="#E7E7E7">
+    android:layout_width="@dimen/dp_67"
+    android:layout_height="@dimen/dp_67"
+    android:background="#E8E8E8">
 
 
     <TextView
-        android:background="#E7E7E7"
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/dp_67"
+        android:layout_height="@dimen/dp_67"
+        android:background="#E8E8E8"
         android:gravity="center"
-        android:textColor="@color/black" />
+        android:textColor="#434343"
+        android:textSize="@dimen/sp_12" />
+
     <View
         android:id="@+id/line"
-        android:visibility="gone"
-        android:layout_gravity="center_vertical"
-        android:background="#DDA021"
-        android:layout_width="3dp"
-        android:layout_height="50dp" />
+        android:layout_width="@dimen/dp_3"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginTop="@dimen/dp_11"
+        android:background="#D0A97A" />
 
 
 </FrameLayout>

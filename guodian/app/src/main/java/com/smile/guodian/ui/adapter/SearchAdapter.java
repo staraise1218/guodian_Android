@@ -2,6 +2,7 @@ package com.smile.guodian.ui.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,6 +20,7 @@ import com.smile.guodian.R;
 import com.smile.guodian.model.entity.GuessGoods;
 import com.smile.guodian.model.entity.SearchResultEntity;
 import com.smile.guodian.ui.activity.SearchActivity;
+import com.smile.guodian.ui.activity.WebActivity;
 import com.smile.guodian.ui.adapter.search.SearchHotAdapter;
 import com.smile.guodian.widget.FlowLayout;
 import com.smile.guodian.widget.HomeGridView;
@@ -128,8 +131,16 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             SearchLikeViewHolder searchLikeViewHolder = (SearchLikeViewHolder) viewHolder;
             HomeHeaderAdapter headerAdapter = new HomeHeaderAdapter(context);
             headerAdapter.setGuessGoods(guessGoods);
-//            System.out.println(guessGoods.size());
             searchLikeViewHolder.gridView.setAdapter(headerAdapter);
+            searchLikeViewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("goodsId", guessGoods.get(position).getGoods_id());
+                    context.startActivity(intent);
+                }
+            });
         }
 
         if (viewHolder instanceof TipsViewHolder) {

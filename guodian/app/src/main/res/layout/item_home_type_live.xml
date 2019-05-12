@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="375dp"
-    android:layout_height="352dp"
-    android:orientation="vertical"
-   >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
-        android:background="#E7E7E7"
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
-    <ListView
-        android:dividerHeight="10dp"
-        android:divider="@color/white"
+        android:layout_height="10dp"
+        android:background="#E7E7E7" />
+
+    <com.smile.guodian.widget.HomeGridView
         android:id="@+id/home_type_live_content"
-        android:layout_width="375dp"
-        android:layout_height="342dp">
-    </ListView>
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_330"
+        android:layout_marginTop="@dimen/dp_10"
+        android:divider="@color/white"
+        android:dividerHeight="10dp"
+        android:numColumns="1"></com.smile.guodian.widget.HomeGridView>
 
     <!--<ImageView-->
-        <!--android:visibility="gone"-->
-        <!--android:id="@+id/iv_home"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="166dp"-->
-        <!--android:contentDescription="@null"-->
-        <!--android:scaleType="centerCrop" />-->
+    <!--android:visibility="gone"-->
+    <!--android:id="@+id/iv_home"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="166dp"-->
+    <!--android:contentDescription="@null"-->
+    <!--android:scaleType="centerCrop" />-->
 
     <!--<TextView-->
-        <!--android:visibility="gone"-->
-        <!--android:id="@+id/tv_title"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="2dp"-->
-        <!--android:drawablePadding="6dp"-->
-        <!--android:ellipsize="end"-->
-        <!--android:gravity="center"-->
-        <!--android:maxLines="1"-->
-        <!--android:textColor="@color/font_black_color"-->
-        <!--android:textSize="13sp" />-->
-</LinearLayout>
+    <!--android:visibility="gone"-->
+    <!--android:id="@+id/tv_title"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="2dp"-->
+    <!--android:drawablePadding="6dp"-->
+    <!--android:ellipsize="end"-->
+    <!--android:gravity="center"-->
+    <!--android:maxLines="1"-->
+    <!--android:textColor="@color/font_black_color"-->
+    <!--android:textSize="13sp" />-->
+</RelativeLayout>

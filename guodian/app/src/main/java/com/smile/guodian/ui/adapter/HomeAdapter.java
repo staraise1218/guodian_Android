@@ -354,7 +354,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class RecommendHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.recommend_content)
-        ListView ivHome;
+        HomeGridView ivHome;
 
 
         RecommendHolder(View itemView) {
@@ -370,7 +370,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        @BindView(R.id.tv_title)
 //        TextView tvTitle;
         @BindView(R.id.home_type_live_content)
-        ListView listView;
+        HomeGridView listView;
 
         LiveHolder(View itemView) {
             super(itemView);

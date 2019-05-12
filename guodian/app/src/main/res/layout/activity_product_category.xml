@@ -15,9 +15,9 @@
 
         <ImageView
             android:id="@+id/product_catogory_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="15dp"
+            android:layout_width="@dimen/dp_19"
+            android:layout_height="@dimen/dp_19"
+            android:layout_marginLeft="9dp"
             android:background="@drawable/back" />
 
         <TextView
@@ -26,12 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp_12" />
 
         <ImageView
             android:id="@+id/product_catogory_search"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/dp_19"
+            android:layout_height="@dimen/dp_19"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:background="@drawable/search"
@@ -41,8 +41,9 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/top_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/product_catogory_head"
+        android:layout_marginTop="@dimen/dp_18"
         android:background="@color/white"
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@android:color/black"

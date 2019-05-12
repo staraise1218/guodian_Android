@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_250"
+    android:layout_height="@dimen/dp_241"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_15"
             android:text="完善姓名"
-            android:textSize="@dimen/sp_20"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_17" />
 
         <TextView
             android:id="@+id/name_cancel"
@@ -54,10 +54,10 @@
         android:layout_height="@dimen/dp_40"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_40"
         android:background="@drawable/button_check"
         android:enabled="false"
         android:text="确定"
-        android:layout_marginBottom="@dimen/dp_40"
         android:textColor="@color/white" />
 
 </LinearLayout>

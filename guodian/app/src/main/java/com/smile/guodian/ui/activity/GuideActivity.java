@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.trinea.android.common.util.PreferencesUtils;
 
 
 public class GuideActivity extends BaseActivity {
@@ -63,6 +64,22 @@ public class GuideActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        boolean isFirst = PreferencesUtils.getBoolean(GuideActivity.this, "isFirst", true);
+        //默认为第一次
+
+        if (isFirst) {
+            PreferencesUtils.putBoolean(GuideActivity.this, "isFirst", false);
+            startActivity(new Intent(GuideActivity.this, GuideActivity.class));
+            MyPagerAdapter adapter = new MyPagerAdapter();
+            imageView.setVisibility(View.GONE);
+            mViewPager.setAdapter(adapter);
+
+            mViewPager.setOffscreenPageLimit(0);
+            mViewPager.setOnPageChangeListener(new PagePositionLister());
+            initData();
+        } else {
+            startActivity(new Intent(GuideActivity.this, MainActivity.class));
+        }
 //        for(int i=0;i<3;i++) {
 //            View inflate = getLayoutInflater().inflate(R.layout.guide_item, null);
 //            ImageView ivGuide = (ImageView) inflate.findViewById(R.id.iv_guide);
@@ -71,13 +88,7 @@ public class GuideActivity extends BaseActivity {
 ////                       GlideUtil.load(GuideActivity.this,GuideActivity.this,"http://guodian.staraise.com.cn"+array.getJSONObject(i).getString("ad_code"),ivGuide);
 //            mViewList.add(inflate);
 //        }
-        MyPagerAdapter adapter = new MyPagerAdapter();
-        imageView.setVisibility(View.GONE);
-        mViewPager.setAdapter(adapter);
 
-        mViewPager.setOffscreenPageLimit(0);
-        mViewPager.setOnPageChangeListener(new PagePositionLister());
-        initData();
     }
 
 

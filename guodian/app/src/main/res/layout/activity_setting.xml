@@ -14,9 +14,9 @@
 
         <ImageView
             android:id="@+id/setting_back"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_11"
             android:background="@drawable/back" />
 
         <TextView
@@ -25,14 +25,14 @@
             android:layout_centerHorizontal="true"
             android:text="设置"
             android:textColor="#000000"
-            android:textSize="@dimen/sp_20" />
+            android:textSize="@dimen/sp_15" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/setting_person"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_58"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -46,8 +46,8 @@
             android:textSize="@dimen/sp_12" />
 
         <ImageView
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_10"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_15"
@@ -63,7 +63,7 @@
     <RelativeLayout
         android:id="@+id/setting_acount"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_58"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -74,11 +74,11 @@
             android:layout_marginTop="@dimen/dp_20"
             android:text="账户安全"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_12" />
+            android:textSize="@dimen/sp_13" />
 
         <ImageView
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_10"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_15"
@@ -94,7 +94,7 @@
     <RelativeLayout
         android:id="@+id/setting_give"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_58"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -105,12 +105,12 @@
             android:layout_marginTop="@dimen/dp_20"
             android:text="给国典平分"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_12" />
+            android:textSize="@dimen/sp_13" />
 
         <ImageView
 
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_10"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_15"
@@ -120,7 +120,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_58"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:orientation="horizontal">
@@ -132,7 +132,7 @@
             android:layout_marginTop="@dimen/dp_20"
             android:text="版本号"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_12" />
+            android:textSize="@dimen/sp_13" />
 
         <TextView
             android:id="@+id/version"
@@ -143,7 +143,7 @@
             android:layout_marginRight="@dimen/dp_15"
             android:src="@drawable/back"
             android:text="V1.0"
-            android:textSize="@dimen/dp_10" />
+            android:textSize="@dimen/sp_10" />
     </RelativeLayout>
 
     <TextView
@@ -154,7 +154,7 @@
     <RelativeLayout
         android:id="@+id/setting_clear"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_58"
 
         android:background="@color/white"
         android:orientation="horizontal">
@@ -166,7 +166,7 @@
             android:layout_marginTop="@dimen/dp_20"
             android:text="清除缓存"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_12" />
+            android:textSize="@dimen/sp_13" />
 
     </RelativeLayout>
 
@@ -178,7 +178,7 @@
     <RelativeLayout
         android:id="@+id/logout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_58"
 
         android:background="@color/white"
         android:orientation="horizontal">
@@ -189,8 +189,8 @@
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_20"
             android:text="退出登录"
-            android:textColor="#C6B48B"
-            android:textSize="@dimen/sp_12" />
+            android:textColor="#D0A97A"
+            android:textSize="@dimen/sp_13" />
 
     </RelativeLayout>
 

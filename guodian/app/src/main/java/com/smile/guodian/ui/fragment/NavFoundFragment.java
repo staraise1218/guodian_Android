@@ -1,7 +1,6 @@
 package com.smile.guodian.ui.fragment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class NavWeFragment extends Fragment {
+public class NavFoundFragment extends Fragment {
 
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
@@ -42,8 +41,8 @@ public class NavWeFragment extends Fragment {
     private List<Find> finds = new ArrayList<>();
     private int page = 1;
 
-    public static NavWeFragment newInstance() {
-        NavWeFragment fragment = new NavWeFragment();
+    public static NavFoundFragment newInstance() {
+        NavFoundFragment fragment = new NavFoundFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

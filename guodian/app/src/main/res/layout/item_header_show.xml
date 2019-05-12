@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="173dp"
-    android:layout_height="wrap_content"
-    android:paddingLeft="2dp"
-    android:paddingRight="2dp">
+    android:layout_width="175dp"
+    android:layout_height="@dimen/dp_260"
+    android:paddingLeft="12dp"
+    android:paddingTop="@dimen/dp_10">
 
     <View
         android:layout_width="2dp"
@@ -26,32 +26,38 @@
 
     <ImageView
         android:id="@+id/item_headline_show_content"
-        android:layout_width="173dp"
-        android:layout_height="200dp" />
+        android:layout_width="@dimen/dp_163"
+        android:layout_height="@dimen/dp_146"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/header_show_name"
-        android:layout_width="@dimen/dp_173"
+        android:layout_width="@dimen/dp_150"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_headline_show_content"
+        android:layout_marginLeft="@dimen/dp_4"
         android:minLines="2"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textColor="#4A4A4A"
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/header_show_price"
-        android:layout_width="@dimen/dp_173"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header_show_name"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_4"
+        android:textColor="@color/text_color"
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/header_show_normal_price"
-        android:layout_width="@dimen/dp_173"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header_show_price"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginBottom="@dimen/dp_8"
         android:text="官网价格:¥"
-        android:textColor="@color/gray"
-        android:textSize="10sp" />
+        android:textColor="#868686"
+        android:textSize="@dimen/sp_10" />
 </RelativeLayout>

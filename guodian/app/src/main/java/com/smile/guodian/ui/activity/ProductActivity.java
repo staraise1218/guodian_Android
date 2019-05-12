@@ -109,9 +109,9 @@ public class ProductActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 webView.setVisibility(View.VISIBLE);
-                content.setVisibility(View.GONE);
-                head.setVisibility(View.GONE);
-                tabLayout.setVisibility(View.GONE);
+//                content.setVisibility(View.GONE);
+//                head.setVisibility(View.GONE);
+//                tabLayout.setVisibility(View.GONE);
                 System.out.println(goodList.get(position).getGoods_id());
                 webView.loadUrl("http://guodian.staraise.com.cn/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
                 webView.setOnKeyListener(new View.OnKeyListener() {
@@ -244,6 +244,15 @@ public class ProductActivity extends BaseActivity {
             public void onFailure(String state, String msg) {
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        if (webView.getVisibility() == View.GONE) {
+            this.finish();
+        } else {
+            webView.setVisibility(View.GONE);
+
+        }
     }
 
 
