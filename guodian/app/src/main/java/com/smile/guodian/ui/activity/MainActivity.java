@@ -42,7 +42,6 @@ public class MainActivity extends BaseActivity {
     private int uid;
 
 
-
     @BindView(R.id.bottom_tab_layout)
     TabLayout tabLayout;
     private ViewPagerAdapter viewPagerAdapter;
@@ -101,7 +100,7 @@ public class MainActivity extends BaseActivity {
                 SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("db", MODE_PRIVATE);
                 uid = sharedPreferences.getInt("uid", -1);
 
-                System.out.println(uid+"---"+tab.getPosition());
+                System.out.println(uid + "---" + tab.getPosition());
 
                 if (uid <= 0 && (tab.getPosition() == 4 || tab.getPosition() == 3)) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -110,7 +109,6 @@ public class MainActivity extends BaseActivity {
                     return;
                 } else {
                     viewPager.setCurrentItem(tab.getPosition(), false);
-
                     for (int i = 0; i < tabLayout.getTabCount(); i++) {
                         View view = tabLayout.getTabAt(i).getCustomView();
                         ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
@@ -133,6 +131,17 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("db", MODE_PRIVATE);
+                uid = sharedPreferences.getInt("uid", -1);
+
+                System.out.println(uid + "---" + tab.getPosition());
+
+                if (uid <= 0 && (tab.getPosition() == 4 || tab.getPosition() == 3)) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.putExtra("where", "main");
+                    startActivity(intent);
+                    return;
+                }
 
             }
         });

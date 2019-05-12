@@ -2,6 +2,7 @@ package com.smile.guodian.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smile.guodian.R;
@@ -22,6 +24,11 @@ import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.adapter.ProductAdapter;
 import com.smile.guodian.widget.ProductGenerator;
+import com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout;
+import com.syz.commonpulltorefresh.lib.PtrDefaultHandler;
+import com.syz.commonpulltorefresh.lib.PtrFrameLayout;
+import com.syz.commonpulltorefresh.lib.loadmore.GridViewWithHeaderAndFooter;
+import com.syz.commonpulltorefresh.lib.loadmore.OnLoadMoreListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,8 +46,8 @@ public class CategoryProductActivity extends BaseActivity {
 
     private String branch_id;
     private String name;
-    @BindView(R.id.product_catogory_content)
-    GridView content;
+    //    @BindView(R.id.product_catogory_content)
+//    GridView content;
     @BindView(R.id.product_catogory_title)
     TextView title;
     @BindView(R.id.product_catogory_back)
@@ -51,6 +58,12 @@ public class CategoryProductActivity extends BaseActivity {
     RelativeLayout head;
     @BindView(R.id.top_tab_layout)
     TabLayout tabLayout;
+    @BindView(R.id.test_grid_view)
+    GridViewWithHeaderAndFooter content;
+    @BindView(R.id.test_grid_view_frame)
+    PtrClassicFrameLayout frameLayout;
+    Handler handler = new Handler();
+
 
     private int page = 1;
     private String sales_num = "desc";
@@ -60,6 +73,8 @@ public class CategoryProductActivity extends BaseActivity {
     private List<ProductCategory> categories;
 
     boolean flag = false;
+    private String tail;
+    ProductAdapter adapter;
 
     @OnClick(R.id.product_catogory_back)
     public void clickView() {
@@ -67,10 +82,26 @@ public class CategoryProductActivity extends BaseActivity {
             this.finish();
         } else {
             webView.setVisibility(View.GONE);
-            content.setVisibility(View.VISIBLE);
-//            tabLayout.setVisibility(View.VISIBLE);
+            frameLayout.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.VISIBLE);
+            head.setVisibility(View.VISIBLE);
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if (webView.getVisibility() == View.GONE) {
+            this.finish();
+        } else {
+            webView.setVisibility(View.GONE);
+//            frameLayout.setVisibility(View.VISIBLE);
+//            tabLayout.setVisibility(View.VISIBLE);
+//            head.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     @Override
     protected void init() {
@@ -79,6 +110,8 @@ public class CategoryProductActivity extends BaseActivity {
         branch_id = intent.getStringExtra("branch_id");
         name = intent.getStringExtra("name");
         String names[] = new String[]{"综合", "销量", "价格", "折扣"};
+        adapter = new ProductAdapter(goodList, this, name);
+        content.setAdapter(adapter);
         if (!flag) {
             flag = true;
             for (int i = 0; i < names.length; i++) {
@@ -86,16 +119,51 @@ public class CategoryProductActivity extends BaseActivity {
 
             }
         }
+
+        frameLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+
+            @Override
+            public void loadMore() {
+                page++;
+                initData(tail);
+                frameLayout.loadMoreComplete(true);
+            }
+        });
+
+        frameLayout.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                frameLayout.autoRefresh(true);
+            }
+        }, 150);
+
+        frameLayout.setPtrHandler(new PtrDefaultHandler() {
+
+            @Override
+            public void onRefreshBegin(final PtrFrameLayout frame) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        goodList.clear();
+                        page = 1;
+                        initData(tail);
+                    }
+                }, 1000);
+            }
+        });
+
+
         webView.getSettings().setJavaScriptEnabled(true);
         title.setText(name);
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 webView.setVisibility(View.VISIBLE);
-                content.setVisibility(View.GONE);
+//                frameLayout.setVisibility(View.GONE);
 //                head.setVisibility(View.GONE);
-                tabLayout.setVisibility(View.GONE);
-                webView.loadUrl("http://guodian.staraise.com.cn/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
+//                tabLayout.setVisibility(View.GONE);
+                webView.loadUrl(HttpContants.BASE_URL + "/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
                 webView.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -104,7 +172,7 @@ public class CategoryProductActivity extends BaseActivity {
                                 webView.setVisibility(View.GONE);
                                 content.setVisibility(View.VISIBLE);
                                 tabLayout.setVisibility(View.GONE);
-//                                head.setVisibility(View.VISIBLE);
+                                head.setVisibility(View.VISIBLE);
                                 return true;
 
                         }
@@ -118,28 +186,19 @@ public class CategoryProductActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                goodList.clear();
                 switch (tab.getPosition()) {
                     case 0:
                         break;
                     case 1:
-//                        if (sales_num.equalsIgnoreCase("desc")) {
-//                            sales_num = "asc";
-                        initData("&sales_num=desc");
-//                        } else {
-//                            sales_num = "desc";
-//                            initData("&sales_num=asc");
-//                        }
+                        tail = "&sales_num=desc";
+//                        initData(tail);
+                        frameLayout.autoRefresh(true);
                         break;
                     case 2:
-//                        System.out.println(branch_id);
-//                        if (price.equalsIgnoreCase("desc")) {
-//                            price = "asc";
-                        initData("&shop_price=asc");
-//                        } else {
-//                            price = "desc";
-//                            initData("");
-//                        }
+                        tail = "&shop_price=asc";
+                        frameLayout.autoRefresh(true);
+//                        initData(tail);
                         break;
                 }
 
@@ -183,14 +242,7 @@ public class CategoryProductActivity extends BaseActivity {
 
     public void initData(String tail) {
         Map<String, String> params = new HashMap<>();
-        goodList = new ArrayList<>();
-//        params.put("banch_id", branch_id + "");
-//        params.put("shop_price", "des");
-//        params.put("page", page + "");
-
-//        System.out.println(HttpContants.BASE_URL + "/Api/category/goodsList?brand_id=" + branch_id + "&shop_price=" + price + tail);
-
-        OkHttp.post(this, HttpContants.BASE_URL + "/Api/category/goodsList?brand_id=" + branch_id + tail, params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/category/goodsList?brand_id=" + branch_id + tail + "&page=" + page, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -208,29 +260,33 @@ public class CategoryProductActivity extends BaseActivity {
                         good.setMarket_price(goodObject.getString("market_price"));
                         goodList.add(good);
                     }
+                    if (array.length() == 0) {
+                        frameLayout.setLoadMoreEnable(false);
+                        frameLayout.refreshComplete();
+//                        frameLayout.loadMoreComplete(true);
+                    } else {
+                        show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-//                Gson gson = new Gson();
-//                ProductBean productBean = gson.fromJson(response, ProductBean.class);
-//                goodList = productBean.getData().getGoodsList();
-                show();
-//                categories = productBean.getData().getCategoryList();
 
 
             }
 
             @Override
             public void onFailure(String state, String msg) {
+                Toast.makeText(CategoryProductActivity.this, msg, Toast.LENGTH_LONG).show();
             }
         });
     }
 
 
     public void show() {
-        ProductAdapter adapter = new ProductAdapter(goodList, this, name);
-        content.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        if (frameLayout.isRefreshing())
+            frameLayout.refreshComplete();
+        frameLayout.setLoadMoreEnable(true);
     }
 
 }

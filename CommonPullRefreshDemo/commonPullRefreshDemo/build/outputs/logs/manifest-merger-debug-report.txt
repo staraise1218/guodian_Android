@@ -1,0 +1,167 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:1-35:12
+MERGED from [:commonPullToRefresh_Lib] /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullToRefresh_Lib/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-16:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/c7eff5c5c9323ee48e5e249182bf7d55/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/12c4aec5601a423060ee3419a2f47b17/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/4bb6da88be762ca605af96189402493f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/3d7c88d7642208fef206421afdb54b35/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/8e0d2587cd46d07fc1cbdc0154b34ad8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/66378ae9c54668fed9ed3b8b7a4e1d40/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/2ed05f6505f5ef4a1cb1444916a7ace0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/135e0bf673a84dba19770e61b5304ecd/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/b17cfb9defa36b43819d1eaea8e9e0e6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/093c7c263ac04b043270d7383af54c41/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/9213e4083f0ff7f13b896328981996a4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/25b7664f84b620370b2e7b68c3878b16/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/8ac9561c1e9f21653c9e045e3b623095/AndroidManifest.xml:17:1-25:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/28944f35e9c0e812c8482c83d4c964db/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/f4556b0c3f652373ed3c30b4f158e7e1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/0779b5e0ff09d54d6910a5c1874820b0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/1ed31bf304432f8c38893648c59b6363/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/bc4f4a58797bdb5321e9d94dfde9ee79/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/f92b33eb819b081b3c2fb16609077664/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/cb01b9a2c86bf7f57c8a3a8cb78f64e3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/a8bfc1f7a52e008725a3d4cc8f850d15/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/24c5f4c3f0d5db1217829305592873af/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/4a38c4f9c456f190cf3ad84c52308fd2/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:1-35:12
+	package
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:3:5-34
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:5:5-30
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:4:5-28
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+application
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:7:5-33:19
+MERGED from [:commonPullToRefresh_Lib] /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullToRefresh_Lib/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-14:19
+MERGED from [:commonPullToRefresh_Lib] /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullToRefresh_Lib/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-14:19
+MERGED from [com.android.support:support-compat:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/25b7664f84b620370b2e7b68c3878b16/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/25b7664f84b620370b2e7b68c3878b16/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/8ac9561c1e9f21653c9e045e3b623095/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/8ac9561c1e9f21653c9e045e3b623095/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/25b7664f84b620370b2e7b68c3878b16/AndroidManifest.xml:22:18-91
+	android:label
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:10:9-41
+	android:icon
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:9:9-45
+	android:allowBackup
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:8:9-35
+activity#com.syz.pullrefresh.MainActivity
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:11:9-20:20
+	android:screenOrientation
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:14:13-49
+	android:label
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:13:13-45
+	android:name
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:12:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:15:13-19:29
+action#android.intent.action.MAIN
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:18:27-74
+activity#com.syz.pullrefresh.ListViewActivity
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:21:9-23:61
+	android:label
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:23:13-59
+	android:name
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:22:13-45
+activity#com.syz.pullrefresh.RecyclerViewActivity
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:24:9-26:65
+	android:label
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:26:13-63
+	android:name
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:25:13-49
+activity#com.syz.pullrefresh.GridViewAtivity
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:27:9-29:61
+	android:label
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:29:13-59
+	android:name
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:28:13-44
+activity#com.syz.pullrefresh.SwipeListViewActivity
+ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:30:9-32:67
+	android:label
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:32:13-65
+	android:name
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml:31:13-50
+uses-sdk
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+MERGED from [:commonPullToRefresh_Lib] /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullToRefresh_Lib/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:commonPullToRefresh_Lib] /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullToRefresh_Lib/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/c7eff5c5c9323ee48e5e249182bf7d55/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/c7eff5c5c9323ee48e5e249182bf7d55/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/12c4aec5601a423060ee3419a2f47b17/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/12c4aec5601a423060ee3419a2f47b17/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/4bb6da88be762ca605af96189402493f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/4bb6da88be762ca605af96189402493f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/3d7c88d7642208fef206421afdb54b35/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/3d7c88d7642208fef206421afdb54b35/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/8e0d2587cd46d07fc1cbdc0154b34ad8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/8e0d2587cd46d07fc1cbdc0154b34ad8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/66378ae9c54668fed9ed3b8b7a4e1d40/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/66378ae9c54668fed9ed3b8b7a4e1d40/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/2ed05f6505f5ef4a1cb1444916a7ace0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/2ed05f6505f5ef4a1cb1444916a7ace0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/135e0bf673a84dba19770e61b5304ecd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/135e0bf673a84dba19770e61b5304ecd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/b17cfb9defa36b43819d1eaea8e9e0e6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/b17cfb9defa36b43819d1eaea8e9e0e6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/093c7c263ac04b043270d7383af54c41/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/093c7c263ac04b043270d7383af54c41/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/9213e4083f0ff7f13b896328981996a4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/9213e4083f0ff7f13b896328981996a4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/25b7664f84b620370b2e7b68c3878b16/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/25b7664f84b620370b2e7b68c3878b16/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/8ac9561c1e9f21653c9e045e3b623095/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/8ac9561c1e9f21653c9e045e3b623095/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/28944f35e9c0e812c8482c83d4c964db/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/28944f35e9c0e812c8482c83d4c964db/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/f4556b0c3f652373ed3c30b4f158e7e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/f4556b0c3f652373ed3c30b4f158e7e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/0779b5e0ff09d54d6910a5c1874820b0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/0779b5e0ff09d54d6910a5c1874820b0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/1ed31bf304432f8c38893648c59b6363/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/1ed31bf304432f8c38893648c59b6363/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/bc4f4a58797bdb5321e9d94dfde9ee79/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/bc4f4a58797bdb5321e9d94dfde9ee79/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/f92b33eb819b081b3c2fb16609077664/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/f92b33eb819b081b3c2fb16609077664/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/cb01b9a2c86bf7f57c8a3a8cb78f64e3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/cb01b9a2c86bf7f57c8a3a8cb78f64e3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/a8bfc1f7a52e008725a3d4cc8f850d15/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/a8bfc1f7a52e008725a3d4cc8f850d15/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/24c5f4c3f0d5db1217829305592873af/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/tom/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/24c5f4c3f0d5db1217829305592873af/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/4a38c4f9c456f190cf3ad84c52308fd2/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/tom/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/4a38c4f9c456f190cf3ad84c52308fd2/AndroidManifest.xml:20:5-44
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+		ADDED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml
+		INJECTED from /Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/src/main/AndroidManifest.xml

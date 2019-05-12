@@ -3,6 +3,7 @@ package com.smile.guodian.ui.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cjj.MaterialRefreshLayout;
 import com.google.gson.Gson;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
@@ -27,10 +30,16 @@ import com.smile.guodian.ui.adapter.ProductAdapter;
 import com.smile.guodian.utils.ToastUtil;
 import com.smile.guodian.widget.DataGenerator;
 import com.smile.guodian.widget.ProductGenerator;
+import com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout;
+import com.syz.commonpulltorefresh.lib.PtrDefaultHandler;
+import com.syz.commonpulltorefresh.lib.PtrFrameLayout;
+import com.syz.commonpulltorefresh.lib.loadmore.GridViewWithHeaderAndFooter;
+import com.syz.commonpulltorefresh.lib.loadmore.OnLoadMoreListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +49,8 @@ import butterknife.OnClick;
 
 public class ProductActivity extends BaseActivity {
 
-    @BindView(R.id.product_content)
-    GridView content;
+    //    @BindView(R.id.product_content)
+//    GridView content;
     @BindView(R.id.product_title)
     TextView title;
     @BindView(R.id.product_back)
@@ -52,6 +61,12 @@ public class ProductActivity extends BaseActivity {
     RelativeLayout head;
     @BindView(R.id.top_tab_layout)
     TabLayout tabLayout;
+    @BindView(R.id.test_grid_view)
+    GridViewWithHeaderAndFooter content;
+    @BindView(R.id.test_grid_view_frame)
+    PtrClassicFrameLayout frameLayout;
+    Handler handler = new Handler();
+
 
     private List<ProductCategory> categories;
 
@@ -73,8 +88,9 @@ public class ProductActivity extends BaseActivity {
     private int page = 1;
     private String name;
 
-    private List<ProductGood> goodList;
+    private List<ProductGood> goodList = new ArrayList<>();
     private String cat_id;
+    ProductAdapter adapter;
 
     @Override
     protected void init() {
@@ -84,23 +100,8 @@ public class ProductActivity extends BaseActivity {
         if (type == 4) {
             tabLayout.setVisibility(View.GONE);
         }
-
-//        content.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                if (firstVisibleItem == (totalItemCount - visibleItemCount) && cat_id != null) {
-//
-//                    page++;
-//                    initData(cat_id);
-//
-//                }
-//            }
-//        });
+        adapter = new ProductAdapter(goodList, this, name);
+        content.setAdapter(adapter);
 
         webView.getSettings().setJavaScriptEnabled(true);
         title.setText(name);
@@ -130,7 +131,46 @@ public class ProductActivity extends BaseActivity {
                 });
             }
         });
-        initData("1");
+
+
+        frameLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+
+            @Override
+            public void loadMore() {
+                page++;
+                initData(cat_id);
+            }
+        });
+
+        frameLayout.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+//                initData("1");
+                frameLayout.autoRefresh(true);
+            }
+        }, 150);
+
+        frameLayout.setPtrHandler(new PtrDefaultHandler() {
+
+            @Override
+            public void onRefreshBegin(final PtrFrameLayout frame) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        goodList.clear();
+                        page = 1;
+                        initData("1");
+//                        mData.clear();
+//                        for (int i = 0; i < 40; i++) {
+//                            mData.add(new String("GridView item  ——" + i));
+//                        }
+//
+                    }
+                }, 1000);
+            }
+        });
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -138,6 +178,7 @@ public class ProductActivity extends BaseActivity {
                 System.out.println(tab.getPosition());
 //                if(tab.getPosition()!=0)
                 page = 1;
+                goodList.clear();
                 for (int i = 0; i < tabLayout.getTabCount(); i++) {
                     View view = tabLayout.getTabAt(i).getCustomView();
                     ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
@@ -168,6 +209,7 @@ public class ProductActivity extends BaseActivity {
 
             }
         });
+
     }
 
     public void initData(String cat_id) {
@@ -182,7 +224,10 @@ public class ProductActivity extends BaseActivity {
             public void onResponse(String response) {
                 Gson gson = new Gson();
                 ProductBean productBean = gson.fromJson(response, ProductBean.class);
-                goodList = productBean.getData().getGoodsList();
+                List<ProductGood> goods = productBean.getData().getGoodsList();
+                for (int i = 0; i < goods.size(); i++) {
+                    goodList.add(goods.get(i));
+                }
                 show();
                 categories = productBean.getData().getCategoryList();
                 if (!flag) {
@@ -203,8 +248,10 @@ public class ProductActivity extends BaseActivity {
 
 
     public void show() {
-        ProductAdapter adapter = new ProductAdapter(goodList, this, name);
-        content.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+        frameLayout.refreshComplete();
+        frameLayout.setLoadMoreEnable(true);
 
     }
 

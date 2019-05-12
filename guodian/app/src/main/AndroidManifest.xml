@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.smile.guodian.ui.activity.SplashActivity"
+            android:name="com.smile.guodian.ui.activity.GuideActivity"
             android:theme="@style/Full">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name="com.smile.guodian.ui.activity.DetailActivity"></activity>
-        <activity
-            android:name="com.smile.guodian.ui.activity.GuideActivity"
-            android:theme="@style/Full"></activity>
+        <!--<activity-->
+        <!--android:name="com.smile.guodian.ui.activity.GuideActivity"-->
+        <!--android:theme="@style/Full"></activity>-->
         <activity android:name="com.smile.guodian.ui.activity.MainActivity"></activity>
         <activity android:name="com.smile.guodian.ui.activity.MyBrowserActivity" />
         <activity android:name="com.smile.guodian.ui.activity.MyCollectionActivity" />

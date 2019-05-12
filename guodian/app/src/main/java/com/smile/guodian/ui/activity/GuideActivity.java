@@ -81,12 +81,10 @@ public class GuideActivity extends BaseActivity {
     }
 
 
-
     /**
      * 初始化数据
      */
     private void initData() {
-
 
 
         OkHttp.post(this, "http://guodian.staraise.com.cn/Api/index/startBanner", null, new OkCallback() {
@@ -109,7 +107,7 @@ public class GuideActivity extends BaseActivity {
                     MyPagerAdapter adapter = new MyPagerAdapter();
                     imageView.setVisibility(View.GONE);
                     mViewPager.setAdapter(adapter);
-
+                    mViewPager.setOffscreenPageLimit(0);
                     mViewPager.setOnPageChangeListener(new PagePositionLister());
 
                 } catch (JSONException e) {

@@ -10,7 +10,7 @@
         <item name="colorControlNormal">@color/font_black_color</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@drawable/splash</item>
+
     </style>
 
     <style name="date_picker_dialog" parent="android:style/Theme.Dialog">
@@ -40,6 +40,7 @@
         <item name="colorControlNormal">@color/font_black_color</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
 </resources>

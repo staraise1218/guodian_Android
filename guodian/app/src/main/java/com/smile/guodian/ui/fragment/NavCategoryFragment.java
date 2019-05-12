@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -193,6 +194,13 @@ public class NavCategoryFragment extends BaseFragment {
                 getContext().startActivity(intent);
             }
         });
+
+//        mRefreshLaout.setMaterialRefreshListener(new MaterialRefreshListener() {
+//            @Override
+//            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+//                materialRefreshLayout.autoRefreshLoadMore();
+//            }
+//        });
 
     }
 

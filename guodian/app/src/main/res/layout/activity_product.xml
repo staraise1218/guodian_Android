@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white">
 
     <WebView
-        android:layout_below="@+id/product_head"
-        android:visibility="gone"
         android:id="@+id/web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
-
+        android:layout_height="match_parent"
+        android:layout_below="@+id/product_head"
+        android:visibility="gone"></WebView>
 
 
     <RelativeLayout
-        android:background="@color/white"
         android:id="@+id/product_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingTop="30dp">
 
         <ImageView
@@ -48,22 +48,51 @@
     </RelativeLayout>
 
     <android.support.design.widget.TabLayout
+        android:id="@+id/top_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_below="@+id/product_head"
         android:background="@color/white"
-        android:id="@+id/top_tab_layout"
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@android:color/black"
-        app:tabTextColor="@android:color/darker_gray"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+        app:tabTextColor="@android:color/darker_gray">
 
     </android.support.design.widget.TabLayout>
+
+
+    <com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout
+        android:id="@+id/test_grid_view_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_tab_layout"
+        android:background="#f0f0f0"
+        cube_ptr:ptr_duration_to_close="200"
+        cube_ptr:ptr_duration_to_close_header="700"
+        cube_ptr:ptr_keep_header_when_refresh="true"
+        cube_ptr:ptr_pull_to_fresh="false"
+        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+        cube_ptr:ptr_resistance="1.8">
+
+        <com.syz.commonpulltorefresh.lib.loadmore.GridViewWithHeaderAndFooter
+            android:id="@+id/test_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:choiceMode="singleChoice"
+            android:divider="#b0b0b0"
+            android:dividerHeight="0.1dp"
+            android:fadingEdge="none"
+            android:numColumns="2"
+            android:scrollbarStyle="outsideOverlay" />
+    </com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout>
+
 
     <GridView
         android:id="@+id/product_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/top_tab_layout"
-        android:numColumns="2"></GridView>
+        android:layout_below="@+id/product_head"
+        android:numColumns="2"
+        android:visibility="gone"></GridView>
 
 </RelativeLayout>

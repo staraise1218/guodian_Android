@@ -1,0 +1,4 @@
+#Sat May 11 23:19:40 CST 2019
+base.0=/Users/tom/Documents/GitHub/guodian_Android/CommonPullRefreshDemo/commonPullRefreshDemo/build/intermediates/transforms/dexMerger/debug/1
+path.0=classes.dex
+renamed.0=classes.dex

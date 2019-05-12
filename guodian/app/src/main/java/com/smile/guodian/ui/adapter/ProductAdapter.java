@@ -18,6 +18,10 @@ import butterknife.BindView;
 
 public class ProductAdapter extends BaseAdapter {
 
+    public List<ProductGood> getGoodList() {
+        return goodList;
+    }
+
     private List<ProductGood> goodList;
     private Context context;
     private String name;
