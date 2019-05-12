@@ -66,7 +66,7 @@ public class ResetPassword extends BaseActivity {
 //        params.put("mobile", phon);
 //        params.put("scene", "1");
 
-        OkHttp.post(this, HttpContants.BASE_URL + "/api/auth/sendMobileCode?mobile="+phon+"&scene=1", params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/api/auth/sendMobileCode?mobile=" + phon + "&scene=1", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
                 JSONObject object = null;
@@ -168,7 +168,7 @@ public class ResetPassword extends BaseActivity {
                 public void run() {
                     duration--;
                     System.out.println(duration);
-                    reset.setText("重新获取（" + duration + "）");
+                    reset.setText("重新获取(" + duration + ")");
                     if (duration < 2) {
                         timer.cancel();
 //                        jumpActivity();

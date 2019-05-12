@@ -1,5 +1,7 @@
 package com.smile.guodian.ui.activity.me;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -7,17 +9,23 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.smile.guodian.R;
+import com.smile.guodian.UserDao;
 import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.User;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.BaseActivity;
+import com.smile.guodian.ui.activity.LoginActivity;
+import com.smile.guodian.ui.activity.MainActivity;
 import com.smile.guodian.ui.activity.RegisterActivity;
 import com.smile.guodian.utils.ToastUtil;
 
@@ -27,6 +35,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,9 +51,12 @@ public class BindPhoneActivity extends BaseActivity {
     TextView tip;
     @BindView(R.id.bindphone_phone)
     EditText phone;
+    @BindView(R.id.bindphone_getVerification)
+    TextView reset;
     @BindView(R.id.bindphone_commit)
     Button commit;
-
+    private int duration = 60;      //倒计时3秒
+    Timer timer = new Timer();
     private String code;
 
     @OnClick({R.id.bindphone_can_not, R.id.bindphone_back, R.id.bindphone_commit, R.id.bindphone_getVerification})
@@ -53,15 +66,39 @@ public class BindPhoneActivity extends BaseActivity {
                 BindPhoneActivity.this.finish();
                 break;
             case R.id.bindphone_getVerification:
+                reset.setEnabled(false);
+                timer.schedule(task, 1000, 1000);
                 getVerif();
                 break;
             case R.id.bindphone_commit:
-
+                bindPhone();
                 break;
+
 
         }
     }
 
+
+    private TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+
+            runOnUiThread(new Runnable() {      // UI thread
+                @Override
+                public void run() {
+                    duration--;
+//                    System.out.println(duration);
+                    reset.setText("重新获取(" + duration + ")");
+                    if (duration < 2) {
+                        timer.cancel();
+                        reset.setEnabled(true);
+//                        jumpActivity();
+                    }
+                }
+            });
+
+        }
+    };
 
     @Override
     protected void init() {
@@ -100,6 +137,47 @@ public class BindPhoneActivity extends BaseActivity {
     @Override
     protected int getContentResourseId() {
         return R.layout.activity_bindphone;
+    }
+
+
+    public void bindPhone() {
+
+        Map<String, String> params = new HashMap<>();
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/auth/bindMobile" + "?mobile=" + phone + "&code=" + code + "&openid=" + "&nicname=" + user.getNickname() + "&headpic=" + user.getHead_pic(), params, new OkCallback() {
+            @Override
+            public void onResponse(String response) {
+
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JSONObject result = null;
+                try {
+                    result = object.getJSONObject("data");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Gson gson = new Gson();
+                User user = gson.fromJson(result.toString(), User.class);
+                user.setId(1L);
+                UserDao userDao = BaseApplication.getDaoSession().getUserDao();
+                if (userDao.loadAll().size() > 0)
+                    userDao.update(user);
+                else {
+                    userDao.insert(user);
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(String state, String msg) {
+                ToastUtil.showShortToast(BindPhoneActivity.this, msg);
+            }
+        });
     }
 
 

@@ -7,10 +7,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_16"
         android:text="热门搜索"
-        android:textColor="@color/black"
+        android:textColor="#323232"
         android:textSize="@dimen/sp_10" />
 
     <com.smile.guodian.widget.HomeGridView
@@ -18,9 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_5"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_5"
-        android:layout_marginBottom="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_30"
         android:numColumns="3"></com.smile.guodian.widget.HomeGridView>
 
 

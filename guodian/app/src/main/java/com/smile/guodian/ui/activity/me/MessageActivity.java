@@ -1,6 +1,7 @@
 package com.smile.guodian.ui.activity.me;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -111,7 +112,7 @@ public class MessageActivity extends BaseActivity {
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       popupWindow.dismiss();
+                        popupWindow.dismiss();
                     }
                 });
 
@@ -121,6 +122,8 @@ public class MessageActivity extends BaseActivity {
                 popupWindow = new PopupWindow(nameView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
                 popupWindow.setOutsideTouchable(true);
+                popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
                 parent = LayoutInflater.from(this).inflate(R.layout.activity_person, null);
                 popupWindow.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
                 //popupWindow在弹窗的时候背景半透明
@@ -173,6 +176,10 @@ public class MessageActivity extends BaseActivity {
                 break;
             case R.id.message_birthday:
                 pvCustomLunar.show();
+                break;
+            case R.id.message_phone:
+                Intent intent = new Intent(MessageActivity.this, BindPhoneActivity.class);
+                startActivity(intent);
                 break;
         }
     }

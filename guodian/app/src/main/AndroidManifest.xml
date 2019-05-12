@@ -45,8 +45,11 @@
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.me.PersonActivity" />
         <activity android:name=".ui.activity.me.PersonNameActivity" />
-        <activity android:name=".ui.activity.me.MessageActivity" />
+        <activity
+            android:name=".ui.activity.me.MessageActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.ClipImageActivity" />
+        <activity android:name=".ui.activity.me.BindPhoneActivity" />
     </application>
 
 </manifest>

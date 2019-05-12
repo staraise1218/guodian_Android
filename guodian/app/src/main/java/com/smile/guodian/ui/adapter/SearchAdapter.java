@@ -177,9 +177,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
             child.setLayoutParams(params);
             child.setTag(false);
-            child.setBackgroundColor(Color.parseColor("#c3c3c3"));
+            child.setBackgroundColor(Color.parseColor("#F5F5F5"));
             child.setText(list[i]);
-//            child.setTextColor(Color.BLACK);
+            child.setTextColor(Color.parseColor("#505050"));
             child.setTextSize(px2sp(context, 30));
             child.setPadding(dip2px(context, 10), dip2px(context, 10), dip2px(context, 10), dip2px(context, 10));
             child.setOnClickListener(new View.OnClickListener() {

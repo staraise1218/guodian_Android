@@ -25,16 +25,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_40"
-            android:text="确定要清空所有的历史记录吗？"
+            android:layout_marginTop="@dimen/dp_28"
+            android:text="若您的手机号无法接收短信验证码"
             android:textSize="@dimen/sp_12" />
 
         <TextView
-            android:layout_width="@dimen/dp_1"
-            android:layout_height="@dimen/dp_35"
-            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="#dcdcdc" />
+            android:layout_marginTop="@dimen/dp_54"
+            android:text="请致电客服电话010-80456828"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
             android:layout_width="match_parent"
@@ -54,13 +55,20 @@
             android:textSize="@dimen/sp_10" />
 
         <TextView
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="@dimen/dp_35"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#dcdcdc" />
+
+        <TextView
             android:id="@+id/dialog_ok"
             android:layout_width="@dimen/dp_130"
             android:layout_height="@dimen/dp_36"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:gravity="center"
-            android:text="确定"
+            android:text="呼叫"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_12" />
 

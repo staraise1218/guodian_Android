@@ -65,7 +65,6 @@ public class FlowLayout extends ViewGroup {
 //        }
 
 
-        System.out.println(lines);
 
         if (lines >= 3) {
             heightNeed = lineHeight * 4;

@@ -54,10 +54,10 @@ public class LoginActivity extends BaseActivity {
     @OnClick({R.id.login_forget, R.id.login_show_password})
     public void clickView(View view) {
         switch (view.getId()) {
-            case R.id.login_forget:
-                Intent intent = new Intent(LoginActivity.this, ForgetPassword.class);
-                startActivity(intent);
-                break;
+//            case R.id.login_forget:
+//                Intent intent = new Intent(LoginActivity.this, ForgetPassword.class);
+//                startActivity(intent);
+//                break;
             case R.id.login_show_password:
                 if (!hiddenPassword.isChecked()) {
                     isHidden = false;
