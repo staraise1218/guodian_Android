@@ -120,7 +120,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onResponse(String response) {
 
-                System.out.println(response);
+//                System.out.println(response);
                 Gson gson = new Gson();
                 JSONObject ob = null;
                 JSONObject data = null;

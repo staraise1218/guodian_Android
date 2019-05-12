@@ -118,6 +118,15 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             recyclerViewHolder.total.setText("共有" + resultEntity.getTotal_num() + "款产品");
             ProductAdapter adapter = new ProductAdapter(resultEntity.getList(), context, "");
             recyclerViewHolder.content.setAdapter(adapter);
+            recyclerViewHolder.content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("goodsId", resultEntity.getList().get(position).getGoods_id());
+                    context.startActivity(intent);
+                }
+            });
         }
 
         if (viewHolder instanceof HotViewHolder) {

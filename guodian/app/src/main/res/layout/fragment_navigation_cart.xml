@@ -14,9 +14,9 @@
 
         <ImageView
             android:id="@+id/bag_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="15dp"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_15"
             android:background="@drawable/back" />
 
         <TextView
@@ -25,14 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp_16" />
 
         <ImageView
             android:id="@+id/bag_search"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="@dimen/dp_15"
             android:background="@drawable/search"
             android:textColor="#000000"
             android:visibility="gone" />

@@ -38,6 +38,16 @@
             android:textColor="#000000" />
     </RelativeLayout>
 
+    <com.smile.guodian.widget.HorizontalListView
+        android:id="@+id/product_tip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_26"
+        android:layout_below="@+id/product_head"
+        android:layout_marginBottom="@dimen/dp_22">
+
+    </com.smile.guodian.widget.HorizontalListView>
+
+
     <android.support.design.widget.TabLayout
         android:id="@+id/top_tab_layout"
         android:layout_width="match_parent"
@@ -45,6 +55,7 @@
         android:layout_below="@+id/product_head"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
+        android:visibility="gone"
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@android:color/black"
         app:tabTextColor="@android:color/darker_gray">
@@ -56,7 +67,7 @@
         android:id="@+id/test_grid_view_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/top_tab_layout"
+        android:layout_below="@+id/product_tip"
         android:background="#f0f0f0"
         cube_ptr:ptr_duration_to_close="200"
         cube_ptr:ptr_duration_to_close_header="700"

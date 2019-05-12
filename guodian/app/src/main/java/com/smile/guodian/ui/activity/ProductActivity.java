@@ -26,9 +26,12 @@ import com.smile.guodian.model.entity.ProductCategory;
 import com.smile.guodian.model.entity.ProductGood;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.adapter.ItemTipAdapter;
 import com.smile.guodian.ui.adapter.ProductAdapter;
+import com.smile.guodian.ui.adapter.search.TextAdapter;
 import com.smile.guodian.utils.ToastUtil;
 import com.smile.guodian.widget.DataGenerator;
+import com.smile.guodian.widget.HorizontalListView;
 import com.smile.guodian.widget.ProductGenerator;
 import com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout;
 import com.syz.commonpulltorefresh.lib.PtrDefaultHandler;
@@ -38,6 +41,7 @@ import com.syz.commonpulltorefresh.lib.loadmore.OnLoadMoreListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,6 +70,8 @@ public class ProductActivity extends BaseActivity {
     @BindView(R.id.test_grid_view_frame)
     PtrClassicFrameLayout frameLayout;
     Handler handler = new Handler();
+    @BindView(R.id.product_tip)
+    HorizontalListView horizontalListView;
 
 
     private List<ProductCategory> categories;
@@ -89,8 +95,9 @@ public class ProductActivity extends BaseActivity {
     private String name;
 
     private List<ProductGood> goodList = new ArrayList<>();
-    private String cat_id;
+    private String cat_id="1";
     ProductAdapter adapter;
+    private int selectPosition = 0;
 
     @Override
     protected void init() {
@@ -109,10 +116,6 @@ public class ProductActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 webView.setVisibility(View.VISIBLE);
-//                content.setVisibility(View.GONE);
-//                head.setVisibility(View.GONE);
-//                tabLayout.setVisibility(View.GONE);
-                System.out.println(goodList.get(position).getGoods_id());
                 webView.loadUrl("http://guodian.staraise.com.cn/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
                 webView.setOnKeyListener(new View.OnKeyListener() {
                     @Override
@@ -168,6 +171,21 @@ public class ProductActivity extends BaseActivity {
 //
                     }
                 }, 1000);
+            }
+        });
+
+
+        horizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+//                TextView textView = view.findViewById(R.id.item_text);
+//                textView.setTextColor(Color.parseColor("#FF9F4D"));
+                selectPosition = position;
+                page = 1;
+                goodList.clear();
+                cat_id = categories.get(position).getId() + "";
+                initData(cat_id);
             }
         });
 
@@ -230,6 +248,8 @@ public class ProductActivity extends BaseActivity {
                 }
                 show();
                 categories = productBean.getData().getCategoryList();
+
+                horizontalListView.setAdapter(new TextAdapter(categories, ProductActivity.this, selectPosition));
                 if (!flag) {
                     flag = true;
                     for (int i = 0; i < categories.size(); i++) {
@@ -245,6 +265,7 @@ public class ProductActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         if (webView.getVisibility() == View.GONE) {

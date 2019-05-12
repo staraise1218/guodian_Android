@@ -52,7 +52,7 @@ public class WebActivity extends BaseActivity {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setDomStorageEnabled(true);
         if (type > -1) {
-
+            head.setVisibility(View.VISIBLE);
 //            Toast.makeText(this, "123" + url, Toast.LENGTH_LONG).show();
             if (type == 2) {
                 url = "http://guodian.staraise.com.cn/page/article.html?type=" + type;
