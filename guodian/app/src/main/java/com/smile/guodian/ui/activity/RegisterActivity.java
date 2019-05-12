@@ -11,10 +11,15 @@ import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +53,8 @@ public class RegisterActivity extends BaseActivity {
     Button commit;
     @BindView(R.id.register_show_password)
     CheckBox showPassword;
-    @BindView(R.id.register_tips)
-    TextView tip;
+//    @BindView(R.id.register_tips)
+//    TextView tip;
 
     private boolean passworldHiden = false;
 
@@ -76,10 +81,52 @@ public class RegisterActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.register_can_not:
+                final View messageView = LayoutInflater.from(this).inflate(R.layout.dialog_message, null);
+                TextView ok = (TextView) messageView.findViewById(R.id.dialog_ok);
+                TextView cancel = (TextView) messageView.findViewById(R.id.dialog_cancel);
+                TextView close = (TextView) messageView.findViewById(R.id.dialog_close);
+                final PopupWindow popupWindow = new PopupWindow(messageView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
+                popupWindow.setOutsideTouchable(true);
+
+                View parent = LayoutInflater.from(this).inflate(R.layout.activity_register, null);
+                popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+                //popupWindow在弹窗的时候背景半透明
+                final WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 0.5f;
+                getWindow().setAttributes(params);
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        params.alpha = 1.0f;
+                        getWindow().setAttributes(params);
+                    }
+                });
+
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+
                 break;
             case R.id.register_show_password:
 
-                if (showPassword.isChecked()) {
+                if (!showPassword.isChecked()) {
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -194,10 +241,10 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        SpannableString spannableString = new SpannableString("点击注册意味着您接受《用户协议》和《隐私保护》");
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#00BFFF")), 10, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#00BFFF")), 17, 23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tip.setText(spannableString);
+//        SpannableString spannableString = new SpannableString("点击注册意味着您接受《用户协议》和《隐私保护》");
+//        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#00BFFF")), 10, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#00BFFF")), 17, 23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        tip.setText(spannableString);
 
 
         phone.addTextChangedListener(new TextWatcher() {
@@ -278,7 +325,6 @@ public class RegisterActivity extends BaseActivity {
                 @Override
                 public void run() {
                     duration--;
-                    System.out.println(duration);
                     getVerification.setText("重新获取（" + duration + "）");
                     if (duration < 2) {
                         timer.cancel();

@@ -9,7 +9,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_15"
-        android:background="#E6E6E6"
+        android:background="#F9F9F9"
         android:visibility="gone" />
 
     <TextView
@@ -26,21 +26,20 @@
         android:visibility="gone" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dp_340"
         android:layout_height="@dimen/dp_1"
         android:layout_below="@+id/item_browser_time"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/dp_25"
-        android:layout_marginRight="@dimen/dp_25"
-        android:background="#E6E6E6" />
+        android:background="#F9F9F9" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="125dp"
         android:layout_below="@+id/item_browser_time"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_1"
         android:orientation="horizontal"
-        android:paddingLeft="25dp">
+        android:paddingLeft="@dimen/dp_6">
 
 
         <CheckBox
@@ -48,58 +47,57 @@
             android:layout_width="@dimen/dp_12"
             android:layout_height="@dimen/dp_12"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/dp_25"
+            android:layout_marginLeft="@dimen/dp_9"
+            android:layout_marginRight="@dimen/dp_6"
             android:background="@drawable/round_check"
             android:button="@null"
             android:visibility="gone" />
 
         <ImageView
             android:id="@+id/item_browser_img"
-            android:layout_width="128dp"
-            android:layout_height="98dp"
-            android:layout_marginTop="@dimen/dp_15" />
+            android:layout_width="@dimen/dp_82"
+            android:layout_height="@dimen/dp_82"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_24" />
 
         <LinearLayout
-            android:layout_width="206dp"
+            android:layout_width="@dimen/dp_239"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_18"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/item_browser_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:minLines="2"
-                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/dp_32"
+                android:textColor="#434343"
                 android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/item_browser_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="10sp"
-                android:visibility="gone" />
+                android:layout_marginTop="@dimen/dp_2"
+                android:textColor="#434343"
+                android:textSize="@dimen/sp_10" />
 
             <TextView
                 android:id="@+id/item_browser_cs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginTop="@dimen/dp_2"
                 android:text="成色：未使用"
-                android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textColor="#434343"
+                android:textSize="@dimen/sp_10" />
 
             <TextView
                 android:id="@+id/item_browser_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginTop="@dimen/dp_2"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="@dimen/sp_12" />
         </LinearLayout>
     </LinearLayout>
 

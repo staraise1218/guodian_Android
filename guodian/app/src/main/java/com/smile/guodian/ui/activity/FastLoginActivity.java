@@ -6,11 +6,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.smile.guodian.R;
@@ -40,7 +46,7 @@ public class FastLoginActivity extends BaseActivity {
     @BindView(R.id.fast_login_password)
     EditText verify;
     @BindView(R.id.reset_password)
-    Button getVerify;
+    TextView getVerify;
     @BindView(R.id.fast_login_commit)
     Button commit;
     @BindView(R.id.webView)
@@ -51,7 +57,7 @@ public class FastLoginActivity extends BaseActivity {
     Timer timer = new Timer();
     private int duration = 60;
 
-    @OnClick({R.id.fast_login_back, R.id.fast_login_commit, R.id.reset_password})
+    @OnClick({R.id.fast_login_back, R.id.fast_login_commit, R.id.reset_password, R.id.fast_login_no_password})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.fast_login_back:
@@ -68,6 +74,50 @@ public class FastLoginActivity extends BaseActivity {
                 timer.schedule(task, 1000, 1000);
                 getVerify.setEnabled(false);
                 getVerif();
+                break;
+            case R.id.fast_login_no_password:
+                final View messageView = LayoutInflater.from(this).inflate(R.layout.dialog_message, null);
+                TextView ok = (TextView) messageView.findViewById(R.id.dialog_ok);
+                TextView cancel = (TextView) messageView.findViewById(R.id.dialog_cancel);
+                TextView close = (TextView) messageView.findViewById(R.id.dialog_close);
+                final PopupWindow popupWindow = new PopupWindow(messageView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
+                popupWindow.setOutsideTouchable(true);
+
+                View parent = LayoutInflater.from(this).inflate(R.layout.activity_register, null);
+                popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+                //popupWindow在弹窗的时候背景半透明
+                final WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 0.5f;
+                getWindow().setAttributes(params);
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        params.alpha = 1.0f;
+                        getWindow().setAttributes(params);
+                    }
+                });
+
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+
                 break;
         }
 
@@ -154,7 +204,7 @@ public class FastLoginActivity extends BaseActivity {
                 public void run() {
                     duration--;
 //                    System.out.println(duration);
-                    getVerify.setText("重新获取（" + duration + "）");
+                    getVerify.setText("重新获取(" + duration + ")");
                     if (duration < 2) {
                         getVerify.setEnabled(true);
                         timer.cancel();
@@ -191,7 +241,8 @@ public class FastLoginActivity extends BaseActivity {
                 }
                 try {
                     code = data.getString("code");
-                    handler.sendEmptyMessage(1);/**/
+                    ToastUtil.showShortToast(FastLoginActivity.this, code);
+//                    handler.sendEmptyMessage(1);/**/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

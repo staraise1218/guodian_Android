@@ -12,10 +12,10 @@
 
         <ImageView
             android:id="@+id/collection_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="11dp"
             android:background="@drawable/back" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="我的收藏"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

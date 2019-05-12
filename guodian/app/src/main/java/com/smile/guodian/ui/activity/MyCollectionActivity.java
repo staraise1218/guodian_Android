@@ -114,7 +114,6 @@ public class MyCollectionActivity extends BaseActivity {
                     }
 
                     collection.setData(myCollections);
-                    System.out.println(collection.toString());
                     mInventoryAdapter = new InventoryAdapter(MyCollectionActivity.this, collection.getData());
                     recycler_view_list.setAdapter(mInventoryAdapter);
                     mInventoryAdapter.setOnDeleteClickListener(new InventoryAdapter.OnDeleteClickLister() {
@@ -146,7 +145,7 @@ public class MyCollectionActivity extends BaseActivity {
 
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
+//                System.out.println(response);
 
                 JSONObject object = null;
                 try {

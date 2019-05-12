@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.smile.guodian.R;
@@ -37,12 +42,12 @@ public class ResetPassword extends BaseActivity {
     @BindView(R.id.reset_password_commit)
     Button commit;
     private int duration = 60;      //倒计时3秒
-    Timer timer = new Timer();
+    Timer timer;
     private String code;
     private String phone;
 
 
-    @OnClick({R.id.reset_password_commit, R.id.reset_password_back, R.id.reset_password})
+    @OnClick({R.id.reset_password_commit, R.id.reset_password_back, R.id.reset_password, R.id.reset_password_title})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.reset_password_back:
@@ -52,8 +57,53 @@ public class ResetPassword extends BaseActivity {
                 resetPassword();
                 break;
             case R.id.reset_password:
+                timer = new Timer();
                 timer.schedule(task, 1000, 1000);
                 getVerif();
+                break;
+            case R.id.reset_password_title:
+                final View messageView = LayoutInflater.from(this).inflate(R.layout.dialog_message, null);
+                TextView ok = (TextView) messageView.findViewById(R.id.dialog_ok);
+                TextView cancel = (TextView) messageView.findViewById(R.id.dialog_cancel);
+                TextView close = (TextView) messageView.findViewById(R.id.dialog_close);
+                final PopupWindow popupWindow = new PopupWindow(messageView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
+                popupWindow.setOutsideTouchable(true);
+
+                View parent = LayoutInflater.from(this).inflate(R.layout.activity_register, null);
+                popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+                //popupWindow在弹窗的时候背景半透明
+                final WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 0.5f;
+                getWindow().setAttributes(params);
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        params.alpha = 1.0f;
+                        getWindow().setAttributes(params);
+                    }
+                });
+
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+
                 break;
         }
     }
@@ -100,6 +150,8 @@ public class ResetPassword extends BaseActivity {
     public void resetPassword() {
 
         String pwd = newPwd.getText().toString();
+        code = verify.getText().toString();
+        pwd = newPwd.getText().toString();
 
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phone);

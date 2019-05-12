@@ -8,65 +8,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:paddingEnd="25dp"
-        android:paddingStart="25dp"
-        >
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/tv_quantity"
-            android:layout_width="80dp"
-            android:layout_height="128dp"
+            android:layout_width="@dimen/dp_85"
+            android:layout_height="@dimen/dp_85"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            />
+            android:layout_marginLeft="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_20" />
 
         <LinearLayout
-            android:layout_marginLeft="5dp"
+            android:layout_width="@dimen/dp_239"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_28"
             android:layout_toRightOf="@+id/tv_quantity"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:layout_width="206dp"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/item_browser_name"
-                android:textSize="10sp"
-                android:textColor="@color/black"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#434343"
+                android:textSize="@dimen/sp_10" />
+
             <TextView
                 android:id="@+id/item_browser_tip"
-                android:textSize="10sp"
-                android:textColor="@color/gray"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="成色未使用"
-                android:id="@+id/item_browser_cs"
-                android:textSize="10sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
+                android:textColor="#434343"
+                android:textSize="@dimen/sp_10" />
 
-                android:id="@+id/item_browser_price"
-                android:textSize="10sp"
-                android:textColor="@color/black"
+            <TextView
+                android:id="@+id/item_browser_cs"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
+                android:text="成色未使用"
+                android:textColor="#434343"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/item_browser_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
+                android:textColor="#434343"
+                android:textSize="@dimen/sp_12" />
         </LinearLayout>
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_delete"
-        android:layout_width="60dp"
-        android:layout_height="128dp"
+        android:layout_width="80dp"
+        android:layout_height="125dp"
         android:background="#D0A97A"
         android:gravity="center"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
         android:text="移除"
         android:textColor="#FFFFFFFF"
-        android:textSize="14sp" />
+        android:textSize="@dimen/sp_12" />
 </LinearLayout>
