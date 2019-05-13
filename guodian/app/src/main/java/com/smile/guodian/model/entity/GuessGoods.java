@@ -1,6 +1,6 @@
 package com.smile.guodian.model.entity;
 
-public class GuessGoods {
+public class GuessGoods  {
     private int goods_id;
     private String goods_name;
     private int store_count;

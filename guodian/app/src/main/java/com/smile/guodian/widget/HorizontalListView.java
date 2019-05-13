@@ -31,27 +31,28 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.Scroller;
 
 public class HorizontalListView extends AdapterView<ListAdapter> {
 
-    public boolean                  mAlwaysOverrideTouch = true;
-    protected ListAdapter           mAdapter;
-    private int                     mLeftViewIndex       = -1;
-    private int                     mRightViewIndex      = 0;
-    protected int                   mCurrentX;
-    protected int                   mNextX;
-    private int                     mMaxX                = Integer.MAX_VALUE;
-    private int                     mDisplayOffset       = 0;
-    protected Scroller              mScroller;
-    private GestureDetector         mGesture;
-    private Queue<View>             mRemovedViewQueue    = new LinkedList<View>();
-    private OnItemSelectedListener  mOnItemSelected;
-    private OnItemClickListener     mOnItemClicked;
+    public boolean mAlwaysOverrideTouch = true;
+    protected ListAdapter mAdapter;
+    private int mLeftViewIndex = -1;
+    private int mRightViewIndex = 0;
+    protected int mCurrentX;
+    protected int mNextX;
+    private int mMaxX = Integer.MAX_VALUE;
+    private int mDisplayOffset = 0;
+    protected Scroller mScroller;
+    private GestureDetector mGesture;
+    private Queue<View> mRemovedViewQueue = new LinkedList<View>();
+    private OnItemSelectedListener mOnItemSelected;
+    private OnItemClickListener mOnItemClicked;
     private OnItemLongClickListener mOnItemLongClicked;
-    private boolean                 mDataChanged         = false;
+    private boolean mDataChanged = false;
 
     public HorizontalListView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -281,8 +282,43 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         requestLayout();
     }
 
+    int lastX = 0;
+    int lastY = 0;
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+
+
+        int x = (int) ev.getRawX();
+        int y = (int) ev.getRawY();
+        int dealtX = 0;
+        int dealtY = 0;
+
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                dealtX = 0;
+                dealtY = 0;
+                // 保证子View能够接收到Action_move事件
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                dealtX += Math.abs(x - lastX);
+                dealtY += Math.abs(y - lastY);
+                if (dealtX >= dealtY) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                } else {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                }
+                lastX = x;
+                lastY = y;
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+
+        }
+
         boolean handled = super.dispatchTouchEvent(ev);
         handled |= mGesture.onTouchEvent(ev);
         return handled;
@@ -290,7 +326,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
     protected boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         synchronized (HorizontalListView.this) {
-            mScroller.fling(mNextX, 0, (int)-velocityX, 0, 0, mMaxX, 0, 0);
+            mScroller.fling(mNextX, 0, (int) -velocityX, 0, 0, mMaxX, 0, 0);
         }
         requestLayout();
 
@@ -320,7 +356,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
                                 float distanceY) {
 
             synchronized (HorizontalListView.this) {
-                mNextX += (int)distanceX;
+                mNextX += (int) distanceX;
             }
             requestLayout();
 
@@ -376,7 +412,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             int top = childPosition[1];
             int bottom = top + child.getHeight();
             viewRect.set(left, top, right, bottom);
-            return viewRect.contains((int)e.getRawX(), (int)e.getRawY());
+            return viewRect.contains((int) e.getRawX(), (int) e.getRawY());
         }
     };
 

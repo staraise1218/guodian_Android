@@ -1,10 +1,12 @@
 package com.smile.guodian.model.impl;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 
 import com.google.gson.Gson;
 import com.smile.guodian.model.HomeLoadModel;
+import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.CategoryList;
 import com.smile.guodian.model.entity.GuessGoods;
 import com.smile.guodian.model.entity.HomeBase;
@@ -28,7 +30,7 @@ import java.util.Map;
 
 public class HomeModelImpl implements HomeLoadModel {
     @Override
-    public void load(final OnLoadListener<HomeTop> listener, Context context, int type) {
+    public void load(final OnLoadListener<HomeTop> listener, final Context context, int type) {
         //这里不调接口，直接返回
 //        if (type == 1) {
 //            listener.onSuccess(getTop());
@@ -40,7 +42,7 @@ public class HomeModelImpl implements HomeLoadModel {
             return;
         }
         Map<String, String> params = new HashMap<>();
-        OkHttp.post(context, "http://guodian.staraise.com.cn/Api/index/index", params, new OkCallback() {
+        OkHttp.post(context, HttpContants.BASE_URL + "/Api/index/index", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
                 JSONArray array = null;
@@ -132,6 +134,12 @@ public class HomeModelImpl implements HomeLoadModel {
 
                     homeTop.setGuessGoodsList(guessGoodsList);
 
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("db", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("guess", array.toString());
+                    editor.commit();
+
+
                     List<HomeBase> list = new ArrayList<>();
                     //list添加轮播图片
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_CAROUSEL, 300));
@@ -148,7 +156,7 @@ public class HomeModelImpl implements HomeLoadModel {
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_LIVE, 12));
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 300));
 
-                     //猜你喜欢
+                    //猜你喜欢
 //                    list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 12));
 
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADER, 300));

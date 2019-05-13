@@ -11,8 +11,7 @@
         android:id="@+id/item_home_product_img"
         android:layout_width="@dimen/dp_121"
         android:layout_height="@dimen/dp_163"
-        android:layout_marginLeft="@dimen/dp_14"
-        android:scaleType="fitXY" />
+        android:layout_marginLeft="@dimen/dp_14" />
 
     <TextView
         android:id="@+id/item_home_product_title"

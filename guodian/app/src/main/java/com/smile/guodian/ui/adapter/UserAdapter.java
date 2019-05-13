@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,11 +16,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.GuessGoods;
 import com.smile.guodian.model.entity.User;
 import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.LoginActivity;
 import com.smile.guodian.ui.activity.SettingActivity;
 import com.smile.guodian.ui.activity.WebActivity;
+import com.smile.guodian.widget.HomeGridView;
 
 import java.util.List;
 
@@ -31,9 +34,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserAdapter extends RecyclerView.Adapter {
 
     private Context context;
+    //    private List<>
+    List<GuessGoods> guessGoodsList;
 
-    public UserAdapter(Context context) {
+    public UserAdapter(Context context, List<GuessGoods> guessGoodsList) {
         this.context = context;
+        this.guessGoodsList = guessGoodsList;
     }
 
     @Override
@@ -114,7 +120,8 @@ public class UserAdapter extends RecyclerView.Adapter {
     }
 
     public class FooterViewHolder extends RecyclerView.ViewHolder {
-
+        @BindView(R.id.user_footer_content)
+        public HomeGridView gridView;
 
         public FooterViewHolder(View itemView) {
             super(itemView);
@@ -147,7 +154,6 @@ public class UserAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         TipViewHolder tipViewHolder;
-        System.out.println("holder--t" + i);
         switch (i) {
             case 0:
                 List<User> users = BaseApplication.getDaoSession().getUserDao().loadAll();
@@ -180,6 +186,23 @@ public class UserAdapter extends RecyclerView.Adapter {
                 tipViewHolder.gridView.setAdapter(new ItemTipAdapter(4, context));
                 break;
 
+            case 4:
+                FooterViewHolder holder = (FooterViewHolder) viewHolder;
+
+                HomeHeaderAdapter headerAdapter = new HomeHeaderAdapter(context);
+                headerAdapter.setGuessGoods(guessGoodsList);
+                holder.gridView.setAdapter(headerAdapter);
+                holder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(context, WebActivity.class);
+                        intent.putExtra("name", guessGoodsList.get(position).getGoods_name());
+                        intent.putExtra("goodsId", guessGoodsList.get(position).getGoods_id() + "");
+                        context.startActivity(intent);
+
+                    }
+                });
+                break;
         }
 
     }

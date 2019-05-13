@@ -24,6 +24,7 @@ import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.RegisterActivity;
+import com.smile.guodian.ui.activity.found.FoundDetailActivity;
 import com.smile.guodian.utils.ToastUtil;
 
 import org.json.JSONException;
@@ -90,6 +91,15 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
 //            holder.give.setBackgroundColor(Color.WHITE);
 //        } else {
 
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FoundDetailActivity.class);
+                intent.putExtra("art_id", finds.get(position).getArticle_id());
+                mContext.startActivity(intent);
+            }
+        });
+
         if (finds.get(position).getIsliked() == 1) {
             holder.give.setChecked(true);
             holder.zan.setTextColor(Color.parseColor("#DDA021"));
@@ -100,15 +110,17 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         }
 
         final TextView textView = holder.zan;
-        final int number = Integer.parseInt(holder.zan.getText().toString());
 
         holder.give.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
-                    int number = Integer.parseInt(holder.zan.getText().toString()) + 1;
-                    System.out.println(number);
+                    int number = 0;
+                    if (holder.zan.getText().toString() != null) {
+                        number = Integer.parseInt(holder.zan.getText().toString());
+                    }
+                    number += 1;
                     holder.zan.setTextColor(Color.parseColor("#DDA021"));
                     holder.zan.setText(number + "");
                     checked(finds.get(position).getArticle_id());

@@ -78,15 +78,25 @@ public class ProductActivity extends BaseActivity {
 
     boolean flag = false;
 
-    @OnClick(R.id.product_back)
-    public void clickView() {
-        if (webView.getVisibility() == View.GONE) {
-            this.finish();
-        } else {
-            webView.setVisibility(View.GONE);
-            content.setVisibility(View.VISIBLE);
-            tabLayout.setVisibility(View.VISIBLE);
+    @OnClick({R.id.product_back, R.id.product_search})
+    public void clickView(View view) {
+
+        switch (view.getId()) {
+            case R.id.product_back:
+                if (webView.getVisibility() == View.GONE) {
+                    this.finish();
+                } else {
+                    webView.setVisibility(View.GONE);
+                    content.setVisibility(View.VISIBLE);
+                    tabLayout.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.product_search:
+                Intent intent = new Intent(ProductActivity.this, SearchActivity.class);
+                startActivity(intent);
+                break;
         }
+
     }
 
     private int type;
@@ -95,7 +105,7 @@ public class ProductActivity extends BaseActivity {
     private String name;
 
     private List<ProductGood> goodList = new ArrayList<>();
-    private String cat_id="1";
+    private String cat_id = "1";
     ProductAdapter adapter;
     private int selectPosition = 0;
 

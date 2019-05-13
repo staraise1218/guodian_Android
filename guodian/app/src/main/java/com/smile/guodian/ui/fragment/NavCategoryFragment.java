@@ -265,7 +265,9 @@ public class NavCategoryFragment extends BaseFragment {
                         }
                         System.out.println(currentPosition);
                         if (currentPosition != 0) {
-                            showCategoryData(currentPosition - 1);
+                            showCategoryData(currentPosition);
+                            second.setVisibility(View.VISIBLE);
+                            sort.setVisibility(View.GONE);
                         } else {
                             showCategoryData(0);
                         }

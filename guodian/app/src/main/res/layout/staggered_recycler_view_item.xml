@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="180dp"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
     android:id="@+id/item_view"
+    android:layout_width="@dimen/dp_165"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_5"
+    android:layout_marginRight="@dimen/dp_5"
     android:orientation="vertical">
 
     <ImageView
@@ -14,40 +14,43 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:layout_below="@+id/item_img"
-        android:text="待评价"
-        android:textSize="8sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="8dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_img"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_11"
+        android:text="待评价"
+        android:textSize="@dimen/sp_10" />
+
     <CheckBox
-        android:button="@null"
         android:id="@+id/item_give"
+        android:layout_width="@dimen/dp_14"
+        android:layout_height="@dimen/dp_14"
+        android:layout_below="@+id/item_img"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_2"
         android:layout_toLeftOf="@+id/item_zan"
         android:background="@drawable/give_checked"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/item_img"
-        android:layout_width="8dp"
-        android:layout_marginRight="3dp"
-        android:layout_height="8dp" />
+        android:button="@null" />
+
     <TextView
-        android:layout_marginTop="20dp"
+        android:id="@+id/item_zan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/item_img"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_7"
         android:gravity="center"
-        android:textSize="8sp"
-        android:id="@+id/item_zan"
-        android:text="12"
         android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textSize="@dimen/sp_10" />
+
     <android.support.v7.widget.CardView
-        android:visibility="gone"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:visibility="gone"
         card_view:cardCornerRadius="4dp"
         card_view:cardUseCompatPadding="true">
 

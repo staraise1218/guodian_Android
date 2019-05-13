@@ -59,6 +59,9 @@ public class NavFoundFragment extends Fragment {
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreListener());
         uid = getContext().getSharedPreferences("db", Context.MODE_PRIVATE).getInt("uid", -1);
+
+
+
         pullData();
 
     }
@@ -130,7 +133,7 @@ public class NavFoundFragment extends Fragment {
                         find.setIsliked(findOb.getInt("isliked"));
                         finds.add(find);
                     }
-                    title.setText(finds.get(0).getTitle());
+//                    title.setText(finds.get(0).getTitle());
                     handler.sendEmptyMessage(1);
                 } catch (JSONException e) {
                     e.printStackTrace();

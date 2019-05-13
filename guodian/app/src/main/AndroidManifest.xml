@@ -50,6 +50,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.ClipImageActivity" />
         <activity android:name=".ui.activity.me.BindPhoneActivity" />
+        <activity android:name=".ui.activity.found.FoundDetailActivity" />
     </application>
 
 </manifest>

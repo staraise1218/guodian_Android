@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <View
-        android:background="#E7E7E7"
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp"
+        android:background="#F7F7F7" />
+
     <TextView
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:background="@color/white"
         android:id="@+id/user_footer_tip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_11"
+        android:background="@color/white"
         android:text="为你挑选"
-        android:textSize="16sp" />
-   <GridView
-       android:id="@+id/user_footer_content"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-   </GridView>
+        android:textSize="12sp" />
+
+    <com.smile.guodian.widget.HomeGridView
+        android:id="@+id/user_footer_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"></com.smile.guodian.widget.HomeGridView>
 </LinearLayout>
