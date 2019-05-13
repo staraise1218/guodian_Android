@@ -64,12 +64,14 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         public RelativeLayout view;
         public TextView zan;
         public CheckBox give;
+        public TextView content;
 
         public ViewHolder(View itemView) {
             super(itemView);
             zan = itemView.findViewById(R.id.item_zan);
             view = itemView.findViewById(R.id.item_view);
             imageView = (ImageView) itemView.findViewById(R.id.item_img);
+            content = itemView.findViewById(R.id.item_content);
 //            title = (TextView) itemView.findViewById(R.id.title);
             give = itemView.findViewById(R.id.item_give);
         }
@@ -100,6 +102,7 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
             }
         });
 
+        holder.content.setText(finds.get(position).getTitle());
         if (finds.get(position).getIsliked() == 1) {
             holder.give.setChecked(true);
             holder.zan.setTextColor(Color.parseColor("#DDA021"));
@@ -153,7 +156,7 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         params.put("user_id", user.getUser_id() + "");
         params.put("article_id", cat_id + "");
 
-        OkHttp.post(mContext, HttpContants.BASE_URL + "/Api/like/clickLike", params, new OkCallback() {
+        OkHttp.post(mContext, HttpContants.BASE_URL + "/Api/find/clickLike", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
 //                System.out.println(response);

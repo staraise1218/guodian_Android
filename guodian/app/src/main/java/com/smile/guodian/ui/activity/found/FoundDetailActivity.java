@@ -86,7 +86,7 @@ public class FoundDetailActivity extends BaseActivity {
         params.put("user_id", user.getUser_id() + "");
         params.put("article_id", article_id + "");
 
-        OkHttp.post(this, HttpContants.BASE_URL + "/Api/like/clickLike", params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/find/clickLike", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
                 System.out.println(response);
