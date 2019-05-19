@@ -51,6 +51,13 @@
         <activity android:name=".ui.activity.ClipImageActivity" />
         <activity android:name=".ui.activity.me.BindPhoneActivity" />
         <activity android:name=".ui.activity.found.FoundDetailActivity" />
+        <activity android:name=".ui.activity.me.AcountActivity" />
+        <activity android:name=".ui.activity.me.ModifyLoginPassword" />
+        <activity android:name=".ui.activity.message.NewMessageActivity" />
+        <activity android:name=".ui.activity.message.MessageCenterActivity" />
+        <activity android:name=".ui.activity.me.AddressActivity" />
+        <activity android:name=".ui.activity.me.EditAddressActivity" />
+        <activity android:name=".ui.activity.me.ModifyPayPassword" />
     </application>
 
 </manifest>

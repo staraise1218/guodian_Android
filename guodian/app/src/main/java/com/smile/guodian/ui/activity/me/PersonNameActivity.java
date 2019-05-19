@@ -32,6 +32,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class PersonNameActivity extends BaseActivity {
 
@@ -108,14 +111,23 @@ public class PersonNameActivity extends BaseActivity {
 
     public void changName() {
         String name = resetName.getText().toString().trim();
-        Map<String, String> params = new HashMap<>();
-//        params.put("mobile", phone);
-//        params.put("password", pwd);
 
+        MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
+        RequestBody body = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"user_id\"\r\n\r\n" + uid + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"field\"\r\n\r\n" + field + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"fieldValue\"\r\n\r\n" + name + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
 
-        OkHttp.post(this, HttpContants.BASE_URL + "/Api/user/changeField?user_id=" + uid + "&field=" + field + "&fieldValue=" + name, params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/user/changeField", body, this, new OkCallback() {
             @Override
             public void onResponse(String response) {
+                User user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
+                if (field.equalsIgnoreCase("username")) {
+                    user.setRealname(resetName.getText().toString());
+
+                } else if (field.equalsIgnoreCase("nickname")) {
+                    user.setNickname(resetName.getText().toString());
+                } else if (field.equalsIgnoreCase("personal_statement")) {
+                    user.setIs_distribut(resetName.getText().toString());
+                }
+                BaseApplication.getDaoSession().getUserDao().update(user);
                 PersonNameActivity.this.finish();
             }
 

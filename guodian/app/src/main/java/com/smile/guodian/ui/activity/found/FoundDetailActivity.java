@@ -57,16 +57,26 @@ public class FoundDetailActivity extends BaseActivity {
     protected void init() {
         SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
         uid = sharedPreferences.getInt("uid", -1);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         article_id = intent.getIntExtra("art_id", -1);
         initData();
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    checked();
-                    checkBox.setEnabled(false);
+
+                    if (uid == -1) {
+                        checkBox.setChecked(false);
+                        Intent intent1 = new Intent(FoundDetailActivity.this, LoginActivity.class);
+                        intent.putExtra("where", "found");
+                        startActivity(intent1);
+                    } else {
+                        checked();
+                        checkBox.setEnabled(false);
+                    }
                 }
+
+
             }
         });
 
@@ -138,9 +148,9 @@ public class FoundDetailActivity extends BaseActivity {
                     Glide.with(FoundDetailActivity.this).load(HttpContants.BASE_URL + articleDetail.getThumb()).into(imageView);
                     content.setText(articleDetail.getContent());
                     checkBox.setChecked(articleDetail.getIsliked() == 1);
-                    if (checkBox.isChecked()) {
-                        checkBox.setEnabled(false);
-                    }
+//                    if (checkBox.isChecked()) {
+//                        checkBox.setEnabled(false);
+//                    }
                 }
 
             }

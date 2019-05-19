@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/address_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_31"
+        android:layout_marginTop="@dimen/dp_25"
+        android:paddingBottom="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/address_back"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_11"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="选择地址"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/address_add_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_58"
+        android:layout_marginBottom="@dimen/dp_55">
+
+        <TextView
+            android:id="@+id/address_tip"
+            android:layout_width="@dimen/dp_336"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_7"
+            android:text="防诈骗提醒：国典商城不会以任何理由发送链接要求您填写个人银行信息进行退款。谨防假冒客服电话诈骗！"
+            android:textColor="#9D9D9D"
+            android:textSize="@dimen/sp_12" />
+
+        <com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout
+            android:id="@+id/address_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/address_tip"
+            android:layout_marginTop="@dimen/dp_19"
+            android:background="#f0f0f0"
+            cube_ptr:ptr_duration_to_close="200"
+            cube_ptr:ptr_duration_to_close_header="700"
+            cube_ptr:ptr_keep_header_when_refresh="true"
+            cube_ptr:ptr_pull_to_fresh="false"
+            cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+            cube_ptr:ptr_resistance="1.8">
+
+            <com.syz.commonpulltorefresh.lib.loadmore.GridViewWithHeaderAndFooter
+                android:id="@+id/address_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:choiceMode="singleChoice"
+                android:divider="#b0b0b0"
+                android:dividerHeight="0.1dp"
+                android:fadingEdge="none"
+                android:gravity="center_horizontal"
+                android:numColumns="2"
+                android:scrollbarStyle="outsideOverlay" />
+        </com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/address_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_58"
+        android:layout_marginBottom="@dimen/dp_55"
+        android:background="#F5F5F5"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/dp_78"
+            android:layout_height="@dimen/dp_71"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_132"
+            android:background="@drawable/address" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_214"
+            android:gravity="center"
+            android:text="您还没有相关地址"
+            android:textColor="#BCBCBC"
+            android:textSize="@dimen/sp_12" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_55"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/address_add"
+            android:layout_width="@dimen/dp_342"
+            android:layout_height="@dimen/dp_36"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/button2"
+            android:text="添加新地址"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_13" />
+
+    </LinearLayout>
+
+</RelativeLayout>

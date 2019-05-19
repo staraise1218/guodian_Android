@@ -80,6 +80,8 @@ public class PersonActivity extends BaseActivity {
     TextView userPhone;
     @BindView(R.id.person_icon)
     CircleImageView icon;
+    @BindView(R.id.person_edit)
+    TextView intruduce;
     //请求相机
     private static final int REQUEST_CAPTURE = 100;
     //请求相册
@@ -90,6 +92,8 @@ public class PersonActivity extends BaseActivity {
     private static final int READ_EXTERNAL_STORAGE_REQUEST_CODE = 103;
     //请求写入外部存储
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 104;
+    //请求摄像头权限
+    private static final int OPEN_CAMERA = 105;
     //头像1
     private CircleImageView headImage1;
     //头像2
@@ -100,7 +104,7 @@ public class PersonActivity extends BaseActivity {
     private int type;
     private int uid;
 
-    @OnClick({R.id.change_icon, R.id.person_center, R.id.person_name, R.id.person_nick, R.id.person_back, R.id.person_show, R.id.person_phone, R.id.person_more})
+    @OnClick({R.id.change_icon, R.id.person_center, R.id.person_name, R.id.person_nick, R.id.person_back, R.id.person_show, R.id.person_phone, R.id.person_more, R.id.person_receive_address})
     public void onclickView(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -129,6 +133,10 @@ public class PersonActivity extends BaseActivity {
             case R.id.change_icon:
                 uploadHeadImage();
                 break;
+            case R.id.person_receive_address:
+                intent = new Intent(PersonActivity.this, AddressActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -139,7 +147,25 @@ public class PersonActivity extends BaseActivity {
         userName.setText(user.getRealname());
         userNick.setText(user.getNickname());
         userPhone.setText(user.getMobile());
+        if (user.getIs_distribut() != null)
+            intruduce.setText(user.getIs_distribut());
         Glide.with(this).load(HttpContants.BASE_URL + user.getHead_pic()).into(icon);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (userName != null) {
+            user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
+            userName.setText(user.getRealname());
+            userNick.setText(user.getNickname());
+            userPhone.setText(user.getMobile());
+            if (user.getIs_distribut() != null)
+                intruduce.setText(user.getIs_distribut());
+        }
+
+
     }
 
     @Override
@@ -177,11 +203,11 @@ public class PersonActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //权限判断
-                if (ContextCompat.checkSelfPermission(PersonActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(PersonActivity.this, Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     //申请WRITE_EXTERNAL_STORAGE权限
-                    ActivityCompat.requestPermissions(PersonActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+                    ActivityCompat.requestPermissions(PersonActivity.this, new String[]{Manifest.permission.CAMERA},
+                            OPEN_CAMERA);
                 } else {
                     //跳转到调用系统相机
                     gotoCamera();
@@ -220,7 +246,7 @@ public class PersonActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == WRITE_EXTERNAL_STORAGE_REQUEST_CODE) {
+        if (requestCode == OPEN_CAMERA) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission Granted
                 gotoCamera();

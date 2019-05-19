@@ -174,11 +174,6 @@ public class ProductActivity extends BaseActivity {
                         goodList.clear();
                         page = 1;
                         initData("1");
-//                        mData.clear();
-//                        for (int i = 0; i < 40; i++) {
-//                            mData.add(new String("GridView item  ——" + i));
-//                        }
-//
                     }
                 }, 1000);
             }
@@ -188,9 +183,6 @@ public class ProductActivity extends BaseActivity {
         horizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-//                TextView textView = view.findViewById(R.id.item_text);
-//                textView.setTextColor(Color.parseColor("#FF9F4D"));
                 selectPosition = position;
                 page = 1;
                 goodList.clear();
@@ -221,7 +213,6 @@ public class ProductActivity extends BaseActivity {
                 }
 
                 cat_id = categories.get(tab.getPosition()).getId() + "";
-
                 initData(cat_id);
 
 

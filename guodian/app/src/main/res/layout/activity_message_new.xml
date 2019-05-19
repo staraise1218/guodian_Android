@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/collection_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_31"
+        android:layout_marginTop="@dimen/dp_25"
+        android:paddingBottom="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/message_new_back"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_11"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="最新消息"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/message_new_none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_99"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/dp_104"
+            android:layout_height="@dimen/dp_86"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/none" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_16"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_99"
+            android:gravity="center"
+            android:text="您还没有相关消息"
+            android:textColor="#BCBCBC"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/message_new_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_56">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/top_line" />
+
+        <com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout
+            android:id="@+id/message_new_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/product_tip"
+            android:layout_marginTop="@dimen/dp_2"
+            android:background="#f0f0f0"
+            cube_ptr:ptr_duration_to_close="200"
+            cube_ptr:ptr_duration_to_close_header="700"
+            cube_ptr:ptr_keep_header_when_refresh="true"
+            cube_ptr:ptr_pull_to_fresh="false"
+            cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+            cube_ptr:ptr_resistance="1.8">
+
+            <com.syz.commonpulltorefresh.lib.loadmore.GridViewWithHeaderAndFooter
+                android:id="@+id/message_new"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:choiceMode="singleChoice"
+                android:divider="#b0b0b0"
+                android:dividerHeight="0.1dp"
+                android:fadingEdge="none"
+                android:numColumns="1"
+
+                android:scrollbarStyle="outsideOverlay" />
+        </com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

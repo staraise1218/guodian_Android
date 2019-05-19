@@ -181,7 +181,7 @@ public class CategoryProductActivity extends BaseActivity {
                 });
             }
         });
-        initData("");
+//        initData("");
         tabLayout.setSelected(true);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

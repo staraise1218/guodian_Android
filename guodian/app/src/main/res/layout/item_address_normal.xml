@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_336"
+    android:layout_height="@dimen/dp_106"
+    android:background="@drawable/normal">
+
+    <TextView
+        android:id="@+id/address_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_12"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_12"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="@dimen/dp_10"
+        android:layout_height="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_74"
+        android:background="@drawable/round_red" />
+
+    <TextView
+        android:id="@+id/address_chose_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_32"
+        android:layout_marginTop="@dimen/dp_71"
+        android:text="设置默认地址"
+        android:textColor="#EB3A33"
+        android:textSize="@dimen/sp_10" />
+
+    <ImageView
+        android:id="@+id/address_edit"
+        android:layout_width="@dimen/dp_25"
+        android:layout_height="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_221"
+        android:layout_marginTop="@dimen/dp_70"
+        android:background="@drawable/edit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_246"
+        android:layout_marginTop="@dimen/dp_76"
+        android:text="编辑"
+        android:textColor="#9D9D9D"
+        android:textSize="@dimen/sp_10" />
+
+    <ImageView
+        android:id="@+id/address_delete"
+        android:layout_width="@dimen/dp_25"
+        android:layout_height="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_278"
+        android:layout_marginTop="@dimen/dp_69"
+        android:background="@drawable/del" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_305"
+        android:layout_marginTop="@dimen/dp_76"
+        android:text="删除"
+        android:textColor="#9D9D9D"
+        android:textSize="@dimen/sp_10" />
+
+</RelativeLayout>

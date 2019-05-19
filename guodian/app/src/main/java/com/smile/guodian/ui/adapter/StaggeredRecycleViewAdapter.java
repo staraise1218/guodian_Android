@@ -23,6 +23,7 @@ import com.smile.guodian.model.entity.User;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.BaseApplication;
+import com.smile.guodian.ui.activity.LoginActivity;
 import com.smile.guodian.ui.activity.RegisterActivity;
 import com.smile.guodian.ui.activity.found.FoundDetailActivity;
 import com.smile.guodian.utils.ToastUtil;
@@ -83,6 +84,7 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         return new ViewHolder(v);
     }
 
+    int uid;
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -113,24 +115,33 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         }
 
         final TextView textView = holder.zan;
-
         holder.give.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
-                    int number = 0;
-                    if (holder.zan.getText().toString() != null) {
-                        number = Integer.parseInt(holder.zan.getText().toString());
+                    uid = mContext.getSharedPreferences("db", Context.MODE_PRIVATE).getInt("uid", -1);
+
+                    if (uid == -1) {
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        intent.putExtra("where", "found");
+                        mContext.startActivity(intent);
+                        holder.give.setChecked(false);
+                    } else {
+                        int number = 0;
+                        if (holder.zan.getText().toString() != null) {
+                            number = Integer.parseInt(holder.zan.getText().toString());
+                        }
+                        number += 1;
+                        holder.zan.setTextColor(Color.parseColor("#DDA021"));
+                        holder.zan.setText(number + "");
+                        checked(finds.get(position).getArticle_id());
+                        holder.give.setEnabled(false);
                     }
-                    number += 1;
-                    holder.zan.setTextColor(Color.parseColor("#DDA021"));
-                    holder.zan.setText(number + "");
-                    checked(finds.get(position).getArticle_id());
-                    holder.give.setEnabled(false);
                 }
             }
         });
+
 
         Glide.with(mContext).load(HttpContants.BASE_URL + finds.get(position).getTumb()).into(holder.imageView);
         holder.zan.setText(finds.get(position).getLike_num());
@@ -149,9 +160,13 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
 
         List<User> userList = BaseApplication.getDaoSession().getUserDao().loadAll();
         User user = new User();
+
         if (userList.size() > 0) {
             user = userList.get(0);
         }
+
+        System.out.println(user.getUser_id() + "user_id");
+
 
         params.put("user_id", user.getUser_id() + "");
         params.put("article_id", cat_id + "");

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <RelativeLayout
+        android:id="@+id/address_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/address_back"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_11"
+            android:layout_marginTop="@dimen/dp_29"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_28"
+            android:gravity="center"
+            android:text="选择地址"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/edit_address_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_28"
+            android:layout_marginRight="@dimen/dp_11"
+            android:text="删除"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/dp_336"
+        android:layout_height="@dimen/dp_265"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_67"
+        android:background="@drawable/white_four">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="收货人"
+            android:textColor="#B5B5B5"
+            android:textSize="@dimen/sp_10" />
+
+        <TextView
+            android:id="@+id/edit_address_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_33"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:layout_width="@dimen/dp_326"
+            android:layout_height="@dimen/dp_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_57"
+            android:background="#F9F9F9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_69"
+            android:text="手机号"
+            android:textColor="#B5B5B5"
+            android:textSize="@dimen/sp_10" />
+
+        <TextView
+            android:id="@+id/edit_address_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_90"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:layout_width="@dimen/dp_326"
+            android:layout_height="@dimen/dp_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_114"
+            android:background="#F9F9F9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_125"
+            android:text="地址"
+            android:textColor="#B5B5B5"
+            android:textSize="@dimen/sp_10" />
+
+        <TextView
+            android:id="@+id/edit_address_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_146"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_12" />
+
+        <ImageView
+            android:id="@+id/edit_city"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_13"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_147"
+            android:layout_marginRight="@dimen/dp_5"
+            android:background="@drawable/back"
+            android:rotation="180" />
+
+        <TextView
+            android:layout_width="@dimen/dp_326"
+            android:layout_height="@dimen/dp_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_170"
+            android:background="#F9F9F9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_180"
+            android:text="详细地址"
+            android:textColor="#B5B5B5"
+            android:textSize="@dimen/sp_10" />
+
+
+        <TextView
+            android:id="@+id/edit_address_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_200"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:layout_width="@dimen/dp_326"
+            android:layout_height="@dimen/dp_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_226"
+            android:background="#F9F9F9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_236"
+            android:text="默认地址"
+            android:textColor="#EB3A33"
+            android:textSize="@dimen/sp_10" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="@dimen/dp_342"
+        android:layout_height="@dimen/dp_36"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_360"
+        android:background="@drawable/button2"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_13" />
+</RelativeLayout>

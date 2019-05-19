@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,8 @@ import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.LoginActivity;
 import com.smile.guodian.ui.activity.SettingActivity;
 import com.smile.guodian.ui.activity.WebActivity;
+import com.smile.guodian.ui.activity.me.PersonActivity;
+import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.widget.HomeGridView;
 
 import java.util.List;
@@ -89,6 +92,10 @@ public class UserAdapter extends RecyclerView.Adapter {
         LinearLayout re;
         @BindView(R.id.user_all)
         LinearLayout all;
+        @BindView(R.id.user_setting)
+        ImageView setting;
+        @BindView(R.id.user_notify)
+        ImageView notify;
 
         @OnClick({R.id.user_wait, R.id.user_receive, R.id.user_return, R.id.user_all})
         public void clickView(View view) {
@@ -169,10 +176,25 @@ public class UserAdapter extends RecyclerView.Adapter {
                 headerViewHolder.name.setText("姓名：" + user.getRealname());
 //                headerViewHolder.rename.setText("");
 
-                headerViewHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
+                headerViewHolder.notify.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MessageCenterActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+                headerViewHolder.setting.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, SettingActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+
+                headerViewHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, PersonActivity.class);
                         context.startActivity(intent);
                     }
                 });

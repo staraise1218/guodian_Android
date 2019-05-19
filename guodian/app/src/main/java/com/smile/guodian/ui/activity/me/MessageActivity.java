@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -26,11 +27,14 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.User;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.BaseActivity;
 import com.smile.guodian.utils.ToastUtil;
 
+import java.net.UnknownServiceException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +58,14 @@ public class MessageActivity extends BaseActivity {
     @BindView(R.id.message_sex_text)
     TextView sex;
     private TextView mTvSelectedDate;
+    @BindView(R.id.message_sex)
+    RelativeLayout mSex;
+    @BindView(R.id.message_phone)
+    RelativeLayout mPhone;
+    @BindView(R.id.message_name)
+    RelativeLayout mName;
+    @BindView(R.id.message_birthday)
+    RelativeLayout mBirthday;
 
     Dialog dialog;
     private int uid;
@@ -62,6 +74,7 @@ public class MessageActivity extends BaseActivity {
     View parent;
     WindowManager.LayoutParams params;
     TimePickerView pvCustomLunar;
+    private User user;
 
     @OnClick({R.id.message_sex, R.id.message_back, R.id.message_phone, R.id.message_name, R.id.message_birthday})
     public void clickView(View view) {
@@ -71,6 +84,9 @@ public class MessageActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.message_sex:
+                if (user.getSex() != null) {
+                    break;
+                }
                 View sexView = LayoutInflater.from(this).inflate(R.layout.dialog_sex, null);
                 TextView btnCarema = (TextView) sexView.findViewById(R.id.btn_camera);
                 TextView btnPhoto = (TextView) sexView.findViewById(R.id.btn_photo);
@@ -100,13 +116,13 @@ public class MessageActivity extends BaseActivity {
                 man.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        change("sex", "男");
+                        change("sex", "1");
                     }
                 });
                 woman.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        change("sex", "女");
+                        change("sex", "2");
                     }
                 });
                 cancel.setOnClickListener(new View.OnClickListener() {
@@ -118,10 +134,14 @@ public class MessageActivity extends BaseActivity {
 
                 break;
             case R.id.message_name:
+                if (user.getRealname() != null) {
+                    break;
+                }
                 View nameView = LayoutInflater.from(this).inflate(R.layout.dialog_name, null);
                 popupWindow = new PopupWindow(nameView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
                 popupWindow.setOutsideTouchable(true);
+                popupWindow.setFocusable(true);
                 popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
                 parent = LayoutInflater.from(this).inflate(R.layout.activity_person, null);
@@ -175,9 +195,15 @@ public class MessageActivity extends BaseActivity {
                 });
                 break;
             case R.id.message_birthday:
+                if (user.getBirthday() != null) {
+                    break;
+                }
                 pvCustomLunar.show();
                 break;
             case R.id.message_phone:
+                if (user.getMobile() != null) {
+                    break;
+                }
                 Intent intent = new Intent(MessageActivity.this, BindPhoneActivity.class);
                 startActivity(intent);
                 break;
@@ -188,25 +214,39 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void init() {
         uid = getSharedPreferences("db", MODE_PRIVATE).getInt("uid", -1);
+        user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
         initLunarPicker();
+        birthday.setText(user.getBirthday());
+        sex.setText(user.getSex());
+        name.setText(user.getRealname());
+        phone.setText(user.getMobile());
+
+        if (user.getSex() != null) {
+            mSex.setEnabled(false);
+        }
+        if (user.getBirthday() != null) {
+            mBirthday.setEnabled(false);
+        }
+        if (user.getMobile() != null) {
+            mPhone.setEnabled(false);
+        }
+        if (user.getRealname() != null) {
+            mName.setEnabled(false);
+        }
+
     }
 
 
     public void change(String field, String name) {
         Map<String, String> params = new HashMap<>();
 
-        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
+        RequestBody body = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"user_id\"\r\n\r\n" + uid + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"field\"\r\n\r\n" + field + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"fieldValue\"\r\n\r\n" + name + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
 
-        // 参数分别为， 请求key ，文件名称 ， RequestBody
-        requestBody.addFormDataPart("filed", field);
-        requestBody.addFormDataPart("fieldValue", name);
-        requestBody.addFormDataPart("user_id", uid + "");
-
-        OkHttp.post(this, HttpContants.BASE_URL + "/Api/user/changeField", requestBody.build(), this, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/user/changeField", body, this, new OkCallback() {
             @Override
             public void onResponse(String response) {
-//                MessageActivity.this.finish();
-                System.out.println(response);
+                popupWindow.dismiss();
             }
 
             @Override

@@ -143,7 +143,9 @@ public class BindPhoneActivity extends BaseActivity {
     public void bindPhone() {
 
         Map<String, String> params = new HashMap<>();
-        OkHttp.post(this, HttpContants.BASE_URL + "/Api/auth/bindMobile" + "?mobile=" + phone + "&code=" + code + "&openid=" + "&nicname=" + user.getNickname() + "&headpic=" + user.getHead_pic(), params, new OkCallback() {
+        String phon = phone.getText().toString();
+        String code = verify.getText().toString();
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/auth/bindMobile" + "?mobile=" + phon + "&code=" + code + "&openid=" + "&nickname=" + user.getNickname() + "&head_pic=" + user.getHead_pic(), params, new OkCallback() {
             @Override
             public void onResponse(String response) {
 
@@ -170,7 +172,8 @@ public class BindPhoneActivity extends BaseActivity {
                     userDao.insert(user);
                 }
 
-
+                Intent intent = new Intent(BindPhoneActivity.this, MainActivity.class);
+                startActivity(intent);
             }
 
             @Override
@@ -186,7 +189,7 @@ public class BindPhoneActivity extends BaseActivity {
         String phon = phone.getText().toString();
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phon);
-        params.put("scene", "1");
+        params.put("scene", "3");
 
         OkHttp.post(this, HttpContants.BASE_URL + "/api/auth/sendMobileCode", params, new OkCallback() {
             @Override
@@ -205,6 +208,7 @@ public class BindPhoneActivity extends BaseActivity {
                 }
                 try {
                     code = data.getString("code");
+                    verify.setText(code);
 //                    handler.sendEmptyMessage(1);
                 } catch (JSONException e) {
                     e.printStackTrace();

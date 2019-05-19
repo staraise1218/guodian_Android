@@ -54,10 +54,6 @@ public class LoginActivity extends BaseActivity {
     @OnClick({R.id.login_forget, R.id.login_show_password})
     public void clickView(View view) {
         switch (view.getId()) {
-//            case R.id.login_forget:
-//                Intent intent = new Intent(LoginActivity.this, ForgetPassword.class);
-//                startActivity(intent);
-//                break;
             case R.id.login_show_password:
                 if (!hiddenPassword.isChecked()) {
                     isHidden = false;
@@ -179,8 +175,12 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void onPageFinished(WebView view, String url) {
                             super.onPageFinished(view, url);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            if (where.equalsIgnoreCase("found")) {
+                                LoginActivity.this.finish();
+                            } else {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
                         }
                     });
 

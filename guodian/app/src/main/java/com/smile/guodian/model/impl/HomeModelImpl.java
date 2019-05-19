@@ -150,7 +150,7 @@ public class HomeModelImpl implements HomeLoadModel {
 //                    //list添加头条
 
                     //横向数据
-                    list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADLINE, 300));
+//                    list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADLINE, 300));
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HOT, 300));
 
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_LIVE, 12));

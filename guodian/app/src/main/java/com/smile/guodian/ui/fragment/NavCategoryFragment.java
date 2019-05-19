@@ -252,9 +252,9 @@ public class NavCategoryFragment extends BaseFragment {
                         }.getType();
                         CategoryBean enums = mGson.fromJson(response, collectionType);
                         Iterator<Category> iterator = enums.getData().iterator();
-                        Category category = new Category();
-                        category.setCat_name("品牌");
-                        categoryFirst.add(category);
+//                        Category category = new Category();
+//                        category.setCat_name("品牌");
+//                        categoryFirst.add(category);
                         while (iterator.hasNext()) {
                             Category bean = iterator.next();
                             position++;
@@ -263,20 +263,20 @@ public class NavCategoryFragment extends BaseFragment {
                             }
                             categoryFirst.add(bean);
                         }
-                        System.out.println(currentPosition);
-                        if (currentPosition != 0) {
-                            showCategoryData(currentPosition);
-                            second.setVisibility(View.VISIBLE);
-                            sort.setVisibility(View.GONE);
-                        } else {
-                            showCategoryData(0);
-                        }
+//                        System.out.println(currentPosition);
+//                        if (currentPosition != 0) {
+                        showCategoryData(currentPosition);
+                        second.setVisibility(View.VISIBLE);
+                        sort.setVisibility(View.GONE);
+//                        } else {
+//                            showCategoryData(0);
+//                        }
 
-                        if (categoryId == 0)
-                            defaultClick();
-                        else {
-                            NavCategoryFragment.this.requestWares(categoryId + "");
-                        }
+//                        if (categoryId == 0)
+//                            defaultClick();
+//                        else {
+//                        NavCategoryFragment.this.requestWares(categoryId + "");
+//                        }
 
                     }
                 });
@@ -302,15 +302,15 @@ public class NavCategoryFragment extends BaseFragment {
                 String name = category.getCat_name();
                 mCategoryAdapter.notifyDataSetChanged();
                 isclick = true;
-                if (position == 0) {
-                    second.setVisibility(View.GONE);
-                    sort.setVisibility(View.VISIBLE);
-                    defaultClick();
-                } else {
-                    second.setVisibility(View.VISIBLE);
-                    sort.setVisibility(View.GONE);
-                    requestWares(id);
-                }
+//                if (position == 0) {
+//                    second.setVisibility(View.GONE);
+//                    sort.setVisibility(View.VISIBLE);
+//                    defaultClick();
+//                } else {
+                second.setVisibility(View.VISIBLE);
+                sort.setVisibility(View.GONE);
+                requestWares(id);
+//                }
             }
         });
 
@@ -333,10 +333,10 @@ public class NavCategoryFragment extends BaseFragment {
 
         //默认选中第0个
         if (!isclick && categoryId == 0) {
-//            Category category = categoryFirst.get(1);
-//            String id = category.getId();
-//            requestWares(id);
-            getBanchID();
+            Category category = categoryFirst.get(1);
+            String id = category.getId();
+            requestWares(id);
+//            getBanchID();
         }
 //        sourceDataList = filledData();
         // 根据a-z进行排序源数据
@@ -420,6 +420,7 @@ public class NavCategoryFragment extends BaseFragment {
             @Override
             public void onResponse(String response, int id) {
 //                LogUtil.e("二级菜单", response + "", true);
+                System.out.println(response);
 
 
                 CategoryBean2 hotGoods = mGson.fromJson(response, CategoryBean2.class);

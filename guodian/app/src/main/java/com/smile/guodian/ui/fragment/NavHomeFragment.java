@@ -113,7 +113,7 @@ public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onRefresh() {
         setRefreshLoading(false);
-        presenter.start(HOME_TOP);
+//        presenter.start(HOME_TOP);
         page = 1;
     }
 
