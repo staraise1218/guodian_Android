@@ -1,6 +1,7 @@
 package com.smile.guodian.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.smile.guodian.R;
+import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
 
@@ -69,15 +71,17 @@ public class GuideActivity extends BaseActivity {
 
         if (isFirst) {
             PreferencesUtils.putBoolean(GuideActivity.this, "isFirst", false);
-            startActivity(new Intent(GuideActivity.this, GuideActivity.class));
             MyPagerAdapter adapter = new MyPagerAdapter();
             imageView.setVisibility(View.GONE);
             mViewPager.setAdapter(adapter);
-
             mViewPager.setOffscreenPageLimit(0);
             mViewPager.setOnPageChangeListener(new PagePositionLister());
             initData();
         } else {
+//            SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putInt("uid", -1);
+//            editor.commit();
             startActivity(new Intent(GuideActivity.this, MainActivity.class));
         }
 //        for(int i=0;i<3;i++) {
@@ -98,7 +102,7 @@ public class GuideActivity extends BaseActivity {
     private void initData() {
 
 
-        OkHttp.post(this, "http://guodian.staraise.com.cn/Api/index/startBanner", null, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/index/startBanner", null, new OkCallback() {
             @Override
             public void onResponse(String response) {
 //                System.out.println(response);
@@ -110,7 +114,7 @@ public class GuideActivity extends BaseActivity {
 //                       System.out.println(array.getJSONObject(i).getString("ad_code"));
                         View inflate = getLayoutInflater().inflate(R.layout.guide_item, null);
                         ImageView ivGuide = (ImageView) inflate.findViewById(R.id.iv_guide);
-                        Glide.with(GuideActivity.this).load("http://guodian.staraise.com.cn" + array.getJSONObject(i).getString("ad_code")).into(ivGuide);
+                        Glide.with(GuideActivity.this).load(HttpContants.BASE_URL + array.getJSONObject(i).getString("ad_code")).into(ivGuide);
 //                       GlideUtil.load(GuideActivity.this,GuideActivity.this,"http://guodian.staraise.com.cn"+array.getJSONObject(i).getString("ad_code"),ivGuide);
                         mViewList.add(inflate);
                     }
@@ -145,6 +149,10 @@ public class GuideActivity extends BaseActivity {
 
     @OnClick(R.id.btn_start)
     public void jumpActivity(View view) {
+//        SharedPreferences sharedPreferences = getSharedPreferences("db", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putInt("uid", -1);
+//        editor.commit();
         startActivity(new Intent(GuideActivity.this, MainActivity.class));
         finish();
     }

@@ -51,7 +51,19 @@ public class HomeHeaderAdapter extends BaseAdapter {
         TextView name = convertView.findViewById(R.id.header_show_name);
         TextView price = convertView.findViewById(R.id.header_show_price);
         TextView normalPrice = convertView.findViewById(R.id.header_show_normal_price);
+        ImageView stateImage = convertView.findViewById(R.id.item_home_state_img);
         name.setText(guessGoods.get(position).getGoods_name());
+
+        stateImage.setVisibility(View.GONE);
+
+        if (guessGoods.get(position).getStore_count() == 0) {
+            stateImage.setVisibility(View.VISIBLE);
+            stateImage.setBackgroundResource(R.drawable.yishouqing);
+        }
+        if (guessGoods.get(position).getReserved() == 1) {
+            stateImage.setVisibility(View.VISIBLE);
+            stateImage.setBackgroundResource(R.drawable.yiyuding);
+        }
 
         String shopPrice = guessGoods.get(position).getShop_price();
         String marketPrice = guessGoods.get(position).getMarket_price();

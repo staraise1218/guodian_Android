@@ -48,6 +48,7 @@ public class UserDao extends AbstractDao<User, Long> {
         public final static Property Is_distribut = new Property(21, String.class, "is_distribut", false, "IS_DISTRIBUT");
         public final static Property Token = new Property(22, String.class, "token", false, "TOKEN");
         public final static Property Username = new Property(23, String.class, "username", false, "USERNAME");
+        public final static Property Personnal_statement = new Property(24, String.class, "personnal_statement", false, "PERSONNAL_STATEMENT");
     }
 
 
@@ -86,7 +87,8 @@ public class UserDao extends AbstractDao<User, Long> {
                 "\"IS_LOCK\" TEXT," + // 20: is_lock
                 "\"IS_DISTRIBUT\" TEXT," + // 21: is_distribut
                 "\"TOKEN\" TEXT," + // 22: token
-                "\"USERNAME\" TEXT);"); // 23: username
+                "\"USERNAME\" TEXT," + // 23: username
+                "\"PERSONNAL_STATEMENT\" TEXT);"); // 24: personnal_statement
     }
 
     /** Drops the underlying database table. */
@@ -218,6 +220,11 @@ public class UserDao extends AbstractDao<User, Long> {
         if (username != null) {
             stmt.bindString(24, username);
         }
+ 
+        String personnal_statement = entity.getPersonnal_statement();
+        if (personnal_statement != null) {
+            stmt.bindString(25, personnal_statement);
+        }
     }
 
     @Override
@@ -343,6 +350,11 @@ public class UserDao extends AbstractDao<User, Long> {
         if (username != null) {
             stmt.bindString(24, username);
         }
+ 
+        String personnal_statement = entity.getPersonnal_statement();
+        if (personnal_statement != null) {
+            stmt.bindString(25, personnal_statement);
+        }
     }
 
     @Override
@@ -376,7 +388,8 @@ public class UserDao extends AbstractDao<User, Long> {
             cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // is_lock
             cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // is_distribut
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // token
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23) // username
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // username
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24) // personnal_statement
         );
         return entity;
     }
@@ -407,6 +420,7 @@ public class UserDao extends AbstractDao<User, Long> {
         entity.setIs_distribut(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
         entity.setToken(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setUsername(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setPersonnal_statement(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
      }
     
     @Override

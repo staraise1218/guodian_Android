@@ -2,6 +2,8 @@ package com.smile.guodian.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smile.guodian.R;
+import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.Browser;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
@@ -48,19 +51,24 @@ public class MyBrowserActivity extends BaseActivity {
 
     @BindView(R.id.check_all)
     CheckBox radioButton;
+    List<Browser> browserList;
 
     @OnClick({R.id.browser_edit, R.id.browser_del})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.browser_del:
                 browsers = adapter.getBrowsers();
-                List<Browser> browserList = new ArrayList<>();
+                String result = "";
+                browserList = new ArrayList<>();
 
                 for (int i = 0; i < browsers.size(); i++) {
                     if (!browsers.get(i).isChecked()) {
                         browserList.add(browsers.get(i));
+                    } else {
+                        result = result + browsers.get(i).getVisit_id() + ",";
                     }
                 }
+                delete(result);
                 adapter.setBrowsers(browserList);
                 adapter.notifyDataSetChanged();
                 if (browserList.size() == 0) {
@@ -72,17 +80,17 @@ public class MyBrowserActivity extends BaseActivity {
                 if (edit.getText().toString().equals("编辑")) {
                     edit.setText("完成");
                     relativeLayout.setVisibility(View.VISIBLE);
-                    adapter = new BrowserAdapter(this, browsers);
-                    adapter.setShowCheck(true);
-                    listView.setAdapter(adapter);
+//                    adapter = new BrowserAdapter(this, browsers);
+                    adapter.setShowCheck(false);
+//                    listView.setAdapter(adapter);
 
                     adapter.notifyDataSetChanged();
                 } else {
                     edit.setText("编辑");
                     relativeLayout.setVisibility(View.GONE);
-                    adapter = new BrowserAdapter(this, browsers);
+//                    adapter = new BrowserAdapter(this, browsers);
                     adapter.setShowCheck(true);
-                    listView.setAdapter(adapter);
+//                    listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
 
@@ -124,13 +132,59 @@ public class MyBrowserActivity extends BaseActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     protected int getContentResourseId() {
         return R.layout.activity_browser;
     }
 
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+//            initData();
+            System.out.println(browsers.size());
+            adapter.setBrowsers(browserList);
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    public void delete(String ids) {
+        Map<String, String> params = new HashMap<>();
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/user/del_visit_log?visit_ids=" + ids, params, new OkCallback() {
+            @Override
+            public void onFailure(String state, String msg) {
+                ToastUtil.showShortToast(MyBrowserActivity.this, msg);
+            }
+
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+//                browsers.clear();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    int code = object.getInt("code");
+                    if (code == 200) {
+                        handler.sendEmptyMessage(1);
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+
     public void initData() {
         Map<String, String> params = new HashMap<>();
-        OkHttp.post(this, "http://guodian.staraise.com.cn/Api/user/visit_log?user_id=" + uid + "&page=" + page, params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/user/visit_log?user_id=" + uid + "&page=" + page, params, new OkCallback() {
             @Override
             public void onFailure(String state, String msg) {
                 ToastUtil.showShortToast(MyBrowserActivity.this, msg);
@@ -148,9 +202,9 @@ public class MyBrowserActivity extends BaseActivity {
                         JSONArray one = data.getJSONArray(key);
                         for (int i = 0; i < one.length(); i++) {
                             Browser browser = new Browser();
-                            if (i == 0) {
-                                browser.setTitle(key);
-                            }
+//                            if (i == 0) {
+                            browser.setTitle(key);
+//                            }
                             JSONObject browserObj = one.getJSONObject(i);
                             browser.setCat_id(browserObj.getInt("cat_id"));
                             browser.setGoods_id(browserObj.getInt("goods_id"));

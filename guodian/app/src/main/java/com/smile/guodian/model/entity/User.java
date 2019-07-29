@@ -32,19 +32,16 @@ public class User {
     String is_distribut;
     String token;
     String username;
+    String personnal_statement;
 
-    @Generated(hash = 586692638)
-    public User() {
-    }
-
-    @Generated(hash = 1366730479)
+    @Generated(hash = 2092571301)
     public User(Long id, String user_id, String email, String realname,
-            String paypwd, String sex, String birthday, String user_money,
-            String frozen_money, String distribut_money, String pay_points,
-            String reg_time, String last_login, String last_ip, String mobile,
-            String head_pic, String nickname, String level, String discount,
-            String total_amount, String is_lock, String is_distribut, String token,
-            String username) {
+                String paypwd, String sex, String birthday, String user_money,
+                String frozen_money, String distribut_money, String pay_points,
+                String reg_time, String last_login, String last_ip, String mobile,
+                String head_pic, String nickname, String level, String discount,
+                String total_amount, String is_lock, String is_distribut, String token,
+                String username, String personnal_statement) {
         this.id = id;
         this.user_id = user_id;
         this.email = email;
@@ -69,6 +66,19 @@ public class User {
         this.is_distribut = is_distribut;
         this.token = token;
         this.username = username;
+        this.personnal_statement = personnal_statement;
+    }
+
+    @Generated(hash = 586692638)
+    public User() {
+    }
+
+    public String getPersonnal_statement() {
+        return personnal_statement;
+    }
+
+    public void setPersonnal_statement(String personnal_statement) {
+        this.personnal_statement = personnal_statement;
     }
 
     public String getUser_id() {

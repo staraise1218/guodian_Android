@@ -7,13 +7,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_10"
-        android:background="#E7E7E7" />
+        android:background="#E7E7E7"
+        android:visibility="gone" />
 
     <com.smile.guodian.widget.HomeGridView
         android:id="@+id/recommend_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/white"
+        android:divider="@color/font_gray_color"
         android:dividerHeight="@dimen/dp_10"
         android:numColumns="1">
 

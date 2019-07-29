@@ -37,8 +37,6 @@ public class Category {
         this.name = name;
     }
 
-
-
     public String getId() {
         return id;
     }
@@ -52,4 +50,5 @@ public class Category {
     private String logo;
     private String name;
     private String id;
+
 }

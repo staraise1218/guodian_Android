@@ -7,11 +7,24 @@
     android:paddingLeft="@dimen/dp_9"
     android:paddingTop="@dimen/dp_10">
 
-    <ImageView
-        android:id="@+id/item_home_product_img"
-        android:layout_width="@dimen/dp_121"
-        android:layout_height="@dimen/dp_163"
-        android:layout_marginLeft="@dimen/dp_14" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_163">
+
+        <ImageView
+            android:id="@+id/item_home_product_img"
+            android:layout_width="@dimen/dp_121"
+            android:layout_height="@dimen/dp_163"
+            android:layout_marginLeft="@dimen/dp_14" />
+
+        <ImageView
+            android:id="@+id/item_home_state_img"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_91"
+            android:layout_marginTop="@dimen/dp_95"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/item_home_product_title"

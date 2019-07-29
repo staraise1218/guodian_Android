@@ -6,11 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <WebView
-        android:id="@+id/catergory_web"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"></WebView>
 
     <RelativeLayout
         android:id="@+id/catergory_content"
@@ -26,7 +21,7 @@
             android:layout_marginBottom="20dp">
 
             <EditText
-                android:id="@+id/home_search"
+                android:id="@+id/category_search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_33"
                 android:background="@drawable/search_bg"
@@ -41,20 +36,10 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:background="@drawable/search" />
 
-            <ImageView
-                android:id="@+id/home_search_camera"
-                android:layout_width="@dimen/dp_19"
-                android:layout_height="@dimen/dp_19"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginRight="@dimen/dp_12"
-                android:background="@drawable/image_search" />
-
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/home_notify"
+            android:id="@+id/category_notify"
             android:layout_width="@dimen/dp_19"
             android:layout_height="@dimen/dp_19"
             android:layout_marginLeft="@dimen/dp_20"
@@ -91,7 +76,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_14"
                 android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -132,39 +118,35 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_7"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/catergory_banner"
-                    android:layout_width="@dimen/dp_259"
+                    android:layout_width="@dimen/dp_240"
                     android:layout_height="@dimen/dp_77"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dp_7" />
+                    android:layout_gravity="center" />
 
-                <com.cjj.MaterialRefreshLayout
-                    android:id="@+id/refresh_layout"
-                    android:layout_width="match_parent"
+                <GridView
+                    android:id="@+id/gridview_wares"
+                    android:layout_width="@dimen/dp_250"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="15dp"
-                    app:overlay="false"
-                    app:progress_colors="@array/material_colors"
-                    app:progress_show_circle_backgroud="false"
-                    app:wave_height_type="higher"
-                    app:wave_show="false">
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_50"
+                    android:background="@color/white"
+                    android:numColumns="3"
+                    android:scrollbars="none"></GridView>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_wares"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/dp_50"
-                        android:background="@color/white"
-                        android:overScrollMode="never"
-                        android:scrollbars="none" />
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerview_wares"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="@dimen/dp_50"-->
+                <!--android:background="@color/white"-->
+                <!--android:overScrollMode="never"-->
+                <!--android:scrollbars="none" />-->
 
-                </com.cjj.MaterialRefreshLayout>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

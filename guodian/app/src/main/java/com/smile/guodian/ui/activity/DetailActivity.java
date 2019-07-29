@@ -90,11 +90,11 @@ public class DetailActivity extends AppCompatActivity {
         tvName.setText(bean.getName());
         tvPrice.setText("¥" + bean.getPrice());
         List<HomeTop.Carousel> list = new ArrayList<>();
-        list.add(new HomeTop.Carousel(1, "https://img.alicdn.com/bao/uploaded/i1/TB1sDqKLXXXXXanXXXXXXXXXXXX_!!0-item_pic.jpg_800x800.jpg"));
-        list.add(new HomeTop.Carousel(2, "https://img.alicdn.com/bao/uploaded/i2/2171322350/TB2SqaTaNaJ.eBjSsziXXaJ_XXa_!!2171322350.jpg_800x800.jpg"));
-        list.add(new HomeTop.Carousel(3, "https://img.alicdn.com/bao/uploaded/i4/TB1Ke9CJpXXXXa9XpXXXXXXXXXX_!!0-item_pic.jpg_800x800.jpg"));
-        list.add(new HomeTop.Carousel(4, "https://asearch.alicdn.com/bao/uploaded/i2/159530341092325317/TB2mMMbaHBnpuFjSZFGXXX51pXa_!!0-saturn_solar.jpg_800x800.jpg"));
-        list.add(new HomeTop.Carousel(5, "https://img.alicdn.com/bao/uploaded/i3/20821802/TB2S7E9abVkpuFjSspcXXbSMVXa_!!20821802.jpg_800x800.jpg"));
+//        list.add(new HomeTop.Carousel(1, "https://img.alicdn.com/bao/uploaded/i1/TB1sDqKLXXXXXanXXXXXXXXXXXX_!!0-item_pic.jpg_800x800.jpg"));
+//        list.add(new HomeTop.Carousel(2, "https://img.alicdn.com/bao/uploaded/i2/2171322350/TB2SqaTaNaJ.eBjSsziXXaJ_XXa_!!2171322350.jpg_800x800.jpg"));
+//        list.add(new HomeTop.Carousel(3, "https://img.alicdn.com/bao/uploaded/i4/TB1Ke9CJpXXXXa9XpXXXXXXXXXX_!!0-item_pic.jpg_800x800.jpg"));
+//        list.add(new HomeTop.Carousel(4, "https://asearch.alicdn.com/bao/uploaded/i2/159530341092325317/TB2mMMbaHBnpuFjSZFGXXX51pXa_!!0-saturn_solar.jpg_800x800.jpg"));
+//        list.add(new HomeTop.Carousel(5, "https://img.alicdn.com/bao/uploaded/i3/20821802/TB2S7E9abVkpuFjSspcXXbSMVXa_!!20821802.jpg_800x800.jpg"));
 
         autoViewPager.setAdapter(new ImageHomeAdapter(context, activity, list));
         indicator.setViewPager(autoViewPager);

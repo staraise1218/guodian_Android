@@ -2,6 +2,7 @@ package com.smile.guodian.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.smile.guodian.R;
 import com.smile.guodian.model.entity.HomeTop;
+import com.smile.guodian.ui.activity.WebActivity;
 import com.smile.guodian.utils.GlideUtil;
 
 import java.util.List;
@@ -52,6 +54,16 @@ public class ImageHomeAdapter extends RecyclingPagerAdapter {
         } else {
             holder = (ViewHolder) view.getTag(R.string.app_name);
         }
+        //跳转到商品详情页
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("type", 20);
+                intent.putExtra("url", list.get(position).getAd_link());
+                activity.startActivity(intent);
+            }
+        });
         holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         Glide.with(context).load(list.get(getPosition(position)).getUrl()).into(holder.imageView);
 //        GlideUtil.load(activity, list.get(getPosition(position)).getUrl(), holder.imageView);

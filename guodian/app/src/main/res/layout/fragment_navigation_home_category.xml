@@ -14,7 +14,6 @@
             android:id="@+id/home_category_one"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_28"
             android:layout_weight="1"
             android:gravity="center"
             android:text="今日新品"
@@ -38,7 +37,6 @@
             android:id="@+id/home_category_three"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
             android:layout_weight="1"
             android:drawablePadding="8dp"
             android:gravity="center"
@@ -58,7 +56,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Today's new"
@@ -78,7 +75,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
             android:layout_weight="1"
             android:drawablePadding="8dp"
             android:gravity="center"
@@ -99,7 +95,6 @@
             android:id="@+id/home_category_four"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="猪年礼物"
@@ -123,7 +118,6 @@
             android:id="@+id/home_category_six"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
             android:layout_weight="1"
             android:drawablePadding="8dp"
             android:gravity="center"
@@ -144,7 +138,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Gift List"
@@ -164,7 +157,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
             android:layout_weight="1"
             android:drawablePadding="8dp"
             android:gravity="center"

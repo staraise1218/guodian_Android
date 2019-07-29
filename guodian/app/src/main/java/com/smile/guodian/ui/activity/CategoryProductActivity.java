@@ -1,12 +1,23 @@
 package com.smile.guodian.ui.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -17,11 +28,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
+import com.smile.guodian.model.entity.Category;
 import com.smile.guodian.model.entity.ProductBean;
 import com.smile.guodian.model.entity.ProductCategory;
 import com.smile.guodian.model.entity.ProductGood;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.ui.adapter.ProductAdapter;
 import com.smile.guodian.widget.ProductGenerator;
 import com.syz.commonpulltorefresh.lib.PtrClassicFrameLayout;
@@ -41,6 +54,10 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 public class CategoryProductActivity extends BaseActivity {
 
@@ -92,14 +109,14 @@ public class CategoryProductActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        if (webView.getVisibility() == View.GONE) {
-            this.finish();
-        } else {
-            webView.setVisibility(View.GONE);
-//            frameLayout.setVisibility(View.VISIBLE);
-//            tabLayout.setVisibility(View.VISIBLE);
-//            head.setVisibility(View.VISIBLE);
-        }
+//        if (webView.getVisibility() == View.GONE) {
+//            this.finish();
+//        } else {
+//            webView.setVisibility(View.GONE);
+////            frameLayout.setVisibility(View.VISIBLE);
+////            tabLayout.setVisibility(View.VISIBLE);
+////            head.setVisibility(View.VISIBLE);
+//        }
     }
 
 
@@ -109,6 +126,7 @@ public class CategoryProductActivity extends BaseActivity {
         Intent intent = getIntent();
         branch_id = intent.getStringExtra("branch_id");
         name = intent.getStringExtra("name");
+        title.setText(name);
         String names[] = new String[]{"综合", "销量", "价格", "折扣"};
         adapter = new ProductAdapter(goodList, this, name);
         content.setAdapter(adapter);
@@ -153,32 +171,75 @@ public class CategoryProductActivity extends BaseActivity {
             }
         });
 
-
-        webView.getSettings().setJavaScriptEnabled(true);
-        title.setText(name);
+//        final WebSettings webSettings = webView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+//        webSettings.setDomStorageEnabled(true);
+//        title.setText(name);
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                webView.setVisibility(View.VISIBLE);
-//                frameLayout.setVisibility(View.GONE);
-//                head.setVisibility(View.GONE);
-//                tabLayout.setVisibility(View.GONE);
-                webView.loadUrl(HttpContants.BASE_URL + "/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
-                webView.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        switch (keyCode) {
-                            case KeyEvent.KEYCODE_BACK:
-                                webView.setVisibility(View.GONE);
-                                content.setVisibility(View.VISIBLE);
-                                tabLayout.setVisibility(View.GONE);
-                                head.setVisibility(View.VISIBLE);
-                                return true;
 
-                        }
-                        return false;
-                    }
-                });
+                Intent intent1 = new Intent(CategoryProductActivity.this, WebActivity.class);
+                intent1.putExtra("goodsId", goodList.get(position).getGoods_id() + "");
+                startActivity(intent1);
+//
+//                webView.setVisibility(View.VISIBLE);
+//                webView.setWebChromeClient(new WebChromeClient() {
+//                    @Override
+//                    public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+//                        AlertDialog.Builder b = new AlertDialog.Builder(CategoryProductActivity.this);
+//                        b.setTitle("Alert");
+//                        b.setMessage(message);
+//                        b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                result.confirm();
+//                            }
+//                        });
+//                        b.setCancelable(false);
+//                        b.create().show();
+//                        return true;
+//                    }
+//
+//                    //设置响应js 的Confirm()函数
+//                    @Override
+//                    public boolean onJsConfirm(WebView view, String url, String message, final JsResult result) {
+//                        return true;
+//                    }
+//
+//                    //设置响应js 的Prompt()函数
+//                    @Override
+//                    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, final JsPromptResult result) {
+//                        return true;
+//                    }
+//                });
+//
+//                webView.setWebViewClient(new WebViewClient() {
+//                    //                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//                    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+////                        System.out.println(request.getUrl().getEncodedPath());
+//                        return super.shouldOverrideUrlLoading(view, request);
+//                    }
+//                });
+//                webView.addJavascriptInterface(CategoryProductActivity.this, "android");
+//                webView.loadUrl(HttpContants.BASE_URL + "/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
+
+//                webView.setOnKeyListener(new View.OnKeyListener() {
+//                    @Override
+//                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                        switch (keyCode) {
+//                            case KeyEvent.KEYCODE_BACK:
+//                                webView.setVisibility(View.GONE);
+//                                content.setVisibility(View.VISIBLE);
+//                                tabLayout.setVisibility(View.GONE);
+//                                head.setVisibility(View.VISIBLE);
+//                                return true;
+//
+//                        }
+//                        return false;
+//                    }
+//                });
             }
         });
 //        initData("");
@@ -187,6 +248,7 @@ public class CategoryProductActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 goodList.clear();
+                page = 1;
                 switch (tab.getPosition()) {
                     case 0:
                         break;
@@ -229,6 +291,59 @@ public class CategoryProductActivity extends BaseActivity {
 
     }
 
+    @JavascriptInterface
+    public void goBack() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    CategoryProductActivity.this.finish();
+                }
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void goMessageCenter() {
+        Intent intent = new Intent(CategoryProductActivity.this, MessageCenterActivity.class);
+        startActivity(intent);
+    }
+
+    @JavascriptInterface
+    public void showShare(String title, String url, String text, String imageUrl, String type) {
+
+//        System.out.println(type);
+
+        OnekeyShare oks = new OnekeyShare();
+        if (type.equals("webo")) {
+            oks.setPlatform(SinaWeibo.NAME);
+        } else if (type.equals("wx")) {
+            oks.setPlatform(Wechat.NAME);
+        } else {
+            oks.setPlatform(QQ.NAME);
+        }
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle(title);
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl(url);
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(text);
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImageUrl(imageUrl);//确保SDcard下面存在此张图片
+        // url在微信、微博，Facebook等平台中使用
+        oks.setUrl(url);
+        // comment是我对这条分享的评论，仅在人人网使用
+//        oks.setComment("我是测试评论文本");
+        // 启动分享GUI
+        oks.show(this);
+    }
+
+
     @Override
     protected int getContentResourseId() {
         return R.layout.activity_product_category;
@@ -245,6 +360,9 @@ public class CategoryProductActivity extends BaseActivity {
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/category/goodsList?brand_id=" + branch_id + tail + "&page=" + page, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
+
+//                System.out.println("---------"+response);
+
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray array = jsonObject.getJSONArray("data");
@@ -281,6 +399,15 @@ public class CategoryProductActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (webView != null) {
+            webView.setVisibility(View.GONE);
+            webView.removeAllViews();
+            webView.destroy();
+        }
+    }
 
     public void show() {
         adapter.notifyDataSetChanged();

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.smile.guodian.R;
@@ -24,6 +25,7 @@ import com.smile.guodian.presenter.HomePresenter;
 import com.smile.guodian.ui.activity.DetailActivity;
 import com.smile.guodian.ui.activity.MainActivity;
 import com.smile.guodian.ui.activity.SearchActivity;
+import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.ui.adapter.HomeAdapter;
 import com.smile.guodian.contract.HomeContract;
 import com.smile.guodian.utils.ToastUtil;
@@ -34,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
@@ -46,6 +49,19 @@ public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRe
     LoadMoreRecyclerView recyclerView;
     @BindView(R.id.home_search)
     EditText search;
+    @BindView(R.id.home_notify)
+    ImageView notify;
+
+    @OnClick(R.id.home_notify)
+    public void clickView(View view) {
+        switch (view.getId()) {
+            case R.id.home_notify:
+                Intent intent = new Intent(getContext(), MessageCenterActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
     private Context context;
     private MainActivity activity;
 

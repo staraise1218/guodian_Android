@@ -47,19 +47,23 @@ public class NewMessageAdapter extends BaseAdapter {
         TextView time = convertView.findViewById(R.id.item_new_message_time);
         TextView content = convertView.findViewById(R.id.item_new_message_content);
 
+        if (messages.size() == 0) {
+            return convertView;
+        }
+
         content.setText(messages.get(position).getMessage());
-        if (messages.get(position).getStatus() == 0) {
+        if (messages.get(position).getStatus().equalsIgnoreCase("0")) {
             tip.setVisibility(View.VISIBLE);
         } else {
             tip.setVisibility(View.GONE);
         }
 
 
-        Date date = new Date(messages.get(position).getSend_time());
+        Date date = new Date(Long.parseLong(messages.get(position).getSend_time()));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm");
         String dateTime = dateFormat.format(date);
         time.setText(dateTime);
 
-        return null;
+        return convertView;
     }
 }

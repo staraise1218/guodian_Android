@@ -1,12 +1,21 @@
 package com.smile.guodian.model.entity;
 
-public class GuessGoods  {
+public class GuessGoods {
     private int goods_id;
     private String goods_name;
     private int store_count;
     private String original_img;
     private String shop_price;
     private String market_price;
+    private int reserved;
+
+    public int getReserved() {
+        return reserved;
+    }
+
+    public void setReserved(int reserved) {
+        this.reserved = reserved;
+    }
 
     public int getGoods_id() {
         return goods_id;

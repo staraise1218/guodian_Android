@@ -72,7 +72,7 @@ public class ModifyLoginPassword extends BaseActivity {
 
                     }
                 };
-                timer.schedule(task, 1000);
+                timer.schedule(task, 1000, 1000);
                 getVerif();
                 break;
         }

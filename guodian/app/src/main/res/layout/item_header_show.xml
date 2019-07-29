@@ -24,17 +24,32 @@
         android:textSize="14sp"
         android:visibility="gone" />
 
-    <ImageView
-        android:id="@+id/item_headline_show_content"
-        android:layout_width="@dimen/dp_163"
-        android:layout_height="@dimen/dp_146"
-        android:layout_centerHorizontal="true" />
+    <FrameLayout
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_163"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/item_headline_show_content"
+            android:layout_width="@dimen/dp_163"
+            android:layout_height="@dimen/dp_146" />
+
+        <ImageView
+            android:id="@+id/item_home_state_img"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_91"
+            android:layout_marginTop="@dimen/dp_95"
+            android:visibility="gone" />
+    </FrameLayout>
+
 
     <TextView
         android:id="@+id/header_show_name"
         android:layout_width="@dimen/dp_150"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item_headline_show_content"
+        android:layout_below="@+id/test"
         android:layout_marginLeft="@dimen/dp_4"
         android:minLines="2"
         android:textColor="#4A4A4A"

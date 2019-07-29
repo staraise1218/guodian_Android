@@ -61,7 +61,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         //默认为第一次
 
         if (isFirst) {
-            PreferencesUtils.putBoolean(SplashActivity.this, "isFirst", false);
+//            PreferencesUtils.putBoolean(SplashActivity.this, "isFirst", false);
             startActivity(new Intent(SplashActivity.this, GuideActivity.class));
         } else {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));

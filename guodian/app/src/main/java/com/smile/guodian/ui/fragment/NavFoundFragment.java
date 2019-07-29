@@ -16,8 +16,10 @@ import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.Find;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.adapter.StaggeredAdapter;
 import com.smile.guodian.ui.adapter.StaggeredRecycleViewAdapter;
 import com.smile.guodian.utils.ToastUtil;
+import com.smile.guodian.widget.refresh.XMultiColumnListView;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONArray;
@@ -31,6 +33,22 @@ import java.util.Map;
 
 
 public class NavFoundFragment extends Fragment {
+
+
+    private View mView;
+    private Context mContext;
+    private static final String ARG_POSITION = "position";
+    private int position;
+    private Handler mHandler;
+
+
+    private StaggeredAdapter mAdapter = null;
+    private int currentPage = 0;
+    //    ContentTask task = new ContentTask(getActivity(), 2);
+    private int mType = 2;
+
+    private XMultiColumnListView mListView;
+    private boolean isRunning = false;
 
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
@@ -51,15 +69,15 @@ public class NavFoundFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
-        //mPullLoadMoreRecyclerView.setRefreshing(true);
-        mPullLoadMoreRecyclerView.setStaggeredGridLayout(2);
-        mRecyclerViewAdapter = new StaggeredRecycleViewAdapter(getActivity(), finds);
-        mRecyclerViewAdapter.setFinds(finds);
-        mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
-        mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreListener());
-        uid = getContext().getSharedPreferences("db", Context.MODE_PRIVATE).getInt("uid", -1);
+//        mPullLoadMoreRecyclerView = view.findViewById(R.id.pullLoadMoreRecyclerView);
 
+        //mPullLoadMoreRecyclerView.setRefreshing(true);
+//        mPullLoadMoreRecyclerView.setStaggeredGridLayout(2);
+//        mRecyclerViewAdapter = new StaggeredRecycleViewAdapter(getActivity(), finds);
+//        mRecyclerViewAdapter.setFinds(finds);
+//        mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+//        mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreListener());
+        uid = getContext().getSharedPreferences("db", Context.MODE_PRIVATE).getInt("uid", -1);
 
 
         pullData();
@@ -76,9 +94,50 @@ public class NavFoundFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_navigation_we, container, false);
-        title = view.findViewById(R.id.we_title);
-        return view;
+        View mView = inflater.inflate(R.layout.fragment_navigation_we, container, false);
+        title = mView.findViewById(R.id.we_title);
+//        mView = inflater.inflate(R.layout.fragment_pla_content, null);
+        mListView = (XMultiColumnListView) mView.findViewById(R.id.list);
+        mListView.setPullRefreshEnable(true);
+        mListView.setPullLoadEnable(true);
+        mListView.setAutoLoadEnable(true);
+
+
+        mListView.setPullLoadEnable(true);
+        mListView.setXListViewListener(new XMultiColumnListView.IXListViewListener() {
+
+            @Override
+            public void onRefresh() {
+                // TODO Auto-generated method stub
+                if (isRunning == false) {
+                    isRunning = true;
+                    page = 0;
+                    mType = 1;
+                    pullData();
+                    ++page;
+                }
+//                AddItemToContainer(++currentPage, 1);
+            }
+
+            @Override
+            public void onLoadMore() {
+                // TODO Auto-generated method stub
+
+                if (isRunning == false) {
+                    isRunning = true;
+                    ++page;
+                    mType = 2;
+                    pullData();
+
+
+                }
+
+//                AddItemToContainer(++currentPage, 2);
+            }
+        });
+        mAdapter = new StaggeredAdapter(getContext());
+        mListView.setAdapter(mAdapter);
+        return mView;
     }
 
     private List<Map<String, String>> setList() {
@@ -87,15 +146,26 @@ public class NavFoundFragment extends Fragment {
 
     }
 
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            System.out.println(mType);
+            isRunning = false;
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    mRecyclerViewAdapter.setFinds(finds);
-                    mRecyclerViewAdapter.notifyDataSetChanged();
-                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    if (mType == 1) {
+                        mAdapter.addItemTop(finds);
+                        mListView.stopRefresh();
+                    } else {
+                        if (finds.size() > 0)
+                            mAdapter.addItemLast(finds);
+                        mListView.stopLoadMore();
+                    }
+                    if (finds.size() > 0)
+                        mAdapter.notifyDataSetChanged();
+//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     break;
             }
         }
@@ -103,7 +173,7 @@ public class NavFoundFragment extends Fragment {
 
 
     public void pullData() {
-
+        finds = new ArrayList<>();
         Map<String, String> params = new HashMap<>();
         OkHttp.post(getContext(), HttpContants.BASE_URL + "/Api/find/index?user_id=" + uid + "&cat_id=11&page=" + page, params, new OkCallback() {
             @Override
@@ -143,6 +213,11 @@ public class NavFoundFragment extends Fragment {
             @Override
             public void onFailure(String state, String msg) {
 //                System.out.println(state+msg);
+                if (mType == 1) {
+                    mListView.stopRefresh();
+                } else {
+                    mListView.stopLoadMore();
+                }
                 ToastUtil.showShortToast(getContext(), msg);
             }
         });
@@ -159,24 +234,26 @@ public class NavFoundFragment extends Fragment {
         }, 1000);
     }
 
-    class PullLoadMoreListener implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-        @Override
-        public void onRefresh() {
-            page = 1;
-            setRefresh();
-            pullData();
-        }
+//    class PullLoadMoreListener implements PullLoadMoreRecyclerView.PullLoadMoreListener {
+//        @Override
+//        public void onRefresh() {
+//            page = 1;
+//            setRefresh();
+//            pullData();
+//        }
+//
+//        @Override
+//        public void onLoadMore() {
+//            page++;
+//            pullData();
+//        }
+//    }
+//
+//    private void setRefresh() {
+//        mRecyclerViewAdapter.getFinds().clear();
+////        mCount = 1;
+//
+//    }
 
-        @Override
-        public void onLoadMore() {
-            page++;
-            pullData();
-        }
-    }
 
-    private void setRefresh() {
-        mRecyclerViewAdapter.getFinds().clear();
-//        mCount = 1;
-
-    }
 }

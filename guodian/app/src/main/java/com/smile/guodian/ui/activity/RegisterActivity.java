@@ -64,9 +64,19 @@ public class RegisterActivity extends BaseActivity {
     private String code;
 
 
-    @OnClick({R.id.register_getVerification, R.id.register_commit, R.id.register_back, R.id.register_can_not, R.id.register_show_password})
+    @OnClick({R.id.register_getVerification, R.id.register_commit, R.id.register_back, R.id.register_can_not, R.id.register_show_password, R.id.register_protocol, R.id.register_protect})
     public void clickView(View view) {
         switch (view.getId()) {
+            case R.id.register_protect:
+                Intent intent = new Intent(RegisterActivity.this, WebActivity.class);
+                intent.putExtra("type", 11);
+                startActivity(intent);
+                break;
+            case R.id.register_protocol:
+                Intent intent1 = new Intent(RegisterActivity.this, WebActivity.class);
+                intent1.putExtra("type", 3);
+                startActivity(intent1);
+                break;
             case R.id.register_getVerification:
                 getVerif();
                 view.setEnabled(false);

@@ -37,6 +37,8 @@ public class DataCleanManager {
      * * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) * *
      */
     public static void cleanInternalCache(Context context) {
+        File webviewCacheDir = new File(context.getCacheDir().getAbsolutePath() + "/webviewCache");
+        deleteFile(webviewCacheDir);
         deleteFilesByDirectory(context.getCacheDir());
     }
 
@@ -128,10 +130,29 @@ public class DataCleanManager {
     private static void deleteFilesByDirectory(File directory) {
         if (directory != null && directory.exists() && directory.isDirectory()) {
             for (File item : directory.listFiles()) {
-                item.delete();
+//                System.out.println(item.getName());
+                deleteFile(item);
             }
         }
     }
+
+    public static void deleteFile(File file) {
+
+        if (file.exists()) {
+            if (file.isFile()) {
+                file.delete();
+            } else if (file.isDirectory()) {
+                File files[] = file.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    deleteFile(files[i]);
+                }
+            }
+            file.delete();
+        } else {
+//            Log.e("TAG", "delete file no exists " + file.getAbsolutePath());
+        }
+    }
+
 
     // 获取文件
 //Context.getExternalFilesDir() --> SDCard/Android/data/你的应用的包名/files/ 目录，一般放一些长时间保存的数据  

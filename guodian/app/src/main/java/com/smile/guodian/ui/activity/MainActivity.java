@@ -18,8 +18,10 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.smile.guodian.R;
 import com.smile.guodian.model.entity.CategoryList;
 import com.smile.guodian.ui.adapter.ViewPagerAdapter;
+import com.smile.guodian.ui.fragment.NavCartFragment;
 import com.smile.guodian.ui.fragment.NavCategoryFragment;
 import com.smile.guodian.ui.fragment.NavHomeFragment;
+import com.smile.guodian.ui.fragment.NavUserFragment;
 import com.smile.guodian.widget.DataGenerator;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class MainActivity extends BaseActivity {
     TextView tvSearchTips;
     private int uid;
 
+    private int type = -1;
 
     @BindView(R.id.bottom_tab_layout)
     TabLayout tabLayout;
@@ -75,6 +78,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        Intent intent = getIntent();
+        type = intent.getIntExtra("type", -1);
+
         initView();
     }
 
@@ -101,6 +107,15 @@ public class MainActivity extends BaseActivity {
                 uid = sharedPreferences.getInt("uid", -1);
 
                 System.out.println(uid + "---" + tab.getPosition());
+                if (tab.getPosition() == 3 && viewPagerAdapter != null) {
+                    NavCartFragment fragment = (NavCartFragment) viewPagerAdapter.getFragments().get(3);
+                    fragment.reload();
+                }
+
+                if (uid >= 0 && tab.getPosition() == 4) {
+                    NavUserFragment fragment = (NavUserFragment) viewPagerAdapter.getFragments().get(4);
+                    fragment.updateData();
+                }
 
                 if (uid <= 0 && (tab.getPosition() == 4 || tab.getPosition() == 3)) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -134,7 +149,12 @@ public class MainActivity extends BaseActivity {
                 SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("db", MODE_PRIVATE);
                 uid = sharedPreferences.getInt("uid", -1);
 
-                System.out.println(uid + "---" + tab.getPosition());
+//                System.out.println(uid + "---" + tab.getPosition());
+
+                if (tab.getPosition() == 3 && viewPagerAdapter != null) {
+                    NavCartFragment fragment = (NavCartFragment) viewPagerAdapter.getFragments().get(3);
+                    fragment.reload();
+                }
 
                 if (uid <= 0 && (tab.getPosition() == 4 || tab.getPosition() == 3)) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -149,55 +169,15 @@ public class MainActivity extends BaseActivity {
             tabLayout.addTab(tabLayout.newTab().setCustomView(DataGenerator.getTabView(this, i)));
         }
 
-//        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.bottom_navigation_item_home, R.drawable.home_check, R.color.colorBottomNavigationActiveColored);
-//        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.bottom_navigation_item_we, R.drawable.found_check, R.color.colorBottomNavigationActiveColored);
-//        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.bottom_navigation_item_help, R.drawable.classify, R.color.colorBottomNavigationActiveColored);
-//        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.bottom_navigation_item_cart, R.drawable.shop, R.color.colorBottomNavigationActiveColored);
-//        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.bottom_navigation_item_user, R.drawable.me_check, R.color.colorBottomNavigationActiveColored);
-
-//        bottomNavigationItems.add(item1);
-//        bottomNavigationItems.add(item2);
-//        bottomNavigationItems.add(item3);
-//        bottomNavigationItems.add(item4);
-//        bottomNavigationItems.add(item5);
-//
-//        bottomNavigation.addItems(bottomNavigationItems);
-//        bottomNavigation.setForceTitlesDisplay(true);
-//        bottomNavigation.setDefaultBackgroundColor(Color.parseColor("#FEFEFE"));
-//        bottomNavigation.setAccentColor(Color.parseColor("#DDA021"));
-//        bottomNavigation.setInactiveColor(Color.parseColor("#949494"));
-//
-//        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
-//            @Override
-//            public boolean onTabSelected(int position, boolean wasSelected) {
-//                viewPager.setCurrentItem(position, false);
-//                return true;
-//            }
-//        });
         viewPager.setOffscreenPageLimit(5);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
-//        NavHomeFragment.newInstance().setMainActivity(this);
 
-        /**
-         * 顶部搜索框内容定时更新，简单的采用倒计时功能
-         */
-//        final List<String> tips = new ArrayList<>();
-//        tips.add("AndroidNexus");
-//        tips.add("EasyToForget");
-//        tips.add("zhiye.wei@gmail.com");
+        if (type != -1) {
+            viewPager.setCurrentItem(type);
+            tabLayout.getTabAt(type).select();
+        }
 
-//        timer = new CountDownTimer(3000000, 5000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                tvSearchTips.setText(tips.get(new Random().nextInt(2)));
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//            }
-//        };
     }
 
     @Override

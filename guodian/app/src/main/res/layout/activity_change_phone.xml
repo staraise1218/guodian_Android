@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/change_phone_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_31"
+        android:layout_marginTop="@dimen/dp_25"
+        android:paddingBottom="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/change_phone_back"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_11"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="已绑定手机号"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_13" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_139"
+        android:text="您当前已绑定手机号"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_13" />
+
+    <TextView
+        android:id="@+id/change_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_161"
+        android:text="166*****2960"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_18" />
+
+    <Button
+        android:id="@+id/change_phone_commit"
+        android:layout_width="@dimen/dp_273"
+        android:layout_height="@dimen/dp_40"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_300"
+        android:background="@drawable/button2"
+        android:text="换绑手机号"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_13" />
+
+    <TextView
+        android:layout_width="@dimen/dp_273"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_357"
+        android:text="为确保账户安全，换绑前需验证当前手机号"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_12" />
+
+</RelativeLayout>

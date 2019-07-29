@@ -2,6 +2,10 @@
 <resources>
 
     <dimen name="title_size">15sp</dimen>
+    <!-- 刷新 -->
+    <dimen name="header_height">60dp</dimen>
+    <dimen name="footer_height">90dp</dimen>
+    <dimen name="footer_padding">10dp</dimen>
 
     <dimen name="picker_view_height">160dp</dimen>
     <dimen name="date_unit_text_size">18sp</dimen>

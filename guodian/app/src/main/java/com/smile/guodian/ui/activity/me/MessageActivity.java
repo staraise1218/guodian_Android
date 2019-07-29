@@ -84,9 +84,9 @@ public class MessageActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.message_sex:
-                if (user.getSex() != null) {
-                    break;
-                }
+//                if (user.getSex() != null) {
+//                    break;
+//                }
                 View sexView = LayoutInflater.from(this).inflate(R.layout.dialog_sex, null);
                 TextView btnCarema = (TextView) sexView.findViewById(R.id.btn_camera);
                 TextView btnPhoto = (TextView) sexView.findViewById(R.id.btn_photo);
@@ -134,9 +134,9 @@ public class MessageActivity extends BaseActivity {
 
                 break;
             case R.id.message_name:
-                if (user.getRealname() != null) {
-                    break;
-                }
+//                if (user.getRealname() != null) {
+//                    break;
+//                }
                 View nameView = LayoutInflater.from(this).inflate(R.layout.dialog_name, null);
                 popupWindow = new PopupWindow(nameView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
@@ -195,16 +195,16 @@ public class MessageActivity extends BaseActivity {
                 });
                 break;
             case R.id.message_birthday:
-                if (user.getBirthday() != null) {
-                    break;
-                }
+//                if (user.getBirthday() != null) {
+//                    break;
+//                }
                 pvCustomLunar.show();
                 break;
             case R.id.message_phone:
-                if (user.getMobile() != null) {
-                    break;
-                }
-                Intent intent = new Intent(MessageActivity.this, BindPhoneActivity.class);
+//                if (user.getMobile() != null) {
+//                    break;
+//                }
+                Intent intent = new Intent(MessageActivity.this, ChangePhoneActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -217,36 +217,61 @@ public class MessageActivity extends BaseActivity {
         user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
         initLunarPicker();
         birthday.setText(user.getBirthday());
-        sex.setText(user.getSex());
+        if (user.getSex().equalsIgnoreCase("1")) {
+            sex.setText("男");
+        } else {
+            sex.setText("女");
+        }
         name.setText(user.getRealname());
         phone.setText(user.getMobile());
 
-        if (user.getSex() != null) {
-            mSex.setEnabled(false);
-        }
-        if (user.getBirthday() != null) {
-            mBirthday.setEnabled(false);
-        }
-        if (user.getMobile() != null) {
-            mPhone.setEnabled(false);
-        }
-        if (user.getRealname() != null) {
-            mName.setEnabled(false);
-        }
+//        if (user.getSex() != null) {
+//            mSex.setEnabled(false);
+//        }
+//        if (user.getBirthday() != null) {
+//            mBirthday.setEnabled(false);
+//        }
+//        if (user.getMobile() != null) {
+//            mPhone.setEnabled(false);
+//        }
+//        if (user.getRealname() != null) {
+//            mName.setEnabled(false);
+//        }
 
     }
 
 
-    public void change(String field, String name) {
+    public void change(final String field, final String fieldvalue) {
         Map<String, String> params = new HashMap<>();
-
+        System.out.println(field + "---" + fieldvalue);
         MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
-        RequestBody body = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"user_id\"\r\n\r\n" + uid + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"field\"\r\n\r\n" + field + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"fieldValue\"\r\n\r\n" + name + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
+        RequestBody body = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"user_id\"\r\n\r\n" + uid + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"field\"\r\n\r\n" + field + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"fieldValue\"\r\n\r\n" + fieldvalue + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
 
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/user/changeField", body, this, new OkCallback() {
             @Override
             public void onResponse(String response) {
-                popupWindow.dismiss();
+                if (popupWindow != null)
+                    popupWindow.dismiss();
+
+
+                if (field.equalsIgnoreCase("sex")) {
+                    if (fieldvalue.equalsIgnoreCase("1")) {
+                        sex.setText("男");
+                    }
+                    if (fieldvalue.equalsIgnoreCase("2")) {
+                        sex.setText("女");
+                    }
+                }
+                if (field.equalsIgnoreCase("username")) {
+                    name.setText(fieldvalue);
+                }
+
+                if (field.equalsIgnoreCase("birthday")) {
+                    birthday.setText(fieldvalue);
+                }
+                if (field.equalsIgnoreCase("phone")) {
+                    phone.setText(fieldvalue);
+                }
             }
 
             @Override
@@ -272,7 +297,7 @@ public class MessageActivity extends BaseActivity {
         pvCustomLunar = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String string = dateFormat.format(date);
                 change("birthday", string);
             }

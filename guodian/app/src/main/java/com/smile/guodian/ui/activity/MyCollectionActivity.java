@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.smile.guodian.R;
+import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.Collection;
 import com.smile.guodian.model.entity.Inventory;
 import com.smile.guodian.okhttp.OkCallback;
@@ -86,7 +87,7 @@ public class MyCollectionActivity extends BaseActivity {
 //        RequestBody body = RequestBody.create(JSON, paramStr);
 //        RequestBody body = RequestBody.create(MediaType.parse())
 
-        OkHttp.post(this, "http://guodian.staraise.com.cn/Api/user/collectGoodslist?user_id=" + uid + "&page=" + page, params, new OkCallback() {
+        OkHttp.post(this,  HttpContants.BASE_URL+"/Api/user/collectGoodslist?user_id=" + uid + "&page=" + page, params, new OkCallback() {
             @Override
             public void onFailure(String state, String msg) {
                 System.out.println(state + msg);
@@ -136,7 +137,7 @@ public class MyCollectionActivity extends BaseActivity {
         Map<String, String> params = new HashMap<>();
 
 
-        OkHttp.post(this, "http://guodian.staraise.com.cn/Api/user/cancel_collect?user_id=" + uid + "&collect_id=" + myCollections.get(position).getCollect_id(), params, new OkCallback() {
+        OkHttp.post(this,  HttpContants.BASE_URL+"/Api/user/cancel_collect?user_id=" + uid + "&collect_id=" + myCollections.get(position).getCollect_id(), params, new OkCallback() {
             @Override
             public void onFailure(String state, String msg) {
                 System.out.println(state + msg);
@@ -165,6 +166,11 @@ public class MyCollectionActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     @Override
     protected int getContentResourseId() {

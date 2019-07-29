@@ -1,18 +1,18 @@
 package com.smile.guodian.model.entity;
 
 public class NewMessage {
-    private int message_id;
+    private String message_id;
     private String message;
-    private int category;
+    private String category;
     private String data;
-    private long send_time;
-    private int status;
+    private String send_time;
+    private String status;
 
-    public int getMessage_id() {
+    public String getMessage_id() {
         return message_id;
     }
 
-    public void setMessage_id(int message_id) {
+    public void setMessage_id(String message_id) {
         this.message_id = message_id;
     }
 
@@ -24,11 +24,11 @@ public class NewMessage {
         this.message = message;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -40,19 +40,19 @@ public class NewMessage {
         this.data = data;
     }
 
-    public long getSend_time() {
+    public String getSend_time() {
         return send_time;
     }
 
-    public void setSend_time(long send_time) {
+    public void setSend_time(String send_time) {
         this.send_time = send_time;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

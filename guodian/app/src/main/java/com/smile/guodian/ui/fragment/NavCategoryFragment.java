@@ -16,6 +16,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -41,7 +42,11 @@ import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.activity.CategoryProductActivity;
 import com.smile.guodian.ui.activity.MainActivity;
+import com.smile.guodian.ui.activity.SearchActivity;
+import com.smile.guodian.ui.activity.me.MessageActivity;
+import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.ui.adapter.CategoryAdapter;
+import com.smile.guodian.ui.adapter.SecondAdapter;
 import com.smile.guodian.ui.adapter.SecondGoodsAdapter;
 import com.smile.guodian.ui.adapter.category.SortAdapter;
 import com.smile.guodian.utils.CharacterParser;
@@ -62,9 +67,27 @@ import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Call;
 
 public class NavCategoryFragment extends BaseFragment {
+
+
+    @OnClick({R.id.category_notify, R.id.category_search})
+    public void clickView(View view) {
+        Intent intent = null;
+        switch (view.getId()) {
+            case R.id.category_notify:
+                intent = new Intent(getContext(), MessageCenterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.category_search:
+                intent = new Intent(getContext(), SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
 
     public NavCategoryFragment() {
     }
@@ -95,12 +118,15 @@ public class NavCategoryFragment extends BaseFragment {
 
     @BindView(R.id.recyclerview_category)
     RecyclerView mRecyclerView;
-    @BindView(R.id.recyclerview_wares)
-    RecyclerView mRecyclerviewWares;
-    @BindView(R.id.refresh_layout)
-    MaterialRefreshLayout mRefreshLaout;
-    @BindView(R.id.catergory_web)
-    WebView webView;
+    @BindView(R.id.gridview_wares)
+    GridView mGridViewWares;
+
+    //    @BindView(R.id.recyclerview_wares)
+//    RecyclerView mRecyclerviewWares;
+//    @BindView(R.id.refresh_layout)
+//    MaterialRefreshLayout mRefreshLaout;
+//    @BindView(R.id.catergory_web)
+//    WebView webView;
     @BindView(R.id.catergory_content)
     RelativeLayout content;
     @BindView(R.id.catergory_banner)
@@ -123,6 +149,7 @@ public class NavCategoryFragment extends BaseFragment {
     private List<Category> categoryFirst = new ArrayList<>();      //一级菜单
     private CategoryAdapter mCategoryAdapter;                      //一级菜单
     private SecondGoodsAdapter mSecondGoodsAdapter;              //二级菜单
+    private SecondAdapter mSecondAdapter;//二级菜单
     private List<Category> datas;
     private List<String> mVFMessagesList;                 //上下轮播的信息
 
@@ -156,8 +183,8 @@ public class NavCategoryFragment extends BaseFragment {
 //        }
         mVFMessagesList = new ArrayList<>();
         requestCategoryData();
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+//        WebSettings webSettings = webView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
 
         sideBar.setTextView(dialog);
         // 设置右侧触摸监听
@@ -166,6 +193,9 @@ public class NavCategoryFragment extends BaseFragment {
             @Override
             public void onTouchingLetterChanged(String s) {
                 // 该字母首次出现的位置
+                if (adapter == null) {
+                    return;
+                }
                 int position = adapter.getPositionForSection(s.charAt(0));
                 if (position != -1) {
                     sortListView.setSelection(position);
@@ -252,9 +282,9 @@ public class NavCategoryFragment extends BaseFragment {
                         }.getType();
                         CategoryBean enums = mGson.fromJson(response, collectionType);
                         Iterator<Category> iterator = enums.getData().iterator();
-//                        Category category = new Category();
-//                        category.setCat_name("品牌");
-//                        categoryFirst.add(category);
+                        Category category = new Category();
+                        category.setCat_name("品牌");
+                        categoryFirst.add(category);
                         while (iterator.hasNext()) {
                             Category bean = iterator.next();
                             position++;
@@ -264,19 +294,21 @@ public class NavCategoryFragment extends BaseFragment {
                             categoryFirst.add(bean);
                         }
 //                        System.out.println(currentPosition);
-//                        if (currentPosition != 0) {
-                        showCategoryData(currentPosition);
-                        second.setVisibility(View.VISIBLE);
-                        sort.setVisibility(View.GONE);
-//                        } else {
-//                            showCategoryData(0);
-//                        }
+                        if (currentPosition != 0) {
+                            showCategoryData(currentPosition);
+                            second.setVisibility(View.VISIBLE);
+                            sort.setVisibility(View.GONE);
+                        } else {
+                            second.setVisibility(View.GONE);
+                            sort.setVisibility(View.VISIBLE);
+                            showCategoryData(0);
+                        }
 
-//                        if (categoryId == 0)
-//                            defaultClick();
-//                        else {
-//                        NavCategoryFragment.this.requestWares(categoryId + "");
-//                        }
+                        if (categoryId == 0)
+                            defaultClick();
+                        else {
+                            NavCategoryFragment.this.requestWares(categoryId + "");
+                        }
 
                     }
                 });
@@ -302,15 +334,15 @@ public class NavCategoryFragment extends BaseFragment {
                 String name = category.getCat_name();
                 mCategoryAdapter.notifyDataSetChanged();
                 isclick = true;
-//                if (position == 0) {
-//                    second.setVisibility(View.GONE);
-//                    sort.setVisibility(View.VISIBLE);
-//                    defaultClick();
-//                } else {
-                second.setVisibility(View.VISIBLE);
-                sort.setVisibility(View.GONE);
-                requestWares(id);
-//                }
+                if (position == 0) {
+                    second.setVisibility(View.GONE);
+                    sort.setVisibility(View.VISIBLE);
+                    defaultClick();
+                } else {
+                    second.setVisibility(View.VISIBLE);
+                    sort.setVisibility(View.GONE);
+                    requestWares(id);
+                }
             }
         });
 
@@ -336,10 +368,10 @@ public class NavCategoryFragment extends BaseFragment {
             Category category = categoryFirst.get(1);
             String id = category.getId();
             requestWares(id);
-//            getBanchID();
+            getBanchID();
         }
 //        sourceDataList = filledData();
-        // 根据a-z进行排序源数据
+////         根据a-z进行排序源数据
 //        Collections.sort(sourceDataList, pinyinComparator);
 //        adapter = new SortAdapter(getContext(), sourceDataList);
 //        sortListView.setAdapter(adapter);
@@ -356,6 +388,7 @@ public class NavCategoryFragment extends BaseFragment {
                     @Override
                     public void onError(Call call, Exception e, int id) {
 //                        LogUtil.e("分类一级", e + "", true);true
+                        System.out.println(e.getMessage() + "");
                     }
 
                     @Override
@@ -419,17 +452,9 @@ public class NavCategoryFragment extends BaseFragment {
 
             @Override
             public void onResponse(String response, int id) {
-//                LogUtil.e("二级菜单", response + "", true);
-                System.out.println(response);
-
-
                 CategoryBean2 hotGoods = mGson.fromJson(response, CategoryBean2.class);
-//                totalPage = hotGoods.getTotalPage();
-//                currPage = hotGoods.getCurrentPage();
                 datas = hotGoods.getData().getList();
-
                 Glide.with(getContext()).load(HttpContants.BASE_URL + hotGoods.getData().getCategory().getImage2()).into(banner);
-
                 showData();
 
             }
@@ -444,27 +469,23 @@ public class NavCategoryFragment extends BaseFragment {
         switch (state) {
             case STATE_NORMAL:
 
-                mSecondGoodsAdapter = new SecondGoodsAdapter(datas, getActivity());
-                mSecondGoodsAdapter.setOnItemClickListener(new BaseQuickAdapter
-                        .OnItemClickListener() {
-
+                mSecondAdapter = new SecondAdapter(getActivity(), datas);
+                mGridViewWares.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(getContext(), CategoryProductActivity.class);
                         intent.putExtra("branch_id", datas.get(position).getId());
                         intent.putExtra("name", datas.get(position).getName());
                         getContext().startActivity(intent);
                     }
                 });
-
-
-                mRecyclerviewWares.setAdapter(mSecondGoodsAdapter);
-                mRecyclerviewWares.setLayoutManager(new GridLayoutManager(getContext(), 3));
-                DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(),
-                        DividerItemDecoration.VERTICAL);
-                itemDecoration.setDrawable(new ColorDrawable(ContextCompat.getColor(mContext, R.color.white)));
-                mRecyclerviewWares.addItemDecoration(itemDecoration);
+                mGridViewWares.setAdapter(mSecondAdapter);
+//                mRecyclerviewWares.setAdapter(mSecondGoodsAdapter);
+//                mRecyclerviewWares.setLayoutManager(new GridLayoutManager(getContext(), 3));
+//                DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(),
+//                        DividerItemDecoration.VERTICAL);
+//                itemDecoration.setDrawable(new ColorDrawable(ContextCompat.getColor(mContext, R.color.white)));
+//                mRecyclerviewWares.addItemDecoration(itemDecoration);
                 break;
 
         }

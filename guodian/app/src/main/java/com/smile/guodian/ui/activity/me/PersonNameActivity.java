@@ -82,7 +82,6 @@ public class PersonNameActivity extends BaseActivity {
         }
 
         uid = getSharedPreferences("db", MODE_PRIVATE).getInt("uid", -1);
-
         resetName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -92,7 +91,7 @@ public class PersonNameActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (start == 0) {
+                if (s.length() == 0) {
                     save.setEnabled(false);
                 } else {
                     save.setEnabled(true);
@@ -121,11 +120,10 @@ public class PersonNameActivity extends BaseActivity {
                 User user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
                 if (field.equalsIgnoreCase("username")) {
                     user.setRealname(resetName.getText().toString());
-
                 } else if (field.equalsIgnoreCase("nickname")) {
                     user.setNickname(resetName.getText().toString());
                 } else if (field.equalsIgnoreCase("personal_statement")) {
-                    user.setIs_distribut(resetName.getText().toString());
+                    user.setPersonnal_statement(resetName.getText().toString());
                 }
                 BaseApplication.getDaoSession().getUserDao().update(user);
                 PersonNameActivity.this.finish();

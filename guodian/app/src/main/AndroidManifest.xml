@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.smile.guodian">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -11,12 +13,23 @@
     <application
         android:name=".ui.BaseApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/iclauncher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/net"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:name">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="包名.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
             android:name="com.smile.guodian.ui.activity.GuideActivity"
             android:theme="@style/Full">
@@ -33,7 +46,9 @@
         <activity android:name="com.smile.guodian.ui.activity.MainActivity"></activity>
         <activity android:name="com.smile.guodian.ui.activity.MyBrowserActivity" />
         <activity android:name="com.smile.guodian.ui.activity.MyCollectionActivity" />
-        <activity android:name="com.smile.guodian.ui.activity.LoginActivity" />
+        <activity
+            android:name="com.smile.guodian.ui.activity.LoginActivity"
+            android:exported="true" />
         <activity android:name="com.smile.guodian.ui.activity.RegisterActivity" />
         <activity android:name="com.smile.guodian.ui.activity.ForgetPassword" />
         <activity android:name="com.smile.guodian.ui.activity.ResetPassword" />
@@ -42,7 +57,7 @@
         <activity android:name=".ui.activity.CategoryProductActivity"></activity>
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.WebActivity" />
-        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.me.SettingActivity" />
         <activity android:name=".ui.activity.me.PersonActivity" />
         <activity android:name=".ui.activity.me.PersonNameActivity" />
         <activity
@@ -58,6 +73,10 @@
         <activity android:name=".ui.activity.me.AddressActivity" />
         <activity android:name=".ui.activity.me.EditAddressActivity" />
         <activity android:name=".ui.activity.me.ModifyPayPassword" />
+        <activity android:name=".ui.activity.me.ChangePhoneActivity" />
+        <activity android:name=".ui.activity.me.ChangePhone1Activty" />
+        <activity android:name=".ui.activity.me.ChangePhone2Activity" />
+        <activity android:name=".ui.activity.EmptyActiity" />
     </application>
 
 </manifest>

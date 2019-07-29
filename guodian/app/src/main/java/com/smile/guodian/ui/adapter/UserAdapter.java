@@ -20,12 +20,13 @@ import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.GuessGoods;
 import com.smile.guodian.model.entity.User;
 import com.smile.guodian.ui.BaseApplication;
-import com.smile.guodian.ui.activity.LoginActivity;
-import com.smile.guodian.ui.activity.SettingActivity;
+import com.smile.guodian.ui.activity.me.SettingActivity;
 import com.smile.guodian.ui.activity.WebActivity;
 import com.smile.guodian.ui.activity.me.PersonActivity;
 import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.widget.HomeGridView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -39,6 +40,49 @@ public class UserAdapter extends RecyclerView.Adapter {
     private Context context;
     //    private List<>
     List<GuessGoods> guessGoodsList;
+    private int waitCount;
+    private int receiveCount;
+    private int returnCount;
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public List<GuessGoods> getGuessGoodsList() {
+        return guessGoodsList;
+    }
+
+    public void setGuessGoodsList(List<GuessGoods> guessGoodsList) {
+        this.guessGoodsList = guessGoodsList;
+    }
+
+    public int getWaitCount() {
+        return waitCount;
+    }
+
+    public void setWaitCount(int waitCount) {
+        this.waitCount = waitCount;
+    }
+
+    public int getReceiveCount() {
+        return receiveCount;
+    }
+
+    public void setReceiveCount(int receiveCount) {
+        this.receiveCount = receiveCount;
+    }
+
+    public int getReturnCount() {
+        return returnCount;
+    }
+
+    public void setReturnCount(int returnCount) {
+        this.returnCount = returnCount;
+    }
 
     public UserAdapter(Context context, List<GuessGoods> guessGoodsList) {
         this.context = context;
@@ -96,6 +140,12 @@ public class UserAdapter extends RecyclerView.Adapter {
         ImageView setting;
         @BindView(R.id.user_notify)
         ImageView notify;
+        @BindView(R.id.wait_count)
+        TextView waitCount;
+        @BindView(R.id.receive_count)
+        TextView receiveCount;
+        @BindView(R.id.return_count)
+        TextView returnCount;
 
         @OnClick({R.id.user_wait, R.id.user_receive, R.id.user_return, R.id.user_all})
         public void clickView(View view) {
@@ -149,6 +199,7 @@ public class UserAdapter extends RecyclerView.Adapter {
     }
 
     public class MessageViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.user_banner)
         public TextView title;
 
         public MessageViewHolder(View itemView) {
@@ -198,10 +249,43 @@ public class UserAdapter extends RecyclerView.Adapter {
                         context.startActivity(intent);
                     }
                 });
+
+
+                if (receiveCount == 0) {
+                    headerViewHolder.receiveCount.setVisibility(View.GONE);
+                } else {
+                    headerViewHolder.receiveCount.setVisibility(View.VISIBLE);
+                    headerViewHolder.receiveCount.setText(receiveCount + "");
+                }
+                if (returnCount == 0) {
+                    headerViewHolder.returnCount.setVisibility(View.GONE);
+                } else {
+                    headerViewHolder.returnCount.setVisibility(View.VISIBLE);
+                    headerViewHolder.returnCount.setText(returnCount + "");
+                }
+                if (waitCount == 0) {
+                    headerViewHolder.waitCount.setVisibility(View.GONE);
+                } else {
+                    headerViewHolder.waitCount.setVisibility(View.VISIBLE);
+                    headerViewHolder.waitCount.setText(waitCount + "");
+                }
+
                 break;
             case 1:
                 tipViewHolder = (TipViewHolder) viewHolder;
                 tipViewHolder.gridView.setAdapter(new ItemTipAdapter(2, context));
+                break;
+            case 2:
+                MessageViewHolder messageViewHolder = (MessageViewHolder) viewHolder;
+                messageViewHolder.title.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, WebActivity.class);
+                        intent.putExtra("type", 20);
+                        intent.putExtra("url", "http://www.guodianjm.com/page/myMember.html");
+                        context.startActivity(intent);
+                    }
+                });
                 break;
             case 3:
                 tipViewHolder = (TipViewHolder) viewHolder;

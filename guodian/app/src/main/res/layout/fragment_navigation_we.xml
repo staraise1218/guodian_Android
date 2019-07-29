@@ -12,8 +12,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/sp_17" />
 
-    <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-        android:id="@+id/pullLoadMoreRecyclerView"
+    <com.smile.guodian.widget.refresh.XMultiColumnListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/we_title" />

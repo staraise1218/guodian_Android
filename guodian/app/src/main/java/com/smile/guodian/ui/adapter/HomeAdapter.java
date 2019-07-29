@@ -143,9 +143,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             CarouselHolder holder = (CarouselHolder) viewHolder;
             holder.viewPager.setAdapter(new ImageHomeAdapter(context, activity, loopList));
             holder.indicator.setViewPager(holder.viewPager);
-//            holder.viewPager.setInterval(4000);
+            holder.viewPager.setInterval(4000);
             holder.viewPager.setSlideBorderMode(AutoScrollViewPager.SLIDE_BORDER_MODE_TO_PARENT);
-//            holder.viewPager.startAutoScroll();
+            holder.viewPager.startAutoScroll();
         } else if (viewHolder instanceof HeadlineHolder) {
             //热门
             HeadlineHolder holder = (HeadlineHolder) viewHolder;
@@ -182,7 +182,6 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     intent.putExtra("name", guessGoods.get(position).getGoods_name());
                     intent.putExtra("goodsId", guessGoods.get(position).getGoods_id() + "");
                     activity.startActivity(intent);
-
                 }
             });
 
@@ -201,11 +200,18 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         intent.putExtra("type", 1);
                         activity.startActivity(intent);
                     }
+                    if (position == 0) {
+                        Intent intent = new Intent(context, WebActivity.class);
+                        intent.putExtra("type", 20);
+//                    intent.putExtra("name", hotList.get(position).getAd_name());
+                        intent.putExtra("url", regabout.get(position).getAd_link());
+                        activity.startActivity(intent);
+                    }
                 }
             });
 
         } else if (viewHolder instanceof CommonHolder) {
-            CommonHolder holder = (CommonHolder) viewHolder;
+            final CommonHolder holder = (CommonHolder) viewHolder;
             HotShowAdapter headlineShowAdapter = new HotShowAdapter(context, activity);
             headlineShowAdapter.setHots(hotList);
             holder.gridView.setAdapter(headlineShowAdapter);
@@ -213,8 +219,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(context, WebActivity.class);
-                    intent.putExtra("name", hotList.get(position).getAd_name());
-                    intent.putExtra("goodsId", hotList.get(position).getPid());
+                    intent.putExtra("type", 20);
+//                    intent.putExtra("name", hotList.get(position).getAd_name());
+                    intent.putExtra("url", hotList.get(position).getAd_link());
+//                    System.out.println(hotList.get(position).getPid() + "----" + position + "---" + hotList.toString());
                     activity.startActivity(intent);
 
                 }
@@ -229,8 +237,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(context, WebActivity.class);
-                    intent.putExtra("name", customer.get(position).getAd_name());
-                    intent.putExtra("goodsId", customer.get(position).getPid());
+                    intent.putExtra("type", 20);
+                    intent.putExtra("name", hotList.get(position).getAd_name());
+//                    System.out.println("--------");
+                    intent.putExtra("url", customer.get(position).getAd_link());
                     activity.startActivity(intent);
                 }
             });

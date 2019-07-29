@@ -2,6 +2,8 @@ package com.smile.guodian.ui.activity.found;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
@@ -46,8 +48,12 @@ public class FoundDetailActivity extends BaseActivity {
     CheckBox checkBox;
 
     @OnClick(R.id.found_detail_back)
-    public void clickView() {
-        this.finish();
+    public void clickView(View view) {
+        switch (view.getId()) {
+            case R.id.found_detail_back:
+                this.finish();
+                break;
+        }
     }
 
     private int uid;
@@ -147,6 +153,7 @@ public class FoundDetailActivity extends BaseActivity {
                     title.setText(articleDetail.getTitle());
                     Glide.with(FoundDetailActivity.this).load(HttpContants.BASE_URL + articleDetail.getThumb()).into(imageView);
                     content.setText(articleDetail.getContent());
+                    content.setMovementMethod(ScrollingMovementMethod.getInstance());
                     checkBox.setChecked(articleDetail.getIsliked() == 1);
 //                    if (checkBox.isChecked()) {
 //                        checkBox.setEnabled(false);

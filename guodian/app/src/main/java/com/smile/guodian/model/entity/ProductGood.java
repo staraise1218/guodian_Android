@@ -7,6 +7,15 @@ public class ProductGood {
     private String original_img;
     private String shop_price;
     private String market_price;
+    private int reserved;
+
+    public int getReserved() {
+        return reserved;
+    }
+
+    public void setReserved(int reserved) {
+        this.reserved = reserved;
+    }
 
     public String getMarket_price() {
         return market_price;
@@ -54,5 +63,17 @@ public class ProductGood {
 
     public void setShop_price(String shop_price) {
         this.shop_price = shop_price;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductGood{" +
+                "goods_id=" + goods_id +
+                ", goods_name='" + goods_name + '\'' +
+                ", store_count=" + store_count +
+                ", original_img='" + original_img + '\'' +
+                ", shop_price='" + shop_price + '\'' +
+                ", market_price='" + market_price + '\'' +
+                '}';
     }
 }

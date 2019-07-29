@@ -7,48 +7,50 @@
 
     <Button
         android:id="@+id/divider"
-        android:background="#E7E7E7"
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="10dp"
+        android:background="#E7E7E7" />
+
     <View
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/divider"
         android:layout_width="4dp"
         android:layout_height="16dp"
+        android:layout_below="@+id/divider"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
         android:background="#DDA021" />
+
     <TextView
-        android:layout_below="@+id/divider"
         android:id="@+id/hot_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:textSize="16sp"
-        android:textColor="@color/black"
         android:text="热门商品"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
     <TextView
-        android:text="Hot commodity"
-        android:layout_marginLeft="5dp"
-        android:textColor="#FFD59A"
-        android:layout_toRightOf="@+id/hot_tip"
-        android:layout_below="@+id/divider"
-        android:textSize="12sp"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/hot_tip"
+        android:text="Hot commodity"
+        android:textColor="#FFD59A"
+        android:textSize="12sp" />
 
     <GridView
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/hot_tip"
-        android:numColumns="2"
         android:id="@+id/item_home_hot_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></GridView>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hot_tip"
+        android:layout_marginTop="15dp"
+        android:numColumns="2"></GridView>
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,10 +61,10 @@
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:textColor="@color/font_black_color"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:visibility="gone" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,10 +74,10 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/font_red_color"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:visibility="gone" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/iv_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,14 +85,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="4dp"
         android:contentDescription="@null"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:visibility="gone" />
 
     <View
-        android:visibility="gone"
         android:layout_width="1px"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:background="@color/divider_main_color" />
+        android:background="@color/divider_main_color"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

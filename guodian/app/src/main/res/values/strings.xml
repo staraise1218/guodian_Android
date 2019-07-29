@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">国典</string>
+    <string name="app_name">国典寄卖</string>
 
     <string name="bottom_navigation_item_home">首页</string>
     <string name="bottom_navigation_item_we">发现</string>
@@ -27,4 +27,13 @@
     <string name="home_first">头条</string>
 
     <string name="toast_network_error">网络错误</string>
+    <!-- 刷新 -->
+    <string name="header_hint_refresh_normal">下拉刷新</string>
+    <string name="header_hint_refresh_ready">松开刷新数据</string>
+    <string name="header_hint_refresh_loading">正在加载&#8230;</string>
+    <string name="header_hint_refresh_time">上次更新时间：</string>
+    <string name="footer_hint_load_normal">查看更多</string>
+    <string name="footer_hint_load_ready">松开载入更多</string>
+
+
 </resources>

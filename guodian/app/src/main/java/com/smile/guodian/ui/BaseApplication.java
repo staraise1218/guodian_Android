@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.StrictMode;
 
+import com.mob.MobSDK;
 import com.smile.guodian.DaoMaster;
 import com.smile.guodian.DaoSession;
 
@@ -22,6 +23,7 @@ public class BaseApplication extends Application {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         builder.detectFileUriExposure();
+        MobSDK.init(this);
 
 
     }

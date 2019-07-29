@@ -1,13 +1,21 @@
 package com.smile.guodian.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -26,6 +34,7 @@ import com.smile.guodian.model.entity.ProductCategory;
 import com.smile.guodian.model.entity.ProductGood;
 import com.smile.guodian.okhttp.OkCallback;
 import com.smile.guodian.okhttp.OkHttp;
+import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.ui.adapter.ItemTipAdapter;
 import com.smile.guodian.ui.adapter.ProductAdapter;
 import com.smile.guodian.ui.adapter.search.TextAdapter;
@@ -50,11 +59,13 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 public class ProductActivity extends BaseActivity {
 
-    //    @BindView(R.id.product_content)
-//    GridView content;
     @BindView(R.id.product_title)
     TextView title;
     @BindView(R.id.product_back)
@@ -109,13 +120,63 @@ public class ProductActivity extends BaseActivity {
     ProductAdapter adapter;
     private int selectPosition = 0;
 
+    @JavascriptInterface
+    public void goBack() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    ProductActivity.this.finish();
+                }
+            }
+        });
+
+    }
+
+    @JavascriptInterface
+    public void goMessageCenter() {
+        Intent intent = new Intent(ProductActivity.this, MessageCenterActivity.class);
+        startActivity(intent);
+    }
+
+    @JavascriptInterface
+    public void showShare(String title, String url, String text, String imageUrl, String type) {
+        OnekeyShare oks = new OnekeyShare();
+        if (type.equals("webo")) {
+            oks.setPlatform(SinaWeibo.NAME);
+        } else if (type.equals("wx")) {
+            oks.setPlatform(Wechat.NAME);
+        } else {
+            oks.setPlatform(QQ.NAME);
+        }
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle(title);
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl(url);
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(text);
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImageUrl(imageUrl);//确保SDcard下面存在此张图片
+        // url在微信、微博，Facebook等平台中使用
+        oks.setUrl(url);
+        // comment是我对这条分享的评论，仅在人人网使用
+//        oks.setComment("我是测试评论文本");
+        // 启动分享GUI
+        oks.show(this);
+    }
+
     @Override
     protected void init() {
         Intent intent = getIntent();
         type = intent.getIntExtra("type", 1);
         name = intent.getStringExtra("title");
         if (type == 4) {
-            tabLayout.setVisibility(View.GONE);
+            horizontalListView.setVisibility(View.GONE);
         }
         adapter = new ProductAdapter(goodList, this, name);
         content.setAdapter(adapter);
@@ -125,23 +186,78 @@ public class ProductActivity extends BaseActivity {
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                webView.setVisibility(View.VISIBLE);
-                webView.loadUrl("http://guodian.staraise.com.cn/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
-                webView.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        switch (keyCode) {
-                            case KeyEvent.KEYCODE_BACK:
-                                webView.setVisibility(View.GONE);
-                                content.setVisibility(View.VISIBLE);
-                                tabLayout.setVisibility(View.GONE);
-                                head.setVisibility(View.VISIBLE);
-                                return true;
 
-                        }
-                        return false;
-                    }
-                });
+                Intent intent1 = new Intent(ProductActivity.this, WebActivity.class);
+//                System.out.println(goodList.get(position).getGoods_id()+"-----");
+                intent1.putExtra("goodsId", goodList.get(position).getGoods_id() + "");
+                startActivity(intent1);
+//                webView.setVisibility(View.VISIBLE);
+//                webView.setWebViewClient(new WebViewClient() {
+//                    @Override
+//                    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//                        super.onPageStarted(view, url, favicon);
+//                    }
+//
+//                    @Override
+//                    public void onPageFinished(WebView view, String url) {
+//                        super.onPageFinished(view, url);
+//                    }
+//
+//                    @Override
+//                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                            return super.shouldOverrideUrlLoading(view, url);
+//                    }
+//
+//                    @Override
+//                    public void onReceivedError(WebView view, int errorCode,
+//                                                String description, String failingUrl) {
+//                        super.onReceivedError(view, errorCode, description, failingUrl);
+//                    }
+//                });
+//                webView.setWebChromeClient(new WebChromeClient() {
+//                    @Override
+//                    public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+//                        AlertDialog.Builder b = new AlertDialog.Builder(ProductActivity.this);
+//                        b.setTitle("Alert");
+//                        b.setMessage(message);
+//                        b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                result.confirm();
+//                            }
+//                        });
+//                        b.setCancelable(false);
+//                        b.create().show();
+//                        return true;
+//                    }
+//                    //设置响应js 的Confirm()函数
+//                    @Override
+//                    public boolean onJsConfirm(WebView view, String url, String message, final JsResult result) {
+//                        return true;
+//                    }
+//                    //设置响应js 的Prompt()函数
+//                    @Override
+//                    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, final JsPromptResult result) {
+//                        return true;
+//                    }
+//                });
+//                webView.addJavascriptInterface(ProductActivity.this, "android");
+//                webView.loadUrl(HttpContants.BASE_URL + "/page/commodity.html?goods_id=" + goodList.get(position).getGoods_id());
+//                webView.setOnKeyListener(new View.OnKeyListener() {
+//                    @Override
+//                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                        switch (keyCode) {
+//                            case KeyEvent.KEYCODE_BACK:
+//                                webView.setVisibility(View.GONE);
+//                                content.setVisibility(View.VISIBLE);
+//                                tabLayout.setVisibility(View.GONE);
+//                                head.setVisibility(View.VISIBLE);
+//                                return true;
+//
+//                        }
+//                        return false;
+//                    }
+//                });
             }
         });
 
@@ -152,6 +268,7 @@ public class ProductActivity extends BaseActivity {
             public void loadMore() {
                 page++;
                 initData(cat_id);
+                frameLayout.loadMoreComplete(true);
             }
         });
 
@@ -173,7 +290,7 @@ public class ProductActivity extends BaseActivity {
                     public void run() {
                         goodList.clear();
                         page = 1;
-                        initData("1");
+                        initData(cat_id);
                     }
                 }, 1000);
             }
@@ -195,8 +312,6 @@ public class ProductActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                System.out.println(tab.getPosition());
-//                if(tab.getPosition()!=0)
                 page = 1;
                 goodList.clear();
                 for (int i = 0; i < tabLayout.getTabCount(); i++) {
@@ -205,10 +320,8 @@ public class ProductActivity extends BaseActivity {
                     TextView text = (TextView) view.findViewById(R.id.tab_content_text);
                     if (i == tab.getPosition()) {
                         text.setTextColor(getResources().getColor(R.color.font_orange_color));
-//                        text.setTextColor(Color.parseColor("#DDA021"));
                     } else {
                         text.setTextColor(getResources().getColor(android.R.color.black));
-//                        text.setTextColor(getResources().getColor(android.R.color.black));
                     }
                 }
 
@@ -241,6 +354,7 @@ public class ProductActivity extends BaseActivity {
         OkHttp.post(this, HttpContants.BASE_URL + "/Api/index/goodslist", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
+                System.out.println(response);
                 Gson gson = new Gson();
                 ProductBean productBean = gson.fromJson(response, ProductBean.class);
                 List<ProductGood> goods = productBean.getData().getGoodsList();
@@ -249,7 +363,6 @@ public class ProductActivity extends BaseActivity {
                 }
                 show();
                 categories = productBean.getData().getCategoryList();
-
                 horizontalListView.setAdapter(new TextAdapter(categories, ProductActivity.this, selectPosition));
                 if (!flag) {
                     flag = true;
@@ -284,6 +397,16 @@ public class ProductActivity extends BaseActivity {
         frameLayout.refreshComplete();
         frameLayout.setLoadMoreEnable(true);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (webView != null) {
+            webView.setVisibility(View.GONE);
+            webView.removeAllViews();
+            webView.destroy();
+        }
     }
 
     @Override

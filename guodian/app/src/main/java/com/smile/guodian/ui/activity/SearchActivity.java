@@ -3,6 +3,8 @@ package com.smile.guodian.ui.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +22,7 @@ import com.smile.guodian.R;
 import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.GuessGoods;
 import com.smile.guodian.model.entity.History;
+import com.smile.guodian.model.entity.ProductGood;
 import com.smile.guodian.model.entity.SearchEntity;
 import com.smile.guodian.model.entity.SearchResultEntity;
 import com.smile.guodian.okhttp.OkCallback;
@@ -53,6 +56,12 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     @BindView(R.id.search_content)
     RecyclerView recyclerView;
+    LinearLayoutManager manager;
+    String keyword = "";
+    private boolean loadMore = false;
+
+    private boolean needLoadMore;
+
 
     @OnClick(R.id.search_cancel)
     public void clickView(View view) {
@@ -65,7 +74,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     private boolean history;
 
-    private int page = 0;
+    private int page = 1;
     private List<Integer> type = new ArrayList<>();
     private SearchAdapter searchAdapter;
     private List<String> hot = new ArrayList<>();
@@ -88,25 +97,66 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == 5) {
-                    page = 0;
-                    String keyword = search.getText().toString();
-                    search(keyword);
+                    page = 1;
+                    loadMore = false;
+                    String key = search.getText().toString();
+                    search(key);
                     return true;
                 }
                 return false;
             }
         });
         searchAdapter = new SearchAdapter(type, this, this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+//        searchAdapter.setHandler(handler);
+        manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(searchAdapter);
         initData();
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int lastVisiblePosition = manager.findLastVisibleItemPosition();
+                    if (lastVisiblePosition >= manager.getItemCount() - 1 && page != 1) {
+                        loadMore = true;
+                        search(keyword);
+                    }
+                }
+            }
+
+        });
 
 
     }
 
-    public void initData() {
 
+//    Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what) {
+//                case 1:
+//                    page++;
+//                    search(keyword);
+////                    frameLayout.loadMoreComplete(true);
+//                    break;
+//                case 2:
+////                    goodList.clear();
+//                    page = 1;
+//                    search(keyword);
+//                    break;
+//                case 3:
+//                    break;
+//                case 4:
+//                    break;
+//            }
+//        }
+//    };
+
+    public void initData() {
+        page = 1;
         List<History> histories = BaseApplication.getDaoSession().getHistoryDao().loadAll();
         final String[] hist = new String[histories.size()];
         for (int i = 0; i < histories.size(); i++) {
@@ -161,7 +211,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 searchAdapter.setGuessGoods(guessGoodsList);
                 searchAdapter.notifyDataSetChanged();
 
-
             }
 
             @Override
@@ -173,10 +222,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    public void search(final String keyword) {
-        page++;
+    public void search(String keywords) {
+        keyword = keywords;
         Map<String, String> params = new HashMap<>();
-        OkHttp.post(this, HttpContants.BASE_URL + "/Api/goods/goodslist?keyword=" + keyword + "&page=" + page, params, new OkCallback() {
+        OkHttp.post(this, HttpContants.BASE_URL + "/Api/goods/goodslist?keyword=" + keywords + "&page=" + page, params, new OkCallback() {
             @Override
             public void onResponse(String response) {
 //                System.out.println(response);
@@ -192,17 +241,29 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     JSONObject data = object.getJSONObject("data");
                     Gson gson = new Gson();
                     SearchResultEntity resultEntity = gson.fromJson(data.toString(), SearchResultEntity.class);
-                    if (resultEntity.getList().size() != 0) {
-                        type.add(5);
+
+
+                    if (loadMore == false) {
+                        searchAdapter.setNeedFresh(false);
                     } else {
+                        searchAdapter.setNeedFresh(true);
+                    }
+
+                    System.out.println(loadMore);
+
+                    if (resultEntity.getList().size() == 0 && !loadMore) {
                         type.add(1);
                         type.add(3);
+                        page = 1;
+                    } else {
+                        type.add(5);
+                        type.add(6);
+                        page++;
                     }
 
                     History history = new History();
                     history.setHistory(keyword);
                     BaseApplication.getDaoSession().getHistoryDao().insert(history);
-
 //                    searchAdapter = new SearchAdapter(type, SearchActivity.this);
                     searchAdapter.setType(type);
                     searchAdapter.setResultEntity(resultEntity);
@@ -237,7 +298,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             case R.id.dialog_ok:
                 break;
             case R.id.del_history:
-
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 final AlertDialog dialog = builder.create();
                 View view = View.inflate(this, R.layout.dialog_del, null);

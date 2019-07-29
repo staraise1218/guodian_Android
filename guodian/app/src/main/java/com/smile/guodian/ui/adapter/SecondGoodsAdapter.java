@@ -24,6 +24,7 @@ public class SecondGoodsAdapter extends BaseQuickAdapter<Category, BaseViewHolde
 
     @Override
     protected void convert(BaseViewHolder holder, Category bean) {
+
         holder.setText(R.id.text_title, bean.getName());
 //        GlideUtil.load(context,bean.getImgUrl(),(ImageView)holder.getView(R.id.iv_view));
         Glide.with(context).load(HttpContants.BASE_URL + bean.getLogo()).into((ImageView) holder

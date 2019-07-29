@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="173dp"
-    android:paddingBottom="16dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp">
 
     <ImageView
         android:id="@+id/item_headline_show_content"
-        android:layout_marginTop="9dp"
         android:layout_width="173dp"
-        android:layout_height="130dp" />
+        android:layout_height="130dp"
+        android:layout_marginTop="9dp" />
 
     <TextView
-        android:textStyle="bold"
-        android:layout_below="@+id/item_headline_show_content"
         android:id="@+id/item_headline_show_title"
-        android:textSize="13sp"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/gray"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_headline_show_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -38,4 +38,14 @@ public class Hot {
     public void setPid(int pid) {
         this.pid = pid;
     }
+
+    @Override
+    public String toString() {
+        return "Hot{" +
+                "ad_name='" + ad_name + '\'' +
+                ", ad_link='" + ad_link + '\'' +
+                ", ad_code='" + ad_code + '\'' +
+                ", pid=" + pid +
+                '}';
+    }
 }

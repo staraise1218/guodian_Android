@@ -45,18 +45,19 @@ public class HomeModelImpl implements HomeLoadModel {
         OkHttp.post(context, HttpContants.BASE_URL + "/Api/index/index", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
+                System.out.println("----" + response);
                 JSONArray array = null;
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject data = jsonObject.getJSONObject("data");
                     array = data.getJSONArray("bannerList");
 
-                    System.out.println(response);
+//                    System.out.println(response);
                     HomeTop homeTop = new HomeTop();
                     List<HomeTop.Carousel> carouselList = new ArrayList<>();
                     for (int i = 0; i < array.length(); i++) {
 
-                        carouselList.add(new HomeTop.Carousel(i, "http://guodian.staraise.com.cn" + array.getJSONObject(i).getString("ad_code")));
+                        carouselList.add(new HomeTop.Carousel(i, HttpContants.BASE_URL + array.getJSONObject(i).getString("ad_code"), array.getJSONObject(i).getString("ad_link")));
 
                     }
                     homeTop.setCarousel(carouselList);
@@ -129,6 +130,7 @@ public class HomeModelImpl implements HomeLoadModel {
                         guessGoods.setOriginal_img(object.getString("original_img"));
                         guessGoods.setShop_price(object.getString("shop_price"));
                         guessGoods.setMarket_price(object.getString("market_price"));
+//                        guessGoods.setReserved(object.getInt("reserved"));
                         guessGoodsList.add(guessGoods);
                     }
 
@@ -142,15 +144,18 @@ public class HomeModelImpl implements HomeLoadModel {
 
                     List<HomeBase> list = new ArrayList<>();
                     //list添加轮播图片
+//                    if (carouselList.size() != 0)
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_CAROUSEL, 300));
 //                    list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_DIVIDER, 300));
 
                     //分类数据
+//                    if (categoryLists.size() != 0)
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_CATEGORY, 300));
 //                    //list添加头条
 
                     //横向数据
 //                    list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADLINE, 300));
+//                    if (hotList.size() != 0)
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HOT, 300));
 
                     list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_LIVE, 12));
@@ -212,12 +217,12 @@ public class HomeModelImpl implements HomeLoadModel {
         //模拟返回数据
         int spanCount = 300;
         List<HomeTop.Carousel> carouselList = new ArrayList<>();
-        carouselList.add(new HomeTop.Carousel(1, "https://img.alicdn.com/simba/img/TB1AhFnPVXXXXa.XFXXSutbFXXX.jpg_q50.jpg"));
-        carouselList.add(new HomeTop.Carousel(2, "https://gw.alicdn.com/imgextra/i2/118/TB22AjYg7qvpuFjSZFhXXaOgXXa_!!118-0-yamato.jpg_q50.jpg"));
-        carouselList.add(new HomeTop.Carousel(3, "https://gw.alicdn.com/imgextra/i1/34/TB2Kea5fYVkpuFjSspcXXbSMVXa_!!34-0-yamato.jpg_q50.jpg"));
-        carouselList.add(new HomeTop.Carousel(4, "https://gw.alicdn.com/imgextra/i1/101/TB2Dz1ScYtlpuFjSspoXXbcDpXa_!!101-0-yamato.jpg_q50.jpg"));
-        carouselList.add(new HomeTop.Carousel(5, "https://gw.alicdn.com/imgextra/i4/140/TB2lWFJgmFjpuFjSspbXXXagVXa_!!140-0-yamato.jpg_q50.jpg"));
-        carouselList.add(new HomeTop.Carousel(6, "https://aecpm.alicdn.com/tps/i4/TB1pgxYJXXXXXcAXpXXrVZt0FXX-640-200.jpg_q50.jpg"));
+//        carouselList.add(new HomeTop.Carousel(1, "https://img.alicdn.com/simba/img/TB1AhFnPVXXXXa.XFXXSutbFXXX.jpg_q50.jpg"));
+//        carouselList.add(new HomeTop.Carousel(2, "https://gw.alicdn.com/imgextra/i2/118/TB22AjYg7qvpuFjSZFhXXaOgXXa_!!118-0-yamato.jpg_q50.jpg"));
+//        carouselList.add(new HomeTop.Carousel(3, "https://gw.alicdn.com/imgextra/i1/34/TB2Kea5fYVkpuFjSspcXXbSMVXa_!!34-0-yamato.jpg_q50.jpg"));
+//        carouselList.add(new HomeTop.Carousel(4, "https://gw.alicdn.com/imgextra/i1/101/TB2Dz1ScYtlpuFjSspoXXbcDpXa_!!101-0-yamato.jpg_q50.jpg"));
+//        carouselList.add(new HomeTop.Carousel(5, "https://gw.alicdn.com/imgextra/i4/140/TB2lWFJgmFjpuFjSspbXXXagVXa_!!140-0-yamato.jpg_q50.jpg"));
+//        carouselList.add(new HomeTop.Carousel(6, "https://aecpm.alicdn.com/tps/i4/TB1pgxYJXXXXXcAXpXXrVZt0FXX-640-200.jpg_q50.jpg"));
         homeTop.setCarousel(carouselList);
 
 //        List<HomeBase> headlineList = new ArrayList<>();

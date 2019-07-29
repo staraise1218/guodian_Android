@@ -39,6 +39,7 @@ import com.smile.guodian.okhttp.OkHttp;
 import com.smile.guodian.ui.BaseApplication;
 import com.smile.guodian.ui.activity.BaseActivity;
 import com.smile.guodian.ui.activity.ClipImageActivity;
+import com.smile.guodian.ui.activity.WebActivity;
 import com.smile.guodian.utils.FileUtil;
 import com.smile.guodian.utils.GlideUtil;
 import com.smile.guodian.utils.ToastUtil;
@@ -51,6 +52,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +84,8 @@ public class PersonActivity extends BaseActivity {
     CircleImageView icon;
     @BindView(R.id.person_edit)
     TextView intruduce;
+
+
     //请求相机
     private static final int REQUEST_CAPTURE = 100;
     //请求相册
@@ -134,7 +138,19 @@ public class PersonActivity extends BaseActivity {
                 uploadHeadImage();
                 break;
             case R.id.person_receive_address:
-                intent = new Intent(PersonActivity.this, AddressActivity.class);
+                intent = new Intent(PersonActivity.this, WebActivity.class);
+                intent.putExtra("url", HttpContants.BASE_URL + "/page/addressList.html");
+                intent.putExtra("type", 20);
+                startActivity(intent);
+                break;
+            case R.id.person_phone:
+                intent = new Intent(PersonActivity.this, ChangePhoneActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.person_center:
+                intent = new Intent(PersonActivity.this, WebActivity.class);
+                intent.putExtra("type", 20);
+                intent.putExtra("url", "http://www.guodianjm.com/page/myMember.html");
                 startActivity(intent);
                 break;
         }
@@ -147,8 +163,9 @@ public class PersonActivity extends BaseActivity {
         userName.setText(user.getRealname());
         userNick.setText(user.getNickname());
         userPhone.setText(user.getMobile());
-        if (user.getIs_distribut() != null)
-            intruduce.setText(user.getIs_distribut());
+//        System.out.println(user.getPersonnal_statement());
+        if (user.getPersonnal_statement() != null)
+            intruduce.setText(user.getPersonnal_statement());
         Glide.with(this).load(HttpContants.BASE_URL + user.getHead_pic()).into(icon);
     }
 
@@ -161,8 +178,8 @@ public class PersonActivity extends BaseActivity {
             userName.setText(user.getRealname());
             userNick.setText(user.getNickname());
             userPhone.setText(user.getMobile());
-            if (user.getIs_distribut() != null)
-                intruduce.setText(user.getIs_distribut());
+            if (user.getPersonnal_statement() != null)
+                intruduce.setText(user.getPersonnal_statement());
         }
 
 
@@ -199,15 +216,28 @@ public class PersonActivity extends BaseActivity {
             }
         });
 
+        final List<String> mPermissionList = new ArrayList<>();
         btnCarema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //权限判断
                 if (ContextCompat.checkSelfPermission(PersonActivity.this, Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
+                    mPermissionList.add(Manifest.permission.CAMERA);
                     //申请WRITE_EXTERNAL_STORAGE权限
-                    ActivityCompat.requestPermissions(PersonActivity.this, new String[]{Manifest.permission.CAMERA},
+//                    ActivityCompat.requestPermissions(PersonActivity.this, new String[]{Manifest.permission.CAMERA},
+//                            OPEN_CAMERA);
+                }
+
+                if (ContextCompat.checkSelfPermission(PersonActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    mPermissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                }
+
+                if (mPermissionList.size() != 0) {
+                    String[] permission = mPermissionList.toArray(new String[mPermissionList.size()]);
+                    ActivityCompat.requestPermissions(PersonActivity.this, permission,
                             OPEN_CAMERA);
+
                 } else {
                     //跳转到调用系统相机
                     gotoCamera();

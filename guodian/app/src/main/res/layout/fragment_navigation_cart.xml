@@ -10,6 +10,7 @@
         android:id="@+id/product_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
         android:visibility="gone">
 
         <ImageView
@@ -45,6 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/product_head"
+        android:layerType="software"
+        android:scrollbars="none"
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/dp_15" />
 

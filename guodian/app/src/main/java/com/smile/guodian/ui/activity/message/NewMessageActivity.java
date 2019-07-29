@@ -70,7 +70,10 @@ public class NewMessageActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        User user = BaseApplication.getDaoSession().getUserDao().loadAll().get(0);
+        List<User> users = BaseApplication.getDaoSession().getUserDao().loadAll();
+        User user = null;
+        if (users.size() > 0)
+            user = users.get(0);
         if (user != null) {
             uid = user.getUser_id();
         } else {
@@ -152,17 +155,27 @@ public class NewMessageActivity extends BaseActivity {
                     e.printStackTrace();
                 }
 
+                if (result.length() == 0) {
+                    none.setVisibility(View.VISIBLE);
+                    content.setVisibility(View.GONE);
+                } else {
+                    content.setVisibility(View.VISIBLE);
+                    none.setVisibility(View.GONE);
+                }
+
                 Gson gson = new Gson();
                 TypeToken<List<NewMessage>> typeToken = new TypeToken<List<NewMessage>>() {
                 };
                 messages = gson.fromJson(result.toString(), typeToken.getType());
 
-                if (messages.size() == 0) {
-                    none.setVisibility(View.VISIBLE);
-                } else {
-                    none.setVisibility(View.GONE);
-                }
+//                if (messages.size() == 0) {
+//
+//                } else {
+//                    none.setVisibility(View.GONE);
+//                }
 
+                adapter = new NewMessageAdapter(getBaseContext(), messages);
+                listView.setAdapter(adapter);
                 show();
             }
 

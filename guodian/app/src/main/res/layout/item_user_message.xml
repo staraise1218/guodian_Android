@@ -8,10 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_96"
         android:layout_below="@+id/user_about"
-        android:background="@drawable/message_bg"
-        android:gravity="center"
-        android:text="开通会员 享更多优惠"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:background="@drawable/huiyuan" />
 
 </LinearLayout>

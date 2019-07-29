@@ -197,6 +197,7 @@
             android:textSize="9sp" />
 
         <TextView
+            android:id="@+id/fast_login_protocol"
             android:layout_width="wrap_content"
             android:layout_height="13dp"
             android:text="《用户协议》"
@@ -211,6 +212,7 @@
             android:textSize="9sp" />
 
         <TextView
+            android:id="@+id/fast_login_protect"
             android:layout_width="wrap_content"
             android:layout_height="13dp"
             android:text="《隐私保护》"

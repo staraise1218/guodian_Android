@@ -81,11 +81,21 @@ public class HomeTop {
 
     public static class Carousel {
         private String url;
+        private String ad_link;
         private int id;
 
-        public Carousel(int id, String url) {
+        public Carousel(int id, String url, String ad_link) {
             this.id = id;
             this.url = url;
+            this.ad_link = ad_link;
+        }
+
+        public String getAd_link() {
+            return ad_link;
+        }
+
+        public void setAd_link(String ad_link) {
+            this.ad_link = ad_link;
         }
 
         public String getUrl() {

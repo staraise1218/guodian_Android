@@ -54,6 +54,7 @@ public class ProductAdapter extends BaseAdapter {
         public TextView title;
         public TextView huiyuan;
         public TextView market;
+        public ImageView stateImage;
     }
 
     ViewHolder viewHolder;
@@ -69,6 +70,7 @@ public class ProductAdapter extends BaseAdapter {
             viewHolder.title = convertView.findViewById(R.id.item_home_product_title);
             viewHolder.huiyuan = convertView.findViewById(R.id.huiyuan);
             viewHolder.market = convertView.findViewById(R.id.item_home_product_price1);
+            viewHolder.stateImage = convertView.findViewById(R.id.item_home_state_img);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -80,6 +82,17 @@ public class ProductAdapter extends BaseAdapter {
         String price = goodList.get(position).getShop_price();
         viewHolder.price.setText("销售价:¥" + price.substring(0, price.length() - 3));
         viewHolder.title.setText(name);
+
+        viewHolder.stateImage.setVisibility(View.GONE);
+
+        if (goodList.get(position).getStore_count() == 0) {
+            viewHolder.stateImage.setVisibility(View.VISIBLE);
+            viewHolder.stateImage.setBackgroundResource(R.drawable.yishouqing);
+        }
+        if (goodList.get(position).getReserved() == 1) {
+            viewHolder.stateImage.setVisibility(View.VISIBLE);
+            viewHolder.stateImage.setBackgroundResource(R.drawable.yiyuding);
+        }
 
         String marketPrice = goodList.get(position).getMarket_price();
         if (marketPrice != null)

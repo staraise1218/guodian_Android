@@ -10,9 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smile.guodian.R;
+import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.ui.activity.MyBrowserActivity;
 import com.smile.guodian.ui.activity.MyCollectionActivity;
 import com.smile.guodian.ui.activity.WebActivity;
+import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 
 public class ItemTipAdapter extends BaseAdapter {
     private int type;
@@ -60,6 +62,17 @@ public class ItemTipAdapter extends BaseAdapter {
             imageView.setBackgroundResource(icon2[position]);
         }
 
+        if (type == 2 && position == 2) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 18);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
         if (type == 2 && position == 0) {
             tips.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -74,6 +87,57 @@ public class ItemTipAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, MyBrowserActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        if (type == 4 && position == 0) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 16);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
+        if (type == 4 && position == 1) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 3);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        if (type == 4 && position == 2) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 17);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        if (type == 4 && position == 4) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 10);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        if (type == 4 && position == 5) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 11);
                     context.startActivity(intent);
                 }
             });
@@ -95,6 +159,18 @@ public class ItemTipAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, WebActivity.class);
                     intent.putExtra("type", 9);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
+        if (type == 4 && position == 3) {
+            tips.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 20);
+                    intent.putExtra("url", HttpContants.BASE_URL + "/page/kfAndHelp.html");
                     context.startActivity(intent);
                 }
             });

@@ -41,6 +41,7 @@
             android:background="@drawable/kefu" />
 
         <TextView
+            android:id="@+id/customer"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_16"
             android:layout_marginLeft="@dimen/dp_50"
@@ -51,6 +52,7 @@
             android:textStyle="bold" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_13"
             android:layout_marginLeft="@dimen/dp_50"
@@ -79,6 +81,7 @@
             android:background="@drawable/wuliu" />
 
         <TextView
+            android:id="@+id/history"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_16"
             android:layout_marginLeft="@dimen/dp_50"

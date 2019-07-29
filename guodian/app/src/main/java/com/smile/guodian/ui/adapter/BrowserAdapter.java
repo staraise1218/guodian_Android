@@ -23,9 +23,11 @@ public class BrowserAdapter extends BaseAdapter {
     private Context context;
     private List<Browser> browsers;
     private boolean showCheck = false;
+    private String title;
 
     public void setShowCheck(boolean showCheck) {
         this.showCheck = showCheck;
+        title = "";
     }
 
     public List<Browser> getBrowsers() {
@@ -39,6 +41,7 @@ public class BrowserAdapter extends BaseAdapter {
     }
 
     public void setBrowsers(List<Browser> browsers) {
+        title = "";
         this.browsers = browsers;
     }
 
@@ -68,18 +71,20 @@ public class BrowserAdapter extends BaseAdapter {
 
         convertView = View.inflate(context, R.layout.item_browser, null);
 
-        if (browsers.get(position).getTitle() != null) {
+
+        if (browsers.get(position).getTitle() != title) {
             TextView time = convertView.findViewById(R.id.item_browser_time);
             TextView divider = convertView.findViewById(R.id.divider);
             time.setText(browsers.get(position).getTitle());
             time.setVisibility(View.VISIBLE);
             divider.setVisibility(View.VISIBLE);
+            title = browsers.get(position).getTitle();
         }
 
 
         CheckBox checkBox = convertView.findViewById(R.id.item_browser_check);
         if (checkAll) {
-            System.out.println(position + "+++");
+//            System.out.println(position + "+++");
             browsers.get(position).setChecked(true);
             checkBox.setChecked(true);
         } else {
