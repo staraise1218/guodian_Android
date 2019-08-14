@@ -18,13 +18,16 @@ import android.widget.LinearLayout;
 import com.smile.guodian.R;
 import com.smile.guodian.base.BundleKey;
 import com.smile.guodian.base.Type;
+import com.smile.guodian.model.HttpContants;
 import com.smile.guodian.model.entity.HomeBase;
 import com.smile.guodian.model.entity.HomeBottom;
 import com.smile.guodian.model.entity.HomeTop;
 import com.smile.guodian.presenter.HomePresenter;
+import com.smile.guodian.ui.activity.CategoryProductActivity;
 import com.smile.guodian.ui.activity.DetailActivity;
 import com.smile.guodian.ui.activity.MainActivity;
 import com.smile.guodian.ui.activity.SearchActivity;
+import com.smile.guodian.ui.activity.WebActivity;
 import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.ui.adapter.HomeAdapter;
 import com.smile.guodian.contract.HomeContract;
@@ -56,7 +59,10 @@ public class NavHomeFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.home_notify:
-                Intent intent = new Intent(getContext(), MessageCenterActivity.class);
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("type", 20);
+                intent.putExtra("url", HttpContants.BASE_URL + "/page/message.html");
+//                Intent intent = new Intent(getContext(), MessageCenterActivity.class);
                 startActivity(intent);
                 break;
         }

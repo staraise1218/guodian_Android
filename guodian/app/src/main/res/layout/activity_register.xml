@@ -49,6 +49,7 @@
         android:layout_centerHorizontal="true">
 
         <View
+            android:visibility="gone"
             android:layout_width="@dimen/dp_2"
             android:layout_height="@dimen/dp_22"
             android:layout_centerVertical="true"
@@ -84,6 +85,7 @@
         android:layout_centerHorizontal="true">
 
         <View
+            android:visibility="gone"
             android:layout_width="@dimen/dp_2"
             android:layout_height="@dimen/dp_22"
             android:layout_centerVertical="true"
@@ -130,6 +132,7 @@
         android:layout_centerHorizontal="true">
 
         <View
+            android:visibility="gone"
             android:layout_width="@dimen/dp_2"
             android:layout_height="@dimen/dp_22"
             android:layout_centerVertical="true"

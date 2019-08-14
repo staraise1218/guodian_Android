@@ -2,6 +2,8 @@ package com.smile.guodian.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -117,6 +119,8 @@ public class GuideActivity extends BaseActivity {
                         Glide.with(GuideActivity.this).load(HttpContants.BASE_URL + array.getJSONObject(i).getString("ad_code")).into(ivGuide);
 //                       GlideUtil.load(GuideActivity.this,GuideActivity.this,"http://guodian.staraise.com.cn"+array.getJSONObject(i).getString("ad_code"),ivGuide);
                         mViewList.add(inflate);
+
+                        System.out.println(HttpContants.BASE_URL + array.getJSONObject(i).getString("ad_code"));
                     }
 
                     MyPagerAdapter adapter = new MyPagerAdapter();
@@ -186,12 +190,23 @@ public class GuideActivity extends BaseActivity {
         }
     }
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            startActivity(new Intent(GuideActivity.this, MainActivity.class));
+            GuideActivity.this.finish();
+        }
+    };
+
     private class PagePositionLister implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             //如果滑动到最后一张,显示按钮
             if (position == mViewList.size() - 1) {
-                mBtnStart.setVisibility(View.VISIBLE);
+//                mBtnStart.setVisibility(View.VISIBLE);
+                handler.sendEmptyMessageDelayed(1, 1000);
+
             } else {
                 mBtnStart.setVisibility(View.GONE);
             }

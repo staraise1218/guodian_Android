@@ -242,7 +242,7 @@ public class LoginActivity extends BaseActivity {
                             String uid = jsonObject.getString("userID");
                             String icon = jsonObject.getString("icon");
                             String nickname = jsonObject.getString("nickname");
-                            thirdLogin(uid + "4", "qq", icon.replace("&", "%26"), nickname);
+                            thirdLogin(uid, "qq", icon.replace("&", "%26"), nickname);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -33,6 +33,7 @@ import com.smile.guodian.model.entity.CategoryBean2;
 import com.smile.guodian.model.entity.SortModel;
 import com.smile.guodian.ui.activity.CategoryProductActivity;
 import com.smile.guodian.ui.activity.SearchActivity;
+import com.smile.guodian.ui.activity.WebActivity;
 import com.smile.guodian.ui.activity.message.MessageCenterActivity;
 import com.smile.guodian.ui.adapter.CategoryAdapter;
 import com.smile.guodian.ui.adapter.SecondAdapter;
@@ -62,8 +63,12 @@ public class NavCategoryFragment1 extends BaseFragment {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.category_notify:
-                intent = new Intent(getContext(), MessageCenterActivity.class);
+                 intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("type", 20);
+                intent.putExtra("url", HttpContants.BASE_URL + "/page/message.html");
                 startActivity(intent);
+//                intent = new Intent(getContext(), MessageCenterActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.category_search:
                 intent = new Intent(getContext(), SearchActivity.class);

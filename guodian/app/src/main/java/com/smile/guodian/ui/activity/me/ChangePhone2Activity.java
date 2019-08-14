@@ -151,7 +151,7 @@ public class ChangePhone2Activity extends BaseActivity {
                 }
                 try {
                     code = data.getString("code");
-                    verify.setText(code);
+//                    verify.setText(code);
 //                    handler.sendEmptyMessage(1);
                 } catch (JSONException e) {
                     e.printStackTrace();

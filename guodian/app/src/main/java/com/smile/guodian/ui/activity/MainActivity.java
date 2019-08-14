@@ -103,6 +103,8 @@ public class MainActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
 //                System.out.println(tab.getPosition());
 
+//                type = tab.getPosition();/
+
                 SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("db", MODE_PRIVATE);
                 uid = sharedPreferences.getInt("uid", -1);
 
@@ -116,27 +118,27 @@ public class MainActivity extends BaseActivity {
                     NavUserFragment fragment = (NavUserFragment) viewPagerAdapter.getFragments().get(4);
                     fragment.updateData();
                 }
-
+//                tabLayout.getTabAt(type).select();
                 if (uid <= 0 && (tab.getPosition() == 4 || tab.getPosition() == 3)) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     intent.putExtra("where", "main");
                     startActivity(intent);
-                    return;
-                } else {
-                    viewPager.setCurrentItem(tab.getPosition(), false);
-                    for (int i = 0; i < tabLayout.getTabCount(); i++) {
-                        View view = tabLayout.getTabAt(i).getCustomView();
-                        ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
-                        TextView text = (TextView) view.findViewById(R.id.tab_content_text);
-                        if (i == tab.getPosition()) {
-                            icon.setImageResource(DataGenerator.mTabResPressed[i]);
-                            text.setTextColor(Color.parseColor("#DDA021"));
-                        } else {
-                            icon.setImageResource(DataGenerator.mTabRes[i]);
-                            text.setTextColor(getResources().getColor(android.R.color.black));
-                        }
+//                    return;
+                }
+                viewPager.setCurrentItem(tab.getPosition(), false);
+                for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                    View view = tabLayout.getTabAt(i).getCustomView();
+                    ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
+                    TextView text = (TextView) view.findViewById(R.id.tab_content_text);
+                    if (i == tab.getPosition()) {
+                        icon.setImageResource(DataGenerator.mTabResPressed[i]);
+                        text.setTextColor(Color.parseColor("#DDA021"));
+                    } else {
+                        icon.setImageResource(DataGenerator.mTabRes[i]);
+                        text.setTextColor(getResources().getColor(android.R.color.black));
                     }
                 }
+
             }
 
             @Override
@@ -154,6 +156,7 @@ public class MainActivity extends BaseActivity {
                 if (tab.getPosition() == 3 && viewPagerAdapter != null) {
                     NavCartFragment fragment = (NavCartFragment) viewPagerAdapter.getFragments().get(3);
                     fragment.reload();
+//                    tabLayout.getTabAt(3).select();
                 }
 
                 if (uid <= 0 && (tab.getPosition() == 4 || tab.getPosition() == 3)) {

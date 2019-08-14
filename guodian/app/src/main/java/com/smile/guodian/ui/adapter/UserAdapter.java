@@ -230,7 +230,11 @@ public class UserAdapter extends RecyclerView.Adapter {
                 headerViewHolder.notify.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, MessageCenterActivity.class);
+                        Intent intent = new Intent(getContext(), WebActivity.class);
+                        intent.putExtra("type", 20);
+                        intent.putExtra("url", HttpContants.BASE_URL + "/page/message.html");
+//                        startActivity(intent);
+//                        Intent intent = new Intent(context, MessageCenterActivity.class);
                         context.startActivity(intent);
                     }
                 });

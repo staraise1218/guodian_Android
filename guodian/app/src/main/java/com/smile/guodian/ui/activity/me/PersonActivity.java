@@ -131,7 +131,9 @@ public class PersonActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.person_more:
-                intent = new Intent(PersonActivity.this, MessageActivity.class);
+                intent = new Intent(PersonActivity.this, WebActivity.class);
+                intent.putExtra("type", 20);
+                intent.putExtra("url", HttpContants.BASE_URL + "/page/info.html");
                 startActivity(intent);
                 break;
             case R.id.change_icon:

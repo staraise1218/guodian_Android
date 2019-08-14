@@ -75,7 +75,12 @@ public class NavCartFragment extends Fragment {
 
     @JavascriptInterface
     public void goMessageCenter() {
-        Intent intent = new Intent(getActivity(), MessageCenterActivity.class);
+        Intent intent = new Intent(getContext(), WebActivity.class);
+        intent.putExtra("type", 20);
+        intent.putExtra("url", HttpContants.BASE_URL + "/page/message.html");
+//        Intent intent = new Intent(getContext(), MessageCenterActivity.class);
+//        startActivity(intent);
+//        Intent intent = new Intent(getActivity(), MessageCenterActivity.class);
         startActivity(intent);
     }
 

@@ -45,9 +45,12 @@ public class ChangePhone1Activty extends BaseActivity {
     private String uid;
     private String phon;
 
-    @OnClick({R.id.change_phone1_commit, R.id.change_phone1_getVerify, R.id.change_phone1_cannot})
+    @OnClick({R.id.change_phone1_commit, R.id.change_phone1_getVerify, R.id.change_phone1_cannot, R.id.change_phone_back})
     public void clickView(View view) {
         switch (view.getId()) {
+            case R.id.change_phone_back:
+                this.finish();
+                break;
             case R.id.change_phone1_cannot:
                 final View messageView = LayoutInflater.from(this).inflate(R.layout.dialog_message, null);
                 TextView ok = (TextView) messageView.findViewById(R.id.dialog_ok);
@@ -125,7 +128,7 @@ public class ChangePhone1Activty extends BaseActivity {
                     Intent intent = new Intent(ChangePhone1Activty.this, ChangePhone2Activity.class);
                     startActivity(intent);
 //                    }
-                    System.out.println(response + "----");
+//                    System.out.println(response + "----");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

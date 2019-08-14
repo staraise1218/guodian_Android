@@ -239,7 +239,7 @@ public class WebActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.print("back");
+//                System.out.print("back");
                 if (webView.canGoBack()) {
                     webView.goBack();
                 } else {
@@ -258,8 +258,14 @@ public class WebActivity extends BaseActivity {
 
     @JavascriptInterface
     public void goMessageCenter() {
-        Intent intent = new Intent(WebActivity.this, MessageCenterActivity.class);
+
+        Intent intent = new Intent(WebActivity.this, WebActivity.class);
+        intent.putExtra("type", 20);
+        intent.putExtra("url", HttpContants.BASE_URL + "/page/message.html");
+//                Intent intent = new Intent(getContext(), MessageCenterActivity.class);
         startActivity(intent);
+//        Intent intent = new Intent(WebActivity.this, MessageCenterActivity.class);
+//        startActivity(intent);
     }
 
     @JavascriptInterface

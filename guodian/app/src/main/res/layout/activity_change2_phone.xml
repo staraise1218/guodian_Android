@@ -136,7 +136,7 @@
         android:layout_marginTop="@dimen/dp_27"
         android:background="@drawable/button_check"
         android:enabled="false"
-        android:text="登录"
+        android:text="确定"
         android:textColor="#FFFFFF" />
 
 </RelativeLayout>
