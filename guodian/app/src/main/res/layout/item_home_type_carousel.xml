@@ -3,10 +3,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_360" />
+        android:layout_height="@dimen/dp_270" />
+
     <com.smile.guodian.widget.CirclePageIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"

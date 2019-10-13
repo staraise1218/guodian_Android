@@ -45,7 +45,7 @@ public class HomeModelImpl implements HomeLoadModel {
         OkHttp.post(context, HttpContants.BASE_URL + "/Api/index/index", params, new OkCallback() {
             @Override
             public void onResponse(String response) {
-                System.out.println("----" + response);
+//                System.out.println("----" + response);
                 JSONArray array = null;
                 try {
                     JSONObject jsonObject = new JSONObject(response);

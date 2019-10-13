@@ -138,12 +138,11 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         HomeBase bean = list.get(position);
-
         if (viewHolder instanceof CarouselHolder) {
             CarouselHolder holder = (CarouselHolder) viewHolder;
             holder.viewPager.setAdapter(new ImageHomeAdapter(context, activity, loopList));
             holder.indicator.setViewPager(holder.viewPager);
-            holder.viewPager.setInterval(4000);
+            holder.viewPager.setInterval(5000);
             holder.viewPager.setSlideBorderMode(AutoScrollViewPager.SLIDE_BORDER_MODE_TO_PARENT);
             holder.viewPager.startAutoScroll();
         } else if (viewHolder instanceof HeadlineHolder) {

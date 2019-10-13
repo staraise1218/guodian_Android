@@ -58,13 +58,17 @@ public class ImageHomeAdapter extends RecyclingPagerAdapter {
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("type", 20);
-                intent.putExtra("url", list.get(position).getAd_link());
-                activity.startActivity(intent);
+                if (list.get(position).getAd_link().equalsIgnoreCase("")) {
+                    return;
+                } else {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("type", 20);
+                    intent.putExtra("url", list.get(position).getAd_link());
+                    activity.startActivity(intent);
+                }
             }
         });
-        holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//        holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         Glide.with(context).load(list.get(getPosition(position)).getUrl()).into(holder.imageView);
 //        GlideUtil.load(activity, list.get(getPosition(position)).getUrl(), holder.imageView);
         return view;

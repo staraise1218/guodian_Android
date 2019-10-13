@@ -106,8 +106,8 @@ public class CategoryProductActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
+//    @Override
+//    public void onBackPressed() {
 //        super.onBackPressed();
 //        if (webView.getVisibility() == View.GONE) {
 //            this.finish();
@@ -117,7 +117,7 @@ public class CategoryProductActivity extends BaseActivity {
 ////            tabLayout.setVisibility(View.VISIBLE);
 ////            head.setVisibility(View.VISIBLE);
 //        }
-    }
+//    }
 
 
     @Override

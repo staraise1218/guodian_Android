@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity {
                 SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("db", MODE_PRIVATE);
                 uid = sharedPreferences.getInt("uid", -1);
 
-                System.out.println(uid + "---" + tab.getPosition());
+//                System.out.println(uid + "---" + tab.getPosition());
                 if (tab.getPosition() == 3 && viewPagerAdapter != null) {
                     NavCartFragment fragment = (NavCartFragment) viewPagerAdapter.getFragments().get(3);
                     fragment.reload();
